@@ -6,8 +6,10 @@ import { CitedValue } from "../CitedValue";
 import { EChart } from "../charts/EChart";
 import { EmptyState } from "../states";
 import { Grid, SubHeading } from "./Grid";
+import { SourcesFooter } from "./PeersTab";
 import { forwardRevenueBarsOption, forwardEpsLineOption } from "@/lib/charts";
 import { num, fmtPrice } from "@/lib/format";
+import { resolveSources } from "@/lib/export/reportModel";
 
 export function EstimatesSection({ report }: { report: CompanyReport }) {
   const e = report.estimates;
@@ -61,6 +63,7 @@ export function EstimatesSection({ report }: { report: CompanyReport }) {
                 ))}
               </tbody>
             </table>
+            <SourcesFooter labels={resolveSources(report, ...e.forward.flatMap((f) => [f.revenue ?? null, f.eps ?? null, f.growth ?? null]), e.target_low ?? null, e.target_mean ?? null, e.target_high ?? null, e.rating ?? null, e.analysts ?? null).labels} />
           </WidgetCard>
         </Grid>
       )}

@@ -35,7 +35,11 @@ src/
   lib/{env,bundledReports,githubReports,format,palette,charts}.ts
   app/api/report/{run,get,status}/route.ts   dispatch · read-back · poll
   app/api/stock-search/route.ts              server-side Screener search proxy
-  lib/export/excelWorkbook.ts                PREMIUM bespoke .xlsx builder (Cover + 9 sheets)
+  lib/export/reportModel.ts                  THE shared "walk the report → emit every
+                                             populated field" layer (coverage · provenance ·
+                                             units · 3 states). BOTH exports render it.
+  lib/export/excelWorkbook.ts                PREMIUM bespoke .xlsx builder (Cover + 8 section
+                                             sheets), rendered generically from reportModel
   app/api/export/excel/route.ts              thin route → buildWorkbook()
   components/print/PrintKit.tsx              shared print kit (loader, brand header/footer, auto-print)
   app/onepager/[ticker]/page.tsx             premium one-pager (landscape, real ECharts)
@@ -54,8 +58,18 @@ data/companies/<TICKER>.json  committed reports (durable cache). TCS.json is the
 - **Engine isolation:** nothing under `src/app` may import from `scripts/`
   (Playwright/cheerio/unpdf must never enter the Worker bundle). Scripts MAY import
   the pure types from `@/lib/types/report` (types erase at build).
-- **Never guess data.** A figure the sources don't contain is
-  `{ value: null, available: false }` → rendered "Not available".
+- **Never guess data; three distinct states.** A cited value with
+  `available: false`/null → "n/a (not disclosed)"; a section flagged
+  inapplicable (`customers.applicable`, `capacity.applicable`, `mna.found`,
+  `concall.available`, `estimates.available` = false) → its "Not applicable"
+  reason; an absent optional field → "—". Never a guessed 0 or "".
+- **Exports are model-driven — never hand-pick fields.** BOTH the full-report
+  PDF (`app/report/[ticker]/print`) and the Excel (`lib/export/excelWorkbook.ts`)
+  render from `lib/export/reportModel.ts` (`buildReportModel`), which emits EVERY
+  populated field, a `Source(s)` cell per multi-value row, and routes every value
+  through `format.ts`'s `formatValue`. When you add/extend a section, add it to
+  `buildReportModel` only — both exports update together. `npm run check:coverage`
+  FAILS if the model drops any populated leaf of the TCS sample; keep it green.
 - **Never waste credits.** Keep read-once harvest, run-level Firecrawl cache,
   Bedrock prompt caching, and incremental `--sections` refresh intact.
 - **Charts follow the dataviz skill:** validated palette (`src/lib/palette.ts`),
@@ -72,6 +86,7 @@ npm run dev         # renders the TCS sample with no keys
 npm run typecheck   # tsc --noEmit  (run before committing)
 npm run build       # Next build
 npm run build:cf    # OpenNext → Worker bundle (the deploy target)
+npm run check:coverage   # FAILS if the full-report export drops any populated field
 npm run analyze -- <TICKER> ["Name"] [--sections a,b]
 ```
 

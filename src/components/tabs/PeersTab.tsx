@@ -6,6 +6,7 @@ import { CitedValue } from "../CitedValue";
 import { EmptyState } from "../states";
 import { Grid } from "./Grid";
 import { num } from "@/lib/format";
+import { resolveSources } from "@/lib/export/reportModel";
 import { seqTint, seqNeedsWhiteText } from "@/lib/palette";
 
 type NumKey =
@@ -100,8 +101,19 @@ export function PeersTab({ report }: { report: CompanyReport }) {
             </tbody>
           </table>
         </div>
+        <SourcesFooter labels={resolveSources(report, ...peers.flatMap((p) => COLS.map((c) => p[c.key] as Cited<number> | undefined))).labels} />
       </WidgetCard>
     </Grid>
+  );
+}
+
+/** Compact "Source(s)" line summarising the distinct provenance of a table. */
+export function SourcesFooter({ labels }: { labels: string[] }) {
+  if (!labels.length) return null;
+  return (
+    <div style={{ padding: "8px 12px", fontSize: 11, color: "var(--text-hint)", borderTop: "1px solid var(--border-default)" }}>
+      Source(s): {labels.join(" · ")}
+    </div>
   );
 }
 
