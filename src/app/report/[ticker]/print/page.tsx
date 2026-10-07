@@ -234,9 +234,9 @@ export default function FullReport() {
       {/* ---- Peers & Estimates ---- */}
       <PrintSection title="Peers & estimates" breakBefore>
         <CitedTable
-          head={["Company", "P/E", "EV/EBITDA", "ROE", "ROCE", "Sales 5Y", "D/E", "Source"]}
+          head={["Company", "P/E", "EV/EBITDA", "ROE", "ROCE", "Sales 5Y", "D/E", "Source(s)"]}
           rows={(r.peers?.peers ?? []).map((p) => [
-            `${p.name}${p.is_self ? " ★" : ""}`, cell(p.pe), cell(p.ev_ebitda), cell(p.roe), cell(p.roce), cell(p.sales_growth_5y), cell(p.de), srcOf(p.pe),
+            `${p.name}${p.is_self ? " ★" : ""}`, cell(p.pe), cell(p.ev_ebitda), cell(p.roe), cell(p.roce), cell(p.sales_growth_5y), cell(p.de), srcsOf(p.pe, p.ev_ebitda, p.roe, p.roce, p.sales_growth_5y, p.de),
           ])}
         />
         {r.estimates?.available && (
@@ -250,8 +250,8 @@ export default function FullReport() {
               </Chart>
             </Two>
             <CitedTable
-              head={["Period", "Revenue (₹ cr)", "EPS (₹)", "Growth", "Source"]}
-              rows={(r.estimates.forward ?? []).map((e) => [e.period, cell(e.revenue ?? null), cell(e.eps ?? null), cell(e.growth ?? null), srcOf(e.revenue ?? e.eps ?? null)])}
+              head={["Period", "Revenue (₹ cr)", "EPS (₹)", "Growth", "Source(s)"]}
+              rows={(r.estimates.forward ?? []).map((e) => [e.period, cell(e.revenue ?? null), cell(e.eps ?? null), cell(e.growth ?? null), srcsOf(e.revenue, e.eps, e.growth)])}
             />
             <MetricTable
               caption="Street targets & consensus"
@@ -325,6 +325,13 @@ function orderRows(r: CompanyReport): { label: string; value: number }[] {
 }
 const cell = (c: Cited<number> | null | undefined): string => citedText(c);
 const srcOf = (c: Cited<number> | null | undefined): string => (c?.available ? c.source ?? "—" : "—");
+/** Unique sources across several independently cited values, so a row isn't
+ *  attributed to just one metric's source. */
+const srcsOf = (...cs: (Cited<number> | null | undefined)[]): string => {
+  const seen: string[] = [];
+  for (const c of cs) if (c?.available && c.source && !seen.includes(c.source)) seen.push(c.source);
+  return seen.join(" · ") || "—";
+};
 
 function Caption({ children }: { children: React.ReactNode }) {
   return <div style={{ fontSize: 10, fontWeight: 700, color: "#374151", margin: "8px 0 3px" }}>{children}</div>;

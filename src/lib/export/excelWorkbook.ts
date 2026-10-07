@@ -35,15 +35,21 @@ const src = (c: AnyCited): string => (!c || !c.available ? "" : c.source ?? "");
 const dt = (c: AnyCited): string => (!c || !c.available ? "" : c.date ?? "");
 const loc = (c: AnyCited): string => (!c || !c.available ? "" : c.locator ?? "");
 
-/** Unique source list across every cited metric a peer row carries. */
-function peerSources(p: Peer): string {
-  const metrics: AnyCited[] = [p.price, p.mcap, p.pe, p.ev_ebitda, p.roe, p.roce, p.roa, p.sales_growth_5y, p.profit_growth_5y, p.de];
+/** Unique, order-preserving source list across several independently cited
+ *  values — so a row whose columns come from different sources is not
+ *  attributed to just one of them. */
+function joinSources(...cols: AnyCited[]): string {
   const seen: string[] = [];
-  for (const m of metrics) {
-    const s = src(m);
+  for (const c of cols) {
+    const s = src(c);
     if (s && !seen.includes(s)) seen.push(s);
   }
   return seen.join(" · ");
+}
+
+/** Unique source list across every cited metric a peer row carries. */
+function peerSources(p: Peer): string {
+  return joinSources(p.price, p.mcap, p.pe, p.ev_ebitda, p.roe, p.roce, p.roa, p.sales_growth_5y, p.profit_growth_5y, p.de);
 }
 
 interface H {
@@ -412,21 +418,23 @@ function peersEstimatesSheet({ wb }: H, r: CompanyReport) {
   const e = r.estimates;
   title(ws, "Street estimates");
   if (e?.available) {
-    const eh = headerRow(ws, ["Period", "Revenue", "EPS", "Growth %", "Source"]);
+    const eh = headerRow(ws, ["Period", "Revenue", "EPS", "Growth %", "Source(s)"]);
     const eStart = eh.number + 1;
     for (const f of e.forward) {
-      const row = ws.addRow([f.period, val(f.revenue ?? null), val(f.eps ?? null), val(f.growth ?? null), src(f.revenue ?? null)]);
+      const row = ws.addRow([f.period, val(f.revenue ?? null), val(f.eps ?? null), val(f.growth ?? null), joinSources(f.revenue ?? null, f.eps ?? null, f.growth ?? null)]);
       row.getCell(2).numFmt = FMT.cr;
       row.getCell(3).numFmt = FMT.price;
       row.getCell(4).numFmt = FMT.pct;
     }
     zebra(ws, eStart, ws.rowCount, 5);
     ws.addRow([]);
-    ws.addRow(["Target low", val(e.target_low ?? null)]).getCell(2).numFmt = FMT.price;
-    ws.addRow(["Target mean", val(e.target_mean ?? null)]).getCell(2).numFmt = FMT.price;
-    ws.addRow(["Target high", val(e.target_high ?? null)]).getCell(2).numFmt = FMT.price;
-    ws.addRow(["Consensus rating", val(e.rating ?? null)]);
-    ws.addRow(["Analysts covering", val(e.analysts ?? null)]);
+    // Each target/consensus row keeps its own cited source.
+    ws.addRow(["Metric", "Value", "Source"]).eachCell((c) => (c.font = { bold: true, color: { argb: MUTED }, size: 10 }));
+    ws.addRow(["Target low", val(e.target_low ?? null), src(e.target_low ?? null)]).getCell(2).numFmt = FMT.price;
+    ws.addRow(["Target mean", val(e.target_mean ?? null), src(e.target_mean ?? null)]).getCell(2).numFmt = FMT.price;
+    ws.addRow(["Target high", val(e.target_high ?? null), src(e.target_high ?? null)]).getCell(2).numFmt = FMT.price;
+    ws.addRow(["Consensus rating", val(e.rating ?? null), src(e.rating ?? null)]);
+    ws.addRow(["Analysts covering", val(e.analysts ?? null), src(e.analysts ?? null)]);
     ws.addRow(["EPS revisions", e.eps_revision ?? ""]);
   } else {
     ws.addRow(["Street estimates: Not available"]).getCell(1).font = { italic: true, color: { argb: MUTED } };
