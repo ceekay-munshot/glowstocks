@@ -1,0 +1,103 @@
+name: analyze
+
+# On-demand research run for ONE Indian listed company. Harvests Screener + the
+# annual report + concalls + presentation, extracts a cited report via Bedrock,
+# commits data/companies/<TICKER>.json (durable cache) and uploads it as the
+# glow-report-<TICKER> artifact (immediate read-back by the dashboard).
+#
+# Actions → analyze → Run workflow → enter a ticker (e.g. TCS). The dashboard's
+# "Run"/"Refresh" button dispatches this same workflow via the GitHub API.
+
+run-name: analyze ${{ inputs.ticker }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      ticker:
+        description: "NSE/BSE ticker (Screener symbol), e.g. TCS"
+        required: true
+      company:
+        description: "Company name (optional — helps resolve the right entity)"
+        required: false
+      sections:
+        description: "Incremental refresh: comma list of sections (snapshot,business,financials,peers,thesis). Empty = all."
+        required: false
+
+# Needed so the run can commit the report JSON back to the repo.
+permissions:
+  contents: write
+
+concurrency:
+  group: analyze-${{ inputs.ticker }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      # Claude via Bedrock (bearer API key) — secrets live ONLY here, never in the Worker.
+      CLAUDE_BEDROCK_API_KEY: ${{ secrets.CLAUDE_BEDROCK_API_KEY }}
+      CLAUDE_BEDROCK_REGION: ${{ vars.CLAUDE_BEDROCK_REGION }}
+      CLAUDE_BEDROCK_MODEL_ID: ${{ vars.CLAUDE_BEDROCK_MODEL_ID }}
+      # Harvest
+      SCREENER_EMAIL: ${{ secrets.SCREENER_EMAIL }}
+      SCREENER_PASSWORD: ${{ secrets.SCREENER_PASSWORD }}
+      FIRECRAWL_API_KEY: ${{ secrets.FIRECRAWL_API_KEY }}
+      # Keep the Bedrock request pool modest to stay under rate limits.
+      ANALYZE_CONCURRENCY: "3"
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "0"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Chromium for Playwright
+        run: npx playwright@1.63.0 install --with-deps chromium
+
+      - name: Analyze
+        env:
+          TICKER: ${{ inputs.ticker }}
+          COMPANY: ${{ inputs.company }}
+          SECTIONS: ${{ inputs.sections }}
+        run: |
+          FLAG=""
+          if [ -n "$SECTIONS" ]; then FLAG="--sections $SECTIONS"; fi
+          npx tsx --tsconfig tsconfig.json scripts/analyze.ts "$TICKER" "$COMPANY" $FLAG
+
+      # Durable cache: commit the committed report back to the repo (read-once —
+      # re-opening a cached company later costs ZERO research credits).
+      - name: Commit report
+        if: success()
+        env:
+          TICKER: ${{ inputs.ticker }}
+        run: |
+          TICKER_UC=$(echo "$TICKER" | tr '[:lower:]' '[:upper:]')
+          FILE="data/companies/${TICKER_UC}.json"
+          if [ ! -f "$FILE" ]; then echo "No report written for $TICKER_UC"; exit 0; fi
+          git config user.name "glowstocks-bot"
+          git config user.email "glowstocks-bot@users.noreply.github.com"
+          git add "$FILE"
+          if git diff --cached --quiet; then
+            echo "No change in $FILE"
+            exit 0
+          fi
+          git commit -m "chore(data): research report for ${TICKER_UC}"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      # Immediate read-back: the dashboard reads this artifact via the GitHub API
+      # (same GITHUB_DISPATCH_TOKEN the Run button uses) the moment the run ends.
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: glow-report-${{ inputs.ticker }}
+          path: report-output/
+          if-no-files-found: warn
+          retention-days: 30

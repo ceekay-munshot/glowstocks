@@ -1,0 +1,39 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+
+# next.js
+/.next/
+/out/
+
+# opennext / cloudflare
+/.open-next/
+.wrangler/
+cloudflare-env.d.ts
+
+# production
+/build
+
+# research engine output (committed reports live in data/companies/, NOT here)
+/report-output/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files — NEVER commit real secrets (this repo is public)
+.env
+.env*.local
+.dev.vars
+!.dev.vars.example
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
