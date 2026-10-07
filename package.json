@@ -1,0 +1,45 @@
+{
+  "name": "glowstocks",
+  "version": "0.1.0",
+  "private": true,
+  "description": "On-demand, source-backed equity research dashboard for Indian listed companies (NSE/BSE).",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "build:cf": "opennextjs-cloudflare build",
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+    "analyze": "tsx --tsconfig tsconfig.json scripts/analyze.ts"
+  },
+  "dependencies": {
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.2",
+    "exceljs": "^4.4.0",
+    "fflate": "^0.8.2",
+    "next": "16.4.0",
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@opennextjs/cloudflare": "^1.20.9",
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "ajv": "^8.17.1",
+    "cheerio": "^1.2.0",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.0",
+    "playwright-core": "^1.62.1",
+    "tailwindcss": "^4.1.13",
+    "tsx": "^4.23.12",
+    "typescript": "^5",
+    "unpdf": "^1.8.1",
+    "wrangler": "^4.125.0"
+  }
+}

@@ -1,0 +1,16 @@
+# Worker-side config for local Cloudflare dev (`npm run preview`) and deploys.
+# Copy this to `.dev.vars` (gitignored) and fill in real values.
+#
+# SECURITY: the ONLY secret the Worker/browser ever holds is GITHUB_DISPATCH_TOKEN.
+# The research secrets (CLAUDE_BEDROCK_API_KEY, FIRECRAWL_API_KEY, SCREENER_*) live
+# ONLY in GitHub Actions secrets and MUST NOT be put here.
+
+# Fine-grained PAT with: Actions (read & write) + Contents (read) on this repo.
+# Lets the dashboard dispatch analyze.yml and read reports back.
+GITHUB_DISPATCH_TOKEN=github_pat_xxxxxxxxxxxxxxxxxxxx
+
+# "owner/repo" the dashboard dispatches against and reads reports from.
+GITHUB_REPO=ceekay-munshot/glowstocks
+
+# Branch the workflow commits reports to / is dispatched against (default: main).
+GITHUB_REPORTS_REF=main

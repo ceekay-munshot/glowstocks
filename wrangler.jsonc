@@ -1,0 +1,33 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "glowstocks",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-04-26",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Non-secret var. GITHUB_REPO is the "owner/repo" the dashboard dispatches the
+  // analyze.yml workflow against, and reads reports back from (artifacts +
+  // committed data/companies/<TICKER>.json). See src/app/api/report/*.
+  //
+  // The ONLY secret the Worker holds is GITHUB_DISPATCH_TOKEN — a fine-grained
+  // PAT with Actions: read & write (and Contents: read) on this repo. Set it with:
+  //   npx wrangler secret put GITHUB_DISPATCH_TOKEN
+  // The research secrets (CLAUDE_BEDROCK_API_KEY, FIRECRAWL_API_KEY, SCREENER_*)
+  // live ONLY in GitHub Actions and never reach the Worker or the browser.
+  "vars": {
+    "GITHUB_REPO": "ceekay-munshot/glowstocks"
+  },
+
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".open-next/assets"
+  },
+
+  "build": {
+    "command": "npx opennextjs-cloudflare build"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}
