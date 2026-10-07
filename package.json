@@ -13,7 +13,8 @@
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
-    "analyze": "tsx --tsconfig tsconfig.json scripts/analyze.ts"
+    "analyze": "tsx --tsconfig tsconfig.json scripts/analyze.ts",
+    "check:coverage": "tsx --tsconfig tsconfig.json scripts/coverage_check.ts"
   },
   "dependencies": {
     "echarts": "^5.6.0",

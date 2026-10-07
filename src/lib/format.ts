@@ -36,23 +36,50 @@ export function fmtX(v: number): string {
   return `${v.toFixed(1)}x`;
 }
 
-/** Route a numeric value to the right formatter by its unit. */
+/** Group an integer with Indian digit grouping; keep up to 2 decimals otherwise. */
+function plainNum(v: number): string {
+  return Number.isInteger(v) ? indianGroup(v) : v.toFixed(2).replace(/\.?0+$/, "");
+}
+
+/**
+ * Route a numeric value to the right display by its unit. The switch is
+ * exhaustive for every unit the contract uses, and ANY unknown non-empty unit
+ * falls through to "<number> <unit>" — so a ratio, a count of months, or a
+ * headcount is never silently rendered as ₹ crore. Keep ALL value rendering
+ * (screen, PDF, Excel labels) going through here.
+ */
 export function formatValue(value: number | string | null, unit?: string): string {
   if (value === null || value === undefined) return NA;
   if (typeof value === "string") return value;
-  switch (unit) {
+  const u = (unit ?? "").trim();
+  switch (u) {
     case "INR cr":
+    case "₹ cr":
+    case "cr":
       return fmtCr(value);
     case "INR":
+    case "₹":
       return fmtPrice(value);
     case "%":
       return fmtPct(value);
     case "x":
+    case "ratio":
       return fmtX(value);
     case "pp":
       return `${value > 0 ? "+" : ""}${value.toFixed(1)}pp`;
+    case "bps":
+      return `${value > 0 ? "+" : ""}${Math.round(value)} bps`;
+    case "months":
+    case "days":
+    case "years":
+    case "weeks":
+      return `${plainNum(value)} ${u}`;
+    case "":
+      return plainNum(value);
     default:
-      return indianGroup(value);
+      // Unknown unit (headcount, centres, countries, …): keep the number
+      // readable and append the unit rather than guessing a currency format.
+      return `${plainNum(value)} ${u}`;
   }
 }
 
