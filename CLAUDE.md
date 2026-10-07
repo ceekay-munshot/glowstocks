@@ -84,15 +84,19 @@ data/companies/<TICKER>.json  committed reports (durable cache). TCS.json is the
 ```bash
 npm run dev         # renders the TCS sample with no keys
 npm run typecheck   # tsc --noEmit  (run before committing)
-npm run build       # Next build
-npm run build:cf    # OpenNext → Worker bundle (the deploy target)
+npm run build       # OpenNext → Worker bundle (.open-next/) — THE deploy artifact
+npm run build:next  # plain Next build (.next/) — fast check, no Worker bundle
+npm run build:cf    # alias of `build`
 npm run check:coverage   # FAILS if the full-report export drops any populated field
 npm run analyze -- <TICKER> ["Name"] [--sections a,b]
 ```
 
-Build note: `next build` type-checks `scripts/**` too, so keep the engine
-type-clean. ESLint does not run during `next build` (Next 16 removed it); run
-`npm run lint` separately.
+Deploy note: the Cloudflare build command MUST be `npm run build` (the OpenNext
+bundle). `wrangler deploy` delegates to `opennextjs-cloudflare deploy`, which needs
+`.open-next/`; a plain `next build` only makes `.next/` and the deploy fails with
+"Could not find compiled Open Next config". `build` runs `next build` internally,
+so it still type-checks `scripts/**` — keep the engine type-clean. ESLint does not
+run during the build (Next 16 removed it); run `npm run lint` separately.
 
 ## Extending
 
