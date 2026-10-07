@@ -26,7 +26,9 @@ scripts/                      THE RESEARCH ENGINE (runs in GitHub Actions, never
     sanity.ts                 range/ordering checks (impossible → "Not available")
     review.ts                 deterministic cross-section reconciliation (softening only)
     cache.ts                  read-once cache + incremental (--sections) plan
-    sections/*.ts             per-section extractors (snapshot/business/financials/peers/thesis)
+    sections/*.ts             per-section extractors — 13 of them:
+                              snapshot, business, financials, peers, thesis,
+                              customers, capacity, growth, concall, mna, estimates, risks, integrity
 
 src/
   lib/types/report.ts         THE v1 DATA CONTRACT (pure types, shared by engine + UI)
@@ -78,7 +80,13 @@ type-clean. ESLint does not run during `next build` (Next 16 removed it); run
 
 - **Add a committed company to the bundle:** drop its JSON in `data/companies/`,
   import it in `src/lib/bundledReports.ts`.
-- **Add/modify a section:** edit `src/lib/types/report.ts` (contract) + the matching
-  `scripts/lib/sections/<name>.ts` (extractor + JSON schema) + the `*Tab.tsx`.
+- **Add/modify a section:** edit `src/lib/types/report.ts` (contract + `SECTION_KEYS`) +
+  the matching `scripts/lib/sections/<name>.ts` (extractor + JSON schema) + wire it into
+  `scripts/analyze.ts` (task, empty factory, coverage, assembly) + render it in a `*Tab.tsx`.
+  `refreshPlan` reads `SECTION_KEYS` directly, so adding a key to the contract auto-joins
+  the incremental-refresh plan.
+- **Tab map (8 tabs):** Snapshot · Business · Customers & Capacity · Financials ·
+  Growth & Concall · Peers & Estimates · Thesis & Risks · Sources & Integrity. Composite
+  tabs stack section components (e.g. `PeersTab` + `EstimatesSection`).
 - **Status matching:** the workflow's `run-name` is `analyze <ticker>`; the status
   route matches on it. Keep them in sync.

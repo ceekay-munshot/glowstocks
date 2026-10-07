@@ -102,19 +102,20 @@ export class SourceCollector {
       return; // a cited leaf has no nested citations
     }
 
-    // ThesisPoint: { text, source?, url? }
-    if (typeof obj.text === "string" && ("url" in obj || "source" in obj)) {
-      const url = (obj.url as string | null | undefined) ?? null;
-      const source = obj.source as string | undefined;
-      if (url || source) {
-        const ref = this.add({
-          title: source || (url ?? ""),
-          type: this.inferType(source, url),
-          date: null,
-          url,
-        });
-        obj.source_id = ref.id;
-      }
+    // Any citable node carrying a source/url string (ThesisPoint, ConcallHighlight,
+    // MnaDeal, …): register it + stamp source_id, then keep recursing so nested
+    // cited numbers (e.g. a deal's deal_size) are stamped too.
+    const source = typeof obj.source === "string" && obj.source.trim() ? (obj.source as string) : undefined;
+    const url = typeof obj.url === "string" && (obj.url as string).trim() ? (obj.url as string) : null;
+    if (source || url) {
+      const ref = this.add({
+        title: source || (url ?? ""),
+        type: this.inferType(source, url),
+        date: typeof obj.date === "string" ? (obj.date as string) : null,
+        locator: typeof obj.locator === "string" ? (obj.locator as string) : null,
+        url,
+      });
+      if (!obj.source_id) obj.source_id = ref.id;
     }
 
     for (const v of Object.values(obj)) this.attach(v);

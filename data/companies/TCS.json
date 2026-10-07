@@ -16,6 +16,14 @@
     "financials": true,
     "peers": true,
     "thesis": true,
+    "customers": true,
+    "capacity": true,
+    "growth": true,
+    "concall": true,
+    "mna": true,
+    "estimates": true,
+    "risks": true,
+    "integrity": true,
     "notes": "Illustrative sample committed so the dashboard renders before any keys are set. Run the engine for live, source-backed data."
   },
   "snapshot": {
@@ -129,6 +137,129 @@
       { "name": "Bull", "probability": { "value": 25, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7" }, "revenue_cagr": { "value": 12, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7" }, "margin": { "value": 27, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7" }, "pe_exit": { "value": 32, "available": true, "unit": "x", "source": "glowstocks estimate", "source_id": "S7" }, "target_price": { "value": 5200, "available": true, "unit": "INR", "source": "glowstocks estimate", "source_id": "S7" }, "upside": { "value": 33, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7" }, "narrative": "AI-led deal acceleration revives double-digit growth and margin expansion." }
     ]
   },
+  "customers": {
+    "applicable": true,
+    "summary": "Highly diversified client base — no single client is material; growth is tracked through total contract value (TCV).",
+    "groups": [
+      { "segment": "$100M+ clients", "names": "~60 clients", "concentration": { "value": 38, "available": true, "unit": "%", "source": "Investor Presentation Q4 FY25", "date": "2025-04-12", "locator": "slide 14", "url": "https://www.tcs.com/investor-relations", "source_id": "S5" }, "risk": "Low — deep, multi-year relationships" },
+      { "segment": "$50–100M clients", "concentration": { "value": 22, "available": true, "unit": "%", "source": "Investor Presentation Q4 FY25", "date": "2025-04-12", "locator": "slide 14", "url": "https://www.tcs.com/investor-relations", "source_id": "S5" }, "risk": "Low" },
+      { "segment": "$20–50M clients", "concentration": { "value": 18, "available": true, "unit": "%", "source": "Investor Presentation Q4 FY25", "date": "2025-04-12", "locator": "slide 14", "url": "https://www.tcs.com/investor-relations", "source_id": "S5" }, "risk": "Low" },
+      { "segment": "$10–20M clients", "concentration": { "value": 12, "available": true, "unit": "%", "source": "Investor Presentation Q4 FY25", "date": "2025-04-12", "locator": "slide 14", "url": "https://www.tcs.com/investor-relations", "source_id": "S5" }, "risk": "Medium — more churn-prone" },
+      { "segment": "<$10M clients", "concentration": { "value": 10, "available": true, "unit": "%", "source": "Investor Presentation Q4 FY25", "date": "2025-04-12", "locator": "slide 14", "url": "https://www.tcs.com/investor-relations", "source_id": "S5" }, "risk": "Medium — long tail" }
+    ],
+    "order_book": [
+      { "metric": "Total TCV signed FY25", "value": { "value": 327000, "available": true, "unit": "INR cr", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "date": "2025-04-12", "locator": "press release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4", "note": "≈ $39.4bn across multi-year contracts" }, "mix": "~55% North America", "coverage": { "value": 1.1, "available": true, "unit": "x", "source": "glowstocks estimate", "source_id": "S7", "note": "book-to-bill (illustrative)" }, "qoq_change": { "value": 8, "available": true, "unit": "%", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "date": "2025-04-12", "locator": "press release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" } },
+      { "metric": "Q4 FY25 TCV", "value": { "value": 102000, "available": true, "unit": "INR cr", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "date": "2025-04-12", "locator": "press release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4", "note": "≈ $12.2bn" }, "qoq_change": { "value": -5, "available": true, "unit": "%", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "date": "2025-04-12", "locator": "press release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" } }
+    ]
+  },
+  "capacity": {
+    "applicable": true,
+    "kind": "delivery",
+    "summary": "Capacity is people + global delivery centres, not plant & machinery — an asset-light delivery model.",
+    "metrics": [
+      { "label": "Total headcount", "value": 607000, "available": true, "unit": "", "source": "Annual Report FY25", "date": "2025-05-10", "locator": "p.40", "url": "https://www.tcs.com/investor-relations", "source_id": "S2" },
+      { "label": "Delivery countries", "value": 55, "available": true, "unit": "", "source": "Annual Report FY25", "date": "2025-05-10", "locator": "p.12", "url": "https://www.tcs.com/investor-relations", "source_id": "S2" },
+      { "label": "LTM attrition (IT services)", "value": 13.3, "available": true, "unit": "%", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "date": "2025-04-12", "locator": "press release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" },
+      { "label": "Women in workforce", "value": 35.6, "available": true, "unit": "%", "source": "Annual Report FY25", "date": "2025-05-10", "locator": "p.41", "url": "https://www.tcs.com/investor-relations", "source_id": "S2" }
+    ],
+    "sites": [
+      { "site": "India (Tier-1 + Tier-2 campuses)", "product": "Global delivery hubs", "capacity": { "value": null, "available": false }, "utilization": { "value": 85, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7", "note": "illustrative utilization" }, "expansion": "New Tier-2 campuses (Kolkata, Kochi, Indore)", "timeline": "FY26–27" },
+      { "site": "North America (onsite + nearshore)", "product": "Client-site + nearshore delivery", "capacity": { "value": null, "available": false }, "utilization": { "value": 82, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7", "note": "illustrative" }, "expansion": "Nearshore centres expanding", "timeline": "FY26" },
+      { "site": "Europe", "product": "Local delivery centres", "capacity": { "value": null, "available": false }, "utilization": { "value": 80, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7", "note": "illustrative" } }
+    ]
+  },
+  "growth": {
+    "summary": "High-single-digit growth as discretionary demand recovers, with margins the key swing factor.",
+    "drivers": [
+      { "name": "Pricing", "detail": "Broadly stable pricing; selective rate action in niche/AI skills.", "direction": "neutral" },
+      { "name": "Volumes", "detail": "Volume-led recovery as deferred discretionary work resumes.", "metric": { "value": 6, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7", "note": "est. FY26 CC growth" }, "direction": "tailwind" },
+      { "name": "Capacity (talent)", "detail": "Campus hiring resumed; bench rebuilt to serve ramp-ups.", "direction": "tailwind" },
+      { "name": "Margins", "detail": "Targeting the 26–28% EBIT band via utilization, pyramid and automation.", "metric": { "value": 26, "available": true, "unit": "%", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "date": "2025-04-12", "locator": "press release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" }, "direction": "tailwind" },
+      { "name": "Order wins (TCV)", "detail": "Robust large-deal TCV of ~$39bn in FY25 underpins visibility.", "metric": { "value": 327000, "available": true, "unit": "INR cr", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "date": "2025-04-12", "locator": "press release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" }, "direction": "tailwind" },
+      { "name": "New products (AI)", "detail": "GenAI / WisdomNext solutions scaling across engagements.", "direction": "tailwind" },
+      { "name": "Exports", "detail": "~95% of revenue is exported; USD/INR a modest tailwind.", "metric": { "value": 95, "available": true, "unit": "%", "source": "Annual Report FY25", "date": "2025-05-10", "locator": "p.58", "url": "https://www.tcs.com/investor-relations", "source_id": "S2" }, "direction": "neutral" },
+      { "name": "Capex / working capital", "detail": "Asset-light; low capex and strong cash conversion fund buybacks.", "direction": "neutral" }
+    ],
+    "catalysts": [
+      { "catalyst": "US BFSI discretionary recovery", "timing": "H2 FY26", "kpi": "BFSI constant-currency growth", "confirms": "BFSI returns to >5% CC growth", "falsifies": "BFSI stays negative for 2+ quarters" },
+      { "catalyst": "GenAI deal conversion to revenue", "timing": "FY26–27", "kpi": "AI-led TCV in reported revenue", "confirms": "AI deals move from pilots to run-rate", "falsifies": "AI remains sub-scale pilots" },
+      { "catalyst": "Margin recovery to 26%+", "timing": "FY26", "kpi": "EBIT margin", "confirms": "Two quarters at 26%+", "falsifies": "Margin slips below 24%" }
+    ],
+    "downside_triggers": [
+      "Prolonged discretionary spend freeze in US/Europe",
+      "EBIT margin slips below 24% for two consecutive quarters",
+      "Large-deal TCV declines for two consecutive quarters",
+      "Sharp INR appreciation versus the USD"
+    ]
+  },
+  "concall": {
+    "available": true,
+    "period": "Q4 FY25",
+    "date": "2025-04-12",
+    "highlights": [
+      { "theme": "Demand environment", "quote": "We are seeing early signs of discretionary spending stabilising in key markets.", "speaker": "K Krithivasan, CEO", "date": "2025-04-12", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" },
+      { "theme": "Margins", "quote": "Our aspiration remains the 26 to 28 percent band and we have levers to get there.", "speaker": "Samir Seksaria, CFO", "date": "2025-04-12", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" },
+      { "theme": "Generative AI", "quote": "GenAI is now embedded across a large and growing number of client engagements.", "speaker": "K Krithivasan, CEO", "date": "2025-04-12", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" },
+      { "theme": "Deal pipeline", "quote": "Our order book remains robust with a healthy mix of large deals.", "speaker": "K Krithivasan, CEO", "date": "2025-04-12", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" },
+      { "theme": "Talent", "quote": "Attrition has moderated and we have resumed campus hiring at scale.", "speaker": "Milind Lakkad, CHRO", "date": "2025-04-12", "source": "TCS Q4 FY25 Earnings Concall & Press Release", "url": "https://www.tcs.com/investor-relations", "source_id": "S4" }
+    ],
+    "insights": [
+      "Demand is stabilising but not yet inflecting — growth is a FY26 H2 story.",
+      "The margin band (26–28%) is the key value driver; levers exist but need volume.",
+      "GenAI is additive to deals today, but a potential deflation risk to legacy work later.",
+      "Large-deal TCV gives revenue visibility despite soft discretionary spend.",
+      "Easing attrition and resumed campus hiring signal management confidence in the ramp."
+    ],
+    "tone": "Cautiously optimistic — guidance-light but reiterated the medium-term margin band."
+  },
+  "mna": {
+    "found": true,
+    "summary": "Growth is overwhelmingly organic; inorganic activity is limited to occasional bolt-ons.",
+    "deals": [
+      { "date": "2021-03-01", "target": "Postbank Systems AG (Germany)", "what": "Captive IT services unit of Deutsche Bank's Postbank", "deal_size": { "value": null, "available": false, "note": "deal value not disclosed" }, "payment": "cash + employee transfer", "rationale": "Deepen European banking delivery; ~1,500 employees onboarded", "status": "completed", "source": "Business press coverage", "url": "https://www.business-standard.com/", "source_id": "S8" }
+    ]
+  },
+  "estimates": {
+    "available": true,
+    "summary": "Street models high-single-digit revenue growth with gradual margin recovery; price targets span a wide range.",
+    "forward": [
+      { "period": "FY26E", "revenue": { "value": 272000, "available": true, "unit": "INR cr", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "forecasts", "url": "https://trendlyne.com/", "source_id": "S9" }, "eps": { "value": 146, "available": true, "unit": "INR", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "forecasts", "url": "https://trendlyne.com/", "source_id": "S9" }, "growth": { "value": 6.5, "available": true, "unit": "%", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "forecasts", "url": "https://trendlyne.com/", "source_id": "S9" } },
+      { "period": "FY27E", "revenue": { "value": 296000, "available": true, "unit": "INR cr", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "forecasts", "url": "https://trendlyne.com/", "source_id": "S9" }, "eps": { "value": 162, "available": true, "unit": "INR", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "forecasts", "url": "https://trendlyne.com/", "source_id": "S9" }, "growth": { "value": 8.8, "available": true, "unit": "%", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "forecasts", "url": "https://trendlyne.com/", "source_id": "S9" } },
+      { "period": "FY28E", "revenue": { "value": 322000, "available": true, "unit": "INR cr", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "forecasts", "url": "https://trendlyne.com/", "source_id": "S9" }, "eps": { "value": 180, "available": true, "unit": "INR", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "forecasts", "url": "https://trendlyne.com/", "source_id": "S9" }, "growth": { "value": 8.9, "available": true, "unit": "%", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "forecasts", "url": "https://trendlyne.com/", "source_id": "S9" } }
+    ],
+    "eps_revision": "Marginal downgrades over the last quarter on soft discretionary demand.",
+    "target_low": { "value": 3400, "available": true, "unit": "INR", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "price targets", "url": "https://trendlyne.com/", "source_id": "S9" },
+    "target_mean": { "value": 4100, "available": true, "unit": "INR", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "price targets", "url": "https://trendlyne.com/", "source_id": "S9" },
+    "target_high": { "value": 4800, "available": true, "unit": "INR", "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "price targets", "url": "https://trendlyne.com/", "source_id": "S9" },
+    "rating": { "value": "Hold (lean Buy)", "available": true, "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "consensus", "url": "https://trendlyne.com/", "source_id": "S9" },
+    "analysts": { "value": 42, "available": true, "source": "Trendlyne consensus", "date": "2026-09-15", "locator": "consensus", "url": "https://trendlyne.com/", "source_id": "S9" }
+  },
+  "risks": {
+    "summary": "The dominant risk is a prolonged discretionary-spend slowdown in the US/Europe; margins and FX are secondary.",
+    "register": [
+      { "risk": "US/Europe discretionary spend slowdown", "evidence": "~66% of revenue from North America + UK; BFSI (31%) soft.", "transmission": "Lower volumes → revenue and margin", "severity": "High", "probability": "Medium", "leading_indicators": "BFSI CC growth, book-to-bill, furloughs", "mitigants": "Cost-takeout deals, vendor consolidation wins" },
+      { "risk": "Wage inflation & attrition", "evidence": "LTM attrition ~13%; supply tight in niche/AI skills.", "transmission": "Higher delivery cost → margin compression", "severity": "Medium", "probability": "Medium", "leading_indicators": "Attrition trend, utilization", "mitigants": "Pyramid, automation, offshore mix" },
+      { "risk": "Currency (INR appreciation)", "evidence": "~95% of revenue is exported.", "transmission": "Lower reported revenue and margin", "severity": "Medium", "probability": "Low", "leading_indicators": "USD/INR trend", "mitigants": "Active hedging programme" },
+      { "risk": "AI-led deflation of legacy services", "evidence": "GenAI can compress effort-based billing over time.", "transmission": "Pricing/volume pressure on legacy work", "severity": "Medium", "probability": "Medium", "leading_indicators": "AI deal mix, realized rates", "mitigants": "AI-led new deals, repositioning" },
+      { "risk": "US visa / immigration policy", "evidence": "Onsite delivery depends on work visas.", "transmission": "Higher onsite cost, delivery friction", "severity": "Low", "probability": "Low", "leading_indicators": "Visa policy, local-hire ratio", "mitigants": "Local hiring, nearshore centres" }
+    ],
+    "downside_scenarios": [
+      { "name": "Prolonged demand freeze", "trigger": "BFSI discretionary stays frozen > 2 quarters", "impact": "Flat revenue; EBIT margin below 24%", "probability": { "value": 25, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7" } },
+      { "name": "AI disruption of legacy", "trigger": "GenAI compresses legacy billing faster than new-deal wins", "impact": "Growth stalls; multiple de-rates", "probability": { "value": 20, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7" } },
+      { "name": "Sharp INR appreciation", "trigger": "USD/INR moves below 80", "impact": "~150 bps margin hit", "probability": { "value": 15, "available": true, "unit": "%", "source": "glowstocks estimate", "source_id": "S7" } }
+    ]
+  },
+  "integrity": {
+    "checks": [
+      { "check": "Issuer ↔ ticker match", "status": "pass", "detail": "TCS resolves to Tata Consultancy Services on Screener." },
+      { "check": "Primary listing", "status": "pass", "detail": "Listed on both NSE and BSE (India)." },
+      { "check": "Consolidated vs standalone", "status": "pass", "detail": "Figures use CONSOLIDATED financial statements." },
+      { "check": "FY alignment", "status": "pass", "detail": "April–March fiscal year, consistent across all periods shown." },
+      { "check": "Restatements", "status": "pass", "detail": "No material restatement of prior periods noted." },
+      { "check": "Corporate actions", "status": "warn", "detail": "Periodic buybacks affect per-share figures; no recent split/bonus." }
+    ],
+    "coverage_note": "Core financials are high-confidence (Screener + annual report). Forward estimates are Street consensus and, in this committed sample, are illustrative rather than live."
+  },
   "sources": [
     { "id": "S1", "title": "Screener — Tata Consultancy Services", "type": "screener", "date": "2026-10-01", "locator": "company page", "url": "https://www.screener.in/company/TCS/consolidated/" },
     { "id": "S2", "title": "TCS Annual Report FY25", "type": "annual_report", "date": "2025-05-10", "locator": "financial statements", "url": "https://www.tcs.com/investor-relations" },
@@ -137,10 +268,12 @@
     { "id": "S5", "title": "TCS Investor Presentation Q4 FY25", "type": "investor_presentation", "date": "2025-04-12", "locator": "slide 9", "url": "https://www.tcs.com/investor-relations" },
     { "id": "S6", "title": "BSE/NSE corporate filings — TCS", "type": "exchange_filing", "date": "2025-04-12", "locator": "announcements", "url": "https://www.bseindia.com/" },
     { "id": "S7", "title": "glowstocks scenario estimates", "type": "estimate", "date": "2026-10-07", "locator": "thesis scenarios", "url": null },
-    { "id": "S8", "title": "Business press coverage", "type": "news", "date": "2025-08-01", "locator": "sector commentary", "url": "https://www.business-standard.com/" }
+    { "id": "S8", "title": "Business press coverage", "type": "news", "date": "2025-08-01", "locator": "sector commentary", "url": "https://www.business-standard.com/" },
+    { "id": "S9", "title": "Trendlyne analyst consensus — TCS", "type": "estimate", "date": "2026-09-15", "locator": "forecasts & price targets", "url": "https://trendlyne.com/" }
   ],
   "sources_seen": [
     "https://www.screener.in/company/TCS/consolidated/",
-    "https://www.tcs.com/investor-relations"
+    "https://www.tcs.com/investor-relations",
+    "https://trendlyne.com/"
   ]
 }

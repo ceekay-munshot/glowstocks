@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import type { CompanyReport, SectionKey } from "@/lib/types/report";
+import { SECTION_KEYS, type CompanyReport, type SectionKey } from "@/lib/types/report";
 import { Header } from "./Header";
 import { WidgetCard } from "./WidgetCard";
 import { ChartSkeleton } from "./states";
@@ -12,17 +12,26 @@ import { FinancialsTab } from "./tabs/FinancialsTab";
 import { PeersTab } from "./tabs/PeersTab";
 import { ThesisTab } from "./tabs/ThesisTab";
 import { SourcesPanel, SourceTrail } from "./tabs/SourcesPanel";
+import { CustomersCapacityTab } from "./tabs/CustomersCapacityTab";
+import { GrowthConcallTab } from "./tabs/GrowthConcallTab";
+import { EstimatesSection } from "./tabs/EstimatesSection";
+import { RisksSection } from "./tabs/RisksSection";
+import { MnaSection } from "./tabs/MnaSection";
+import { IntegritySection } from "./tabs/IntegritySection";
 
-type Tab = SectionKey | "sources";
+type Tab =
+  | "snapshot" | "business" | "customers" | "financials" | "growth" | "peers" | "thesis" | "sources";
 const TABS: { key: Tab; label: string }[] = [
   { key: "snapshot", label: "Snapshot" },
   { key: "business", label: "Business" },
+  { key: "customers", label: "Customers & Capacity" },
   { key: "financials", label: "Financials" },
-  { key: "peers", label: "Peers" },
-  { key: "thesis", label: "Thesis" },
+  { key: "growth", label: "Growth & Concall" },
+  { key: "peers", label: "Peers & Estimates" },
+  { key: "thesis", label: "Thesis & Risks" },
 ];
 
-const COVERAGE_KEYS: SectionKey[] = ["snapshot", "business", "financials", "peers", "thesis"];
+const COVERAGE_KEYS: SectionKey[] = [...SECTION_KEYS];
 
 export function Dashboard({ initialReport }: { initialReport: CompanyReport | null }) {
   const [report, setReport] = useState<CompanyReport | null>(initialReport);
@@ -192,7 +201,7 @@ export function Dashboard({ initialReport }: { initialReport: CompanyReport | nu
           ))}
           <div style={{ flex: 1 }} />
           <button className="gs-tab" data-active={tab === "sources"} onClick={() => setTab("sources")}>
-            Sources{report ? ` (${report.sources.length})` : ""}
+            Sources &amp; Integrity{report ? ` (${report.sources.length})` : ""}
           </button>
         </div>
         {report && <CoverageBar report={report} />}
@@ -212,10 +221,28 @@ export function Dashboard({ initialReport }: { initialReport: CompanyReport | nu
           <>
             {tab === "snapshot" && <SnapshotTab report={report} />}
             {tab === "business" && <BusinessTab report={report} />}
+            {tab === "customers" && <CustomersCapacityTab report={report} />}
             {tab === "financials" && <FinancialsTab report={report} />}
-            {tab === "peers" && <PeersTab report={report} />}
-            {tab === "thesis" && <ThesisTab report={report} />}
-            {tab === "sources" && <SourcesPanel sources={report.sources} updated={report.last_updated} />}
+            {tab === "growth" && <GrowthConcallTab report={report} />}
+            {tab === "peers" && (
+              <>
+                <PeersTab report={report} />
+                <EstimatesSection report={report} />
+              </>
+            )}
+            {tab === "thesis" && (
+              <>
+                <ThesisTab report={report} />
+                <RisksSection report={report} />
+                <MnaSection report={report} />
+              </>
+            )}
+            {tab === "sources" && (
+              <>
+                <SourcesPanel sources={report.sources} updated={report.last_updated} />
+                <IntegritySection report={report} />
+              </>
+            )}
             {tab !== "sources" && <SourceTrail sources={report.sources} updated={report.last_updated} onViewAll={() => setTab("sources")} />}
           </>
         ) : (

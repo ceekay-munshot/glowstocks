@@ -165,6 +165,126 @@ export async function POST(request: Request) {
   }
   th.getColumn(2).width = 24;
 
+  /* ---- Customers ---- */
+  const cu = wb.addWorksheet("Customers");
+  titleRow(cu, "Client concentration");
+  const cuH = cu.addRow(["Segment", "% revenue", "Names", "Risk"]);
+  cuH.font = { bold: true };
+  for (const g of report.customers?.groups ?? []) cu.addRow([g.segment, v(g.concentration), g.names ?? "", g.risk ?? ""]);
+  cu.addRow([]);
+  titleRow(cu, "Order book / pipeline");
+  const cuO = cu.addRow(["Metric", "Value", "Mix", "Coverage", "QoQ %"]);
+  cuO.font = { bold: true };
+  for (const o of report.customers?.order_book ?? []) cu.addRow([o.metric, v(o.value), o.mix ?? "", v(o.coverage ?? null), v(o.qoq_change ?? null)]);
+  cu.getColumn(1).width = 28;
+  cu.getColumn(3).width = 24;
+
+  /* ---- Capacity ---- */
+  const ca = wb.addWorksheet("Capacity");
+  titleRow(ca, `Footprint (${report.capacity?.kind ?? "n/a"})`);
+  const caM = ca.addRow(["Metric", "Value", "Unit"]);
+  caM.font = { bold: true };
+  for (const m of report.capacity?.metrics ?? []) ca.addRow([m.label, v(m), m.unit ?? ""]);
+  ca.addRow([]);
+  titleRow(ca, "Sites");
+  const caS = ca.addRow(["Site", "Product", "Capacity", "Utilization", "Capex", "Expansion", "Timeline"]);
+  caS.font = { bold: true };
+  for (const s of report.capacity?.sites ?? []) ca.addRow([s.site, s.product ?? "", v(s.capacity ?? null), v(s.utilization ?? null), v(s.capex ?? null), s.expansion ?? "", s.timeline ?? ""]);
+  ca.getColumn(1).width = 30;
+
+  /* ---- Growth ---- */
+  const gr = wb.addWorksheet("Growth");
+  titleRow(gr, "Growth drivers");
+  const grD = gr.addRow(["Driver", "Direction", "Detail", "Metric"]);
+  grD.font = { bold: true };
+  for (const d of report.growth?.drivers ?? []) gr.addRow([d.name, d.direction, d.detail, v(d.metric ?? null)]);
+  gr.addRow([]);
+  titleRow(gr, "Catalysts");
+  const grC = gr.addRow(["Catalyst", "Timing", "KPI", "Confirms", "Falsifies"]);
+  grC.font = { bold: true };
+  for (const c of report.growth?.catalysts ?? []) gr.addRow([c.catalyst, c.timing, c.kpi, c.confirms ?? "", c.falsifies ?? ""]);
+  gr.addRow([]);
+  titleRow(gr, "Downside triggers");
+  for (const t of report.growth?.downside_triggers ?? []) gr.addRow(["•", t]);
+  gr.getColumn(1).width = 26;
+  gr.getColumn(3).width = 40;
+
+  /* ---- Concall ---- */
+  const co = wb.addWorksheet("Concall");
+  titleRow(co, `Concall highlights — ${report.concall?.period ?? ""}`);
+  const coH = co.addRow(["Theme", "Quote", "Speaker", "Date"]);
+  coH.font = { bold: true };
+  for (const h of report.concall?.highlights ?? []) co.addRow([h.theme, h.quote, h.speaker, h.date ?? ""]);
+  co.addRow([]);
+  titleRow(co, "So-what insights");
+  for (const ins of report.concall?.insights ?? []) co.addRow(["•", ins]);
+  co.getColumn(2).width = 60;
+  co.getColumn(3).width = 22;
+
+  /* ---- M&A ---- */
+  const mn = wb.addWorksheet("M&A");
+  const mnH = mn.addRow(["Date", "Target", "What", "Deal size", "Payment", "Status", "Rationale"]);
+  mnH.eachCell((c) => {
+    c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: HEADER_ARGB } };
+    c.font = { bold: true, color: { argb: "FFFFFFFF" } };
+  });
+  if (report.mna?.found) {
+    for (const d of report.mna.deals) mn.addRow([d.date ?? "", d.target, d.what, v(d.deal_size ?? null), d.payment ?? "", d.status ?? "", d.rationale ?? ""]);
+  } else {
+    mn.addRow(["", "No material M&A found.", "", "", "", "", ""]);
+  }
+  mn.getColumn(2).width = 28;
+  mn.getColumn(3).width = 36;
+  mn.views = [{ state: "frozen", ySplit: 1 }];
+
+  /* ---- Estimates ---- */
+  const es = wb.addWorksheet("Estimates");
+  const esH = es.addRow(["Period", "Revenue (INR cr)", "EPS (INR)", "Growth %"]);
+  esH.eachCell((c) => {
+    c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: HEADER_ARGB } };
+    c.font = { bold: true, color: { argb: "FFFFFFFF" } };
+  });
+  for (const f of report.estimates?.forward ?? []) es.addRow([f.period, v(f.revenue ?? null), v(f.eps ?? null), v(f.growth ?? null)]);
+  es.addRow([]);
+  es.addRow(["Target low", v(report.estimates?.target_low ?? null)]);
+  es.addRow(["Target mean", v(report.estimates?.target_mean ?? null)]);
+  es.addRow(["Target high", v(report.estimates?.target_high ?? null)]);
+  es.addRow(["Rating", v(report.estimates?.rating ?? null)]);
+  es.addRow(["Analysts", v(report.estimates?.analysts ?? null)]);
+  es.getColumn(1).width = 18;
+  es.views = [{ state: "frozen", ySplit: 1 }];
+
+  /* ---- Risks ---- */
+  const ri = wb.addWorksheet("Risks");
+  const riH = ri.addRow(["Risk", "Severity", "Probability", "Evidence", "Transmission", "Mitigants"]);
+  riH.eachCell((c) => {
+    c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: HEADER_ARGB } };
+    c.font = { bold: true, color: { argb: "FFFFFFFF" } };
+  });
+  for (const row of report.risks?.register ?? []) ri.addRow([row.risk, row.severity, row.probability, row.evidence ?? "", row.transmission ?? "", row.mitigants ?? ""]);
+  ri.addRow([]);
+  titleRow(ri, "Top downside scenarios");
+  for (const d of report.risks?.downside_scenarios ?? []) ri.addRow([d.name, v(d.probability ?? null), d.trigger, d.impact ?? ""]);
+  ri.getColumn(1).width = 30;
+  [4, 5, 6].forEach((i) => (ri.getColumn(i).width = 32));
+  ri.views = [{ state: "frozen", ySplit: 1 }];
+
+  /* ---- Integrity ---- */
+  const ig = wb.addWorksheet("Integrity");
+  const igH = ig.addRow(["Check", "Status", "Detail"]);
+  igH.eachCell((c) => {
+    c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: HEADER_ARGB } };
+    c.font = { bold: true, color: { argb: "FFFFFFFF" } };
+  });
+  for (const c of report.integrity?.checks ?? []) ig.addRow([c.check, c.status, c.detail ?? ""]);
+  if (report.integrity?.coverage_note) {
+    ig.addRow([]);
+    ig.addRow(["Coverage", report.integrity.coverage_note]);
+  }
+  ig.getColumn(1).width = 28;
+  ig.getColumn(3).width = 60;
+  ig.views = [{ state: "frozen", ySplit: 1 }];
+
   /* ---- Sources ---- */
   const so = wb.addWorksheet("Sources");
   so.columns = [

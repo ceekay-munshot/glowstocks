@@ -132,7 +132,18 @@ point is a `Cited<T>`: `{ value, unit, available, source, date, locator, url }`.
 | **financials** | latest quarter + latest FY + 5-year history |
 | **peers** | peer table (price, mcap, P/E, EV/EBITDA, ROE, ROCE, ROA, 5Y growth, D/E) |
 | **thesis** | supports, counters, change-my-mind, bear/base/bull scenarios |
+| **customers** | client/customer mix & concentration + order book / TCV pipeline |
+| **capacity** | manufacturing or delivery footprint — sites, capacity, utilization, headcount, capex |
+| **growth** | 8 growth drivers + forward catalyst watchlist + downside triggers |
+| **concall** | latest concall highlights (theme · quote · speaker) + "so what" insights + tone |
+| **mna** | M&A / inorganic moves (target, size, payment, rationale, status) |
+| **estimates** | Street expectations — forward revenue/EPS, revisions, price-target range |
+| **risks** | risk register (severity × probability, evidence, mitigants) + top-3 downside scenarios |
+| **integrity** | data-trust gate (issuer↔ticker, listing, consolidated/standalone, FY, restatements) |
 | **sources** | the provenance spine — every `{ id, title, type, date, locator, url }` |
+
+**Tabs:** Snapshot · Business · Customers & Capacity · Financials · Growth & Concall ·
+Peers & Estimates · Thesis & Risks · Sources & Integrity.
 
 ### Never waste credits
 
