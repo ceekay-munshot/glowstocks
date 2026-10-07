@@ -78,6 +78,13 @@ data/companies/<TICKER>.json  committed reports (durable cache). TCS.json is the
   `scripts/validate_palette.js` in the dataviz skill — re-run it if you change hues.
 - **UI follows the dashboard-builder skill:** 3-zone shell, 48px header,
   `WidgetCard` for every widget (no cards-in-cards), shimmer/empty/error states.
+- **Pin Next to 16.3.x (do NOT bump to 16.4+ yet).** `@opennextjs/cloudflare`
+  1.20.9 (the latest) does not handle Next 16.4's new `preview-props.json` server
+  manifest: the deployed Worker throws at startup (`Unexpected
+  loadManifest(.../preview-props.json)` → Cloudflare **Error 1101** on every
+  route). 16.3.8 satisfies the adapter's `>=16.3.8` peer and renders fine. Only
+  bump Next once a newer `@opennextjs/cloudflare` adds 16.4 support — and verify
+  with `npm run preview` (the local Worker) before trusting a deploy.
 
 ## Commands
 
