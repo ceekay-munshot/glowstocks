@@ -124,6 +124,24 @@ export default function FullReport() {
           head={["Footprint metric", "Value", "Source"]}
           rows={(r.capacity?.metrics ?? []).map((m) => [m.label, citedText(m), m.source ?? "—"])}
         />
+        {(r.capacity?.sites ?? []).length > 0 && (
+          <>
+            <Caption>Sites & footprint detail</Caption>
+            <CitedTable
+              head={["Site", "Product", "Capacity", "Util.", "Capex", "Expansion", "Timeline", "Source"]}
+              rows={(r.capacity?.sites ?? []).map((s) => [
+                s.site,
+                s.product ?? "—",
+                cell(s.capacity ?? null),
+                cell(s.utilization ?? null),
+                cell(s.capex ?? null),
+                s.expansion ?? "—",
+                s.timeline ?? "—",
+                srcOf(s.capacity ?? s.utilization ?? null),
+              ])}
+            />
+          </>
+        )}
       </PrintSection>
 
       {/* ---- Financials ---- */}
@@ -136,6 +154,19 @@ export default function FullReport() {
             <EChart option={marginsLineOption(history)} height={200} animate={false} />
           </Chart>
         </Two>
+        {f?.latest_quarter && (
+          <MetricTable
+            caption={`Latest quarter — ${f.latest_quarter.period}`}
+            rows={[
+              { label: "Revenue", c: f.latest_quarter.revenue },
+              { label: "EBITDA margin", c: f.latest_quarter.ebitda_margin ?? null },
+              { label: "PAT", c: f.latest_quarter.pat },
+              { label: "PAT margin", c: f.latest_quarter.pat_margin ?? null },
+              { label: "ROCE", c: f.latest_quarter.roce ?? null },
+              { label: "ROE", c: f.latest_quarter.roe ?? null },
+            ]}
+          />
+        )}
         {f?.latest_fy && (
           <MetricTable
             caption={`Latest FY — ${f.latest_fy.period}`}
@@ -187,6 +218,15 @@ export default function FullReport() {
                 <b>{h.theme}:</b> <i>“{h.quote}”</i> — {h.speaker} <span style={{ color: "#9ca3af" }}>({h.source})</span>
               </div>
             ))}
+            {(r.concall.insights ?? []).length > 0 && (
+              <>
+                <Caption>So-what insights</Caption>
+                <ul style={ulS}>{r.concall.insights.map((ins, i) => <li key={i}>{ins}</li>)}</ul>
+              </>
+            )}
+            {r.concall.tone && (
+              <div style={{ fontSize: 10, color: "#6b7280", marginTop: 4 }}><b>Management tone:</b> {r.concall.tone}</div>
+            )}
           </div>
         )}
       </PrintSection>
@@ -200,14 +240,33 @@ export default function FullReport() {
           ])}
         />
         {r.estimates?.available && (
-          <Two>
-            <Chart title="Forward revenue (₹ cr)" has={r.estimates.forward.some((e) => e.revenue?.available)}>
-              <EChart option={forwardRevenueBarsOption(r.estimates.forward)} height={180} animate={false} />
-            </Chart>
-            <Chart title="Forward EPS (₹)" has={r.estimates.forward.some((e) => e.eps?.available)}>
-              <EChart option={forwardEpsLineOption(r.estimates.forward)} height={180} animate={false} />
-            </Chart>
-          </Two>
+          <>
+            <Two>
+              <Chart title="Forward revenue (₹ cr)" has={r.estimates.forward.some((e) => e.revenue?.available)}>
+                <EChart option={forwardRevenueBarsOption(r.estimates.forward)} height={180} animate={false} />
+              </Chart>
+              <Chart title="Forward EPS (₹)" has={r.estimates.forward.some((e) => e.eps?.available)}>
+                <EChart option={forwardEpsLineOption(r.estimates.forward)} height={180} animate={false} />
+              </Chart>
+            </Two>
+            <CitedTable
+              head={["Period", "Revenue (₹ cr)", "EPS (₹)", "Growth", "Source"]}
+              rows={(r.estimates.forward ?? []).map((e) => [e.period, cell(e.revenue ?? null), cell(e.eps ?? null), cell(e.growth ?? null), srcOf(e.revenue ?? e.eps ?? null)])}
+            />
+            <MetricTable
+              caption="Street targets & consensus"
+              rows={[
+                { label: "Target — low", c: r.estimates.target_low ?? null },
+                { label: "Target — mean", c: r.estimates.target_mean ?? null },
+                { label: "Target — high", c: r.estimates.target_high ?? null },
+                { label: "Consensus rating", c: r.estimates.rating ?? null },
+                { label: "Analysts covering", c: r.estimates.analysts ?? null },
+              ]}
+            />
+            {r.estimates.eps_revision && (
+              <p style={{ fontSize: 10, color: "#374151", margin: "4px 0 0" }}><b>EPS revisions:</b> {r.estimates.eps_revision}</p>
+            )}
+          </>
         )}
       </PrintSection>
 
@@ -326,7 +385,7 @@ function SourcesTable({ sources }: { sources: SourceRef[] }) {
     <table style={tblS}>
       <thead>
         <tr style={{ background: "#eef2ff", color: "#3730a3" }}>
-          {["#", "Title", "Type", "Date", "Locator"].map((h) => <th key={h} style={{ ...tdS, textAlign: "left", fontWeight: 700 }}>{h}</th>)}
+          {["#", "Title", "Type", "Date", "Locator", "URL"].map((h) => <th key={h} style={{ ...tdS, textAlign: "left", fontWeight: 700 }}>{h}</th>)}
         </tr>
       </thead>
       <tbody>
@@ -337,6 +396,9 @@ function SourcesTable({ sources }: { sources: SourceRef[] }) {
             <td style={tdS}>{s.type}</td>
             <td style={tdS}>{s.date ?? "—"}</td>
             <td style={tdS}>{s.locator ?? "—"}</td>
+            <td style={{ ...tdS, maxWidth: 150 }}>
+              {s.url ? <a href={s.url} style={{ color: "#4f46e5", wordBreak: "break-all" }}>{s.url}</a> : "—"}
+            </td>
           </tr>
         ))}
       </tbody>

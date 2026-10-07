@@ -13,6 +13,27 @@ export function usePrintReport(ticker: string): { report: CompanyReport | null; 
   const [state, setState] = useState<LoadState>("loading");
   useEffect(() => {
     let cancelled = false;
+
+    // 1. Prefer the report the dashboard handed off — exactly what was on
+    //    screen when Export was clicked. One-shot: consumed on read.
+    try {
+      const raw = localStorage.getItem(`gs:print:${ticker}`);
+      if (raw) {
+        localStorage.removeItem(`gs:print:${ticker}`);
+        const parsed = JSON.parse(raw) as { at?: number; report?: CompanyReport };
+        if (parsed?.report?.ticker === ticker && Date.now() - (parsed.at ?? 0) < 5 * 60_000) {
+          setReport(parsed.report);
+          setState("ready");
+          return () => {
+            cancelled = true;
+          };
+        }
+      }
+    } catch {
+      /* storage unavailable or malformed — fall back to the server read-back */
+    }
+
+    // 2. Fall back to the server read-back (direct URL, or no handoff present).
     (async () => {
       try {
         const res = await fetch(`/api/report/get?ticker=${encodeURIComponent(ticker)}`);

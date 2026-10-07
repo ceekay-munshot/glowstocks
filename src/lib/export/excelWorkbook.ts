@@ -50,9 +50,15 @@ interface H {
   wb: ExcelJS.Workbook;
 }
 
+// Row number of each sheet's FIRST coloured header band, so buildWorkbook can
+// freeze the panes at the actual table header (sheets open with a title row, so
+// a blanket ySplit:1 would freeze the title instead of the header).
+const firstHeaderRow = new WeakMap<ExcelJS.Worksheet, number>();
+
 /** Style a header row: coloured band, white bold, thin bottom border, frozen. */
 function headerRow(ws: ExcelJS.Worksheet, values: (string | number)[], fill = INDIGO): ExcelJS.Row {
   const row = ws.addRow(values);
+  if (!firstHeaderRow.has(ws)) firstHeaderRow.set(ws, row.number);
   row.eachCell((cell) => {
     cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: fill } };
     cell.font = { bold: true, color: { argb: "FFFFFFFF" }, size: 11 };
@@ -537,9 +543,17 @@ export function buildWorkbook(r: CompanyReport): ExcelJS.Workbook {
   peersEstimatesSheet(h, r);
   thesisRisksSheet(h, r);
   sourcesIntegritySheet(h, r);
-  // Freeze the first data block header on every sheet + gridlines on.
+  // Freeze each sheet through its first coloured header row (not the title row
+  // above it), so the table's column labels stay pinned while scrolling. Sheets
+  // whose first table starts deep — e.g. Thesis & Risks, which opens with prose
+  // and bullet blocks — would freeze most of the viewport, so leave those
+  // unfrozen; gridlines stay on everywhere.
   wb.eachSheet((ws) => {
-    if (ws.name !== "Cover") ws.views = [{ state: "frozen", ySplit: 1, showGridLines: true }];
+    if (ws.name === "Cover") return;
+    const hr = firstHeaderRow.get(ws);
+    ws.views = hr && hr <= 8
+      ? [{ state: "frozen", ySplit: hr, showGridLines: true }]
+      : [{ showGridLines: true }];
   });
   return wb;
 }
