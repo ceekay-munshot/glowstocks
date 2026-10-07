@@ -71,12 +71,18 @@ npm run dev            # http://localhost:3000 — renders the TCS sample, no ke
 Other scripts:
 
 ```bash
-npm run build          # Next production build
-npm run build:cf       # OpenNext → Cloudflare Worker bundle (.open-next/worker.js)
+npm run build          # OpenNext → Cloudflare Worker bundle (.open-next/) — the deploy artifact
+npm run build:next     # plain Next production build (.next/), for a quick check
+npm run build:cf       # alias of `build` (OpenNext → Cloudflare Worker bundle)
 npm run preview        # build + run the Worker locally (needs .dev.vars)
 npm run deploy         # build + deploy to Cloudflare
 npm run typecheck      # tsc --noEmit
 ```
+
+> **Deploy note:** the Cloudflare build step must run `npm run build` (the OpenNext
+> bundle). `npx wrangler deploy` delegates to `opennextjs-cloudflare deploy`, which
+> needs `.open-next/`; a plain `next build` only produces `.next/` and the deploy
+> fails with _"Could not find compiled Open Next config"_.
 
 ### Run the research engine locally
 

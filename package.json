@@ -5,7 +5,8 @@
   "description": "On-demand, source-backed equity research dashboard for Indian listed companies (NSE/BSE).",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "opennextjs-cloudflare build",
+    "build:next": "next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
