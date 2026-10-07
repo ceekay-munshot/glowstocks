@@ -51,6 +51,7 @@ export function Header({
   onRun,
   onExportExcel,
   onExportPdf,
+  onExportFullPdf,
 }: {
   report: CompanyReport | null;
   running: boolean;
@@ -59,11 +60,13 @@ export function Header({
   onRun: () => void;
   onExportExcel: () => void;
   onExportPdf: () => void;
+  onExportFullPdf: () => void;
 }) {
   const [menu, setMenu] = useState(false);
 
   return (
     <header
+      className="gs-header"
       style={{
         position: "sticky",
         top: 0,
@@ -84,9 +87,9 @@ export function Header({
         <h1 style={{ fontSize: 15, fontWeight: 700, color: "var(--text-primary)", margin: 0, whiteSpace: "nowrap" }}>
           glow<span style={{ color: "var(--primary)" }}>stocks</span>
         </h1>
-        {report && <TickerPill ticker={report.ticker} company={report.company} />}
+        {report && <span className="gs-hide-sm" style={{ display: "inline-flex", minWidth: 0 }}><TickerPill ticker={report.ticker} company={report.company} /></span>}
         {report?.is_sample && (
-          <span style={{ fontSize: 10, fontWeight: 600, color: "#d97706", background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 6, padding: "2px 7px", whiteSpace: "nowrap" }}>
+          <span className="gs-hide-sm" style={{ fontSize: 10, fontWeight: 600, color: "#d97706", background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 6, padding: "2px 7px", whiteSpace: "nowrap" }}>
             SAMPLE
           </span>
         )}
@@ -108,8 +111,9 @@ export function Header({
               onMouseLeave={() => setMenu(false)}
               style={{ position: "absolute", right: 0, top: 36, zIndex: 40, background: "#fff", border: "1px solid var(--border-default)", borderRadius: 10, boxShadow: "0 12px 32px rgba(0,0,0,0.12)", padding: 4, minWidth: 180 }}
             >
-              <MenuItem label="Excel workbook (.xlsx)" hint="Full v1 data + Sources" onClick={() => { setMenu(false); onExportExcel(); }} />
-              <MenuItem label="One-pager (PDF)" hint="Visual snapshot · print" onClick={() => { setMenu(false); onExportPdf(); }} />
+              <MenuItem label="One-pager (PDF)" hint="Landscape visual · print" onClick={() => { setMenu(false); onExportPdf(); }} />
+              <MenuItem label="Full report (PDF)" hint="Multi-page · all sections" onClick={() => { setMenu(false); onExportFullPdf(); }} />
+              <MenuItem label="Full data (Excel)" hint="All 13 sections + Sources" onClick={() => { setMenu(false); onExportExcel(); }} />
             </div>
           )}
         </div>

@@ -179,6 +179,11 @@ export function Dashboard({ initialReport }: { initialReport: CompanyReport | nu
     window.open(`/onepager/${encodeURIComponent(report.ticker)}`, "_blank", "noopener");
   }, [report]);
 
+  const exportFullPdf = useCallback(() => {
+    if (!report) return;
+    window.open(`/report/${encodeURIComponent(report.ticker)}/print`, "_blank", "noopener");
+  }, [report]);
+
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh", overflow: "hidden" }}>
       <Header
@@ -189,6 +194,7 @@ export function Dashboard({ initialReport }: { initialReport: CompanyReport | nu
         onRun={() => report && handleRun(report.ticker, report.company)}
         onExportExcel={exportExcel}
         onExportPdf={exportPdf}
+        onExportFullPdf={exportFullPdf}
       />
 
       {/* Sub-nav + coverage bar */}

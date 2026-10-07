@@ -10,10 +10,23 @@ const ReactECharts = dynamic(() => import("echarts-for-react"), {
   loading: () => <ChartSkeleton />,
 });
 
-export function EChart({ option, height = 260 }: { option: EChartsOption; height?: number }) {
+/**
+ * `animate={false}` renders the chart with no entry animation — used by the
+ * print routes so the canvas is fully drawn by the time the PDF is captured.
+ */
+export function EChart({
+  option,
+  height = 260,
+  animate = true,
+}: {
+  option: EChartsOption;
+  height?: number;
+  animate?: boolean;
+}) {
+  const opt = animate ? option : { ...option, animation: false, animationDuration: 0 };
   return (
     <ReactECharts
-      option={option}
+      option={opt}
       notMerge
       lazyUpdate
       style={{ height, width: "100%" }}

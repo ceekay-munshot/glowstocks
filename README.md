@@ -6,7 +6,8 @@ An analyst types one company. A GitHub Actions robot researches it — Screener
 financials, the annual report, concall transcripts, the investor presentation and
 the web — and a language model (Claude via AWS Bedrock) extracts a structured,
 **citation-backed** report. The dashboard shows it as a colourful, low-text,
-visual report with tabs, and exports a one-pager PDF + a multi-sheet Excel.
+visual report with tabs, and exports a premium one-pager PDF, a full multi-page
+PDF, and a polished multi-sheet Excel workbook.
 
 Every data point carries its own source, date, locator and link — hover any number
 to see where it came from. Nothing is guessed: a figure the sources don't contain
@@ -155,6 +156,27 @@ Peers & Estimates · Thesis & Risks · Sources & Integrity.
   carries the rest forward from the committed report.
 
 ---
+
+## Exports (bespoke)
+
+The header **Export ▾** menu offers three downloads, all built from the CURRENT
+loaded report (all 13 sections) and all working on the committed sample with no keys:
+
+- **One-pager (PDF)** — a single **landscape** page: KPI tiles + stance badge + the
+  best charts (segment donut, 5-year revenue & margins, scenario upside, peer
+  snapshot), branded header/footer. Route: `/onepager/[ticker]`.
+- **Full report (PDF)** — a **multi-page** document: branded cover, then every
+  section with its charts, tables and inline source citations, a running footer and
+  clean page breaks. Route: `/report/[ticker]/print`.
+- **Full data (Excel)** — a bespoke `.xlsx`: a branded **Cover** sheet (stance badge,
+  KPIs, sources) + nine tab-organized sheets. Frozen coloured headers, zebra
+  striping, gridlines, ₹cr/%/x/date number formats, conditional colour and in-cell
+  data bars. Every row keeps its **source**; "Not available" shows as **n/a**, never
+  0 or blank. Built in `src/lib/export/excelWorkbook.ts`, served by
+  `/api/export/excel`.
+
+Both PDF routes render the **real ECharts** (animation off) and auto-open the
+browser's print-to-PDF; a "Download PDF" button is always available.
 
 ## Guardrails
 

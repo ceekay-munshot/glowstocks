@@ -199,12 +199,39 @@ body {
   border-radius: 2px 2px 0 0;
 }
 
-/* Print: used by the one-pager export route. */
+/* Responsive: keep the 48px header usable at phone width with no horizontal
+   page scroll (the shell already clips overflow; here we drop non-essential
+   chrome so search + Run + Export stay reachable). */
+@media (max-width: 640px) {
+  .gs-header {
+    padding: 0 10px !important;
+    gap: 6px !important;
+  }
+  .gs-hide-sm {
+    display: none !important;
+  }
+  .gs-search {
+    width: 38vw !important;
+    min-width: 110px;
+  }
+}
+
+/* Print: used by the one-pager + full-report export routes. */
+.gs-print {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
 @media print {
+  html,
   body {
     background: #ffffff;
   }
   .gs-no-print {
     display: none !important;
+  }
+  .gs-print,
+  .gs-print * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
