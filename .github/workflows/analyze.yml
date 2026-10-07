@@ -20,7 +20,7 @@ on:
         description: "Company name (optional — helps resolve the right entity)"
         required: false
       sections:
-        description: "Incremental refresh: comma list of sections (snapshot,business,financials,peers,thesis). Empty = all."
+        description: "Incremental refresh: comma list of sections (snapshot,business,financials,peers,thesis,customers,capacity,growth,concall,mna,estimates,risks,integrity). Empty = all."
         required: false
 
 # Needed so the run can commit the report JSON back to the repo.

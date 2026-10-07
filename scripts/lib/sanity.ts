@@ -71,5 +71,16 @@ export function sanityCheck(report: CompanyReport): string[] {
     clampPct(p.roa, `peer ${p.name} ROA`, warnings);
   }
 
+  // Prompt-2 sections: percentages must stay within 0–100.
+  for (const g of report.customers?.groups ?? []) {
+    clampPct(g.concentration, `customer ${g.segment} concentration`, warnings);
+  }
+  for (const s of report.capacity?.sites ?? []) {
+    clampPct(s.utilization, `capacity ${s.site} utilization`, warnings);
+  }
+  for (const d of report.risks?.downside_scenarios ?? []) {
+    clampPct(d.probability, `risk scenario ${d.name} probability`, warnings);
+  }
+
   return warnings;
 }

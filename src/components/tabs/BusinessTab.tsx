@@ -84,7 +84,48 @@ export function BusinessTab({ report }: { report: CompanyReport }) {
           <EmptyState />
         )}
       </WidgetCard>
+
+      <WidgetCard title="Footprint & dependencies" subtitle="Where the revenue (and the risk) is concentrated" category="india">
+        <Dependencies report={report} />
+      </WidgetCard>
     </Grid>
+  );
+}
+
+function pick<T>(arr: T[] | undefined, val: (t: T) => number | null): T | null {
+  if (!arr || !arr.length) return null;
+  let best: T | null = null;
+  let bestV = -Infinity;
+  for (const t of arr) {
+    const v = val(t);
+    if (v !== null && v > bestV) {
+      bestV = v;
+      best = t;
+    }
+  }
+  return best;
+}
+
+function Dependencies({ report }: { report: CompanyReport }) {
+  const seg = pick(report.business?.segments, (s) => (s.pct_revenue?.available ? (s.pct_revenue.value ?? null) : null));
+  const geo = pick(report.business?.geographies, (g) => (g.pct_revenue?.available ? (g.pct_revenue.value ?? null) : null));
+  const client = pick(report.customers?.groups, (g) => (g.concentration?.available ? (g.concentration.value ?? null) : null));
+  const footprint = report.capacity?.metrics?.[0];
+  const rows: { label: string; value: string }[] = [
+    { label: "Largest segment", value: seg ? `${seg.name} · ${seg.pct_revenue.value}%` : "Not available" },
+    { label: "Largest geography", value: geo ? `${geo.region} · ${geo.pct_revenue.value}%` : "Not available" },
+    { label: "Top client bucket", value: client ? `${client.segment} · ${client.concentration.value}%` : "Not available" },
+    { label: "Footprint", value: footprint?.available ? `${footprint.label}: ${footprint.value}${footprint.unit ? " " + footprint.unit : ""}` : "Not available" },
+  ];
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+      {rows.map((r) => (
+        <div key={r.label} style={{ display: "flex", justifyContent: "space-between", gap: 10, fontSize: 13, borderBottom: "1px solid var(--border-default)", paddingBottom: 8 }}>
+          <span style={{ color: "var(--text-muted)" }}>{r.label}</span>
+          <span style={{ fontWeight: 600, color: "var(--text-primary)", textAlign: "right" }}>{r.value}</span>
+        </div>
+      ))}
+    </div>
   );
 }
 

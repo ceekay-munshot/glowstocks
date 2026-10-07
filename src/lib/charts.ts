@@ -5,6 +5,8 @@
 
 import type { EChartsOption } from "echarts";
 import type {
+  CustomerGroup,
+  EstimateYear,
   FinancialYear,
   Geography,
   Segment,
@@ -171,6 +173,103 @@ export function scenarioUpsideOption(
         data,
         barMaxWidth: 36,
         label: { show: true, position: "top", color: INK.secondary, fontFamily: FONT, formatter: (p: any) => (typeof p.value === "number" ? `${p.value > 0 ? "+" : ""}${p.value}%` : "") },
+      },
+    ],
+  };
+}
+
+/** Ordered horizontal value bars (order book / TCV, capacity by site). One axis. */
+export function valueBarsOption(
+  rows: { label: string; value: number }[],
+  fmt: (v: number) => string,
+): EChartsOption {
+  const sorted = [...rows].sort((a, b) => a.value - b.value);
+  return {
+    textStyle: { fontFamily: FONT },
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, valueFormatter: (v) => (typeof v === "number" ? fmt(v) : "—") },
+    grid: { ...baseGrid, left: 8, right: 72 },
+    xAxis: { type: "value", axisLabel: { ...axisLabel, formatter: (v: any) => fmt(v) }, splitLine, axisLine: { show: false } },
+    yAxis: { type: "category", data: sorted.map((r) => r.label), axisLabel: { ...axisLabel, color: INK.secondary }, axisLine, axisTick: { show: false } },
+    series: [
+      {
+        type: "bar",
+        data: sorted.map((r) => r.value),
+        itemStyle: { color: SERIES[0], borderRadius: [0, 3, 3, 0] },
+        barMaxWidth: 22,
+        label: { show: true, position: "right", color: INK.secondary, fontFamily: FONT, formatter: (p: any) => fmt(p.value) },
+      },
+    ],
+  };
+}
+
+/** Customer revenue mix: donut (part-to-whole). Legend + labels satisfy relief. */
+export function customerMixDonutOption(groups: CustomerGroup[]): EChartsOption {
+  const data = groups
+    .filter((g) => g.concentration?.available && typeof g.concentration.value === "number")
+    .map((g, i) => ({
+      name: g.segment,
+      value: g.concentration.value as number,
+      itemStyle: { color: seriesColor(i), borderColor: INK.surface, borderWidth: 2 },
+    }));
+  return {
+    textStyle: { fontFamily: FONT },
+    tooltip: { trigger: "item", formatter: (p: any) => `${p.name}<br/><b>${p.value}%</b> of revenue` },
+    legend: { type: "scroll", bottom: 0, textStyle: { color: INK.secondary, fontFamily: FONT }, itemWidth: 12, itemHeight: 12 },
+    series: [
+      {
+        name: "Customer mix",
+        type: "pie",
+        radius: ["45%", "72%"],
+        center: ["50%", "44%"],
+        avoidLabelOverlap: true,
+        padAngle: 2,
+        itemStyle: { borderRadius: 4 },
+        label: { color: INK.secondary, fontFamily: FONT, formatter: "{b}\n{c}%", fontSize: 11 },
+        labelLine: { length: 8, length2: 8 },
+        data,
+      },
+    ],
+  };
+}
+
+/** Forward revenue estimates: vertical bars (INR cr), one axis. */
+export function forwardRevenueBarsOption(forward: EstimateYear[]): EChartsOption {
+  return {
+    textStyle: { fontFamily: FONT },
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, valueFormatter: (v) => (typeof v === "number" ? fmtCr(v) : "—") },
+    grid: { ...baseGrid, bottom: 8 },
+    xAxis: { type: "category", data: forward.map((f) => f.period), axisLabel, axisLine, axisTick: { show: false } },
+    yAxis: { type: "value", axisLabel: { ...axisLabel, formatter: (v: any) => `₹${axisCr(v)}` }, splitLine, axisLine: { show: false } },
+    series: [
+      {
+        name: "Revenue (est.)",
+        type: "bar",
+        data: forward.map((f) => num(f.revenue ?? null)),
+        itemStyle: { color: SERIES[0], ...barItem },
+        barMaxWidth: 44,
+      },
+    ],
+  };
+}
+
+/** Forward EPS estimates: 2px line (INR), one axis. */
+export function forwardEpsLineOption(forward: EstimateYear[]): EChartsOption {
+  return {
+    textStyle: { fontFamily: FONT },
+    tooltip: { trigger: "axis", axisPointer: { type: "cross", label: { backgroundColor: INK.secondary } }, valueFormatter: (v) => (typeof v === "number" ? `₹${v}` : "—") },
+    grid: { ...baseGrid, right: 52, bottom: 8 },
+    xAxis: { type: "category", data: forward.map((f) => f.period), boundaryGap: false, axisLabel, axisLine, axisTick: { show: false } },
+    yAxis: { type: "value", axisLabel: { ...axisLabel, formatter: (v: any) => `₹${v}` }, splitLine, axisLine: { show: false } },
+    series: [
+      {
+        name: "EPS (est.)",
+        type: "line",
+        smooth: true,
+        data: forward.map((f) => num(f.eps ?? null)),
+        lineStyle: { width: 2, color: SERIES[2] },
+        itemStyle: { color: SERIES[2] },
+        symbolSize: 8,
+        endLabel: { show: true, color: INK.secondary, fontFamily: FONT, formatter: (p: any) => (typeof p.value === "number" ? `₹${p.value}` : "") },
       },
     ],
   };

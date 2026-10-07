@@ -13,9 +13,17 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import type {
   BusinessSection,
+  CapacitySection,
   CompanyReport,
+  ConcallSection,
+  CustomersSection,
+  EstimatesSection,
   FinancialsSection,
+  GrowthSection,
+  IntegritySection,
+  MnaSection,
   PeersSection,
+  RisksSection,
   SectionKey,
   SnapshotSection,
   SourceRef,
@@ -31,6 +39,14 @@ import { extractFinancials } from "./lib/sections/financials";
 import { extractBusiness } from "./lib/sections/business";
 import { extractPeers } from "./lib/sections/peers";
 import { extractThesis } from "./lib/sections/thesis";
+import { extractCustomers } from "./lib/sections/customers";
+import { extractCapacity } from "./lib/sections/capacity";
+import { extractGrowth } from "./lib/sections/growth";
+import { extractConcall } from "./lib/sections/concall";
+import { extractMna } from "./lib/sections/mna";
+import { extractEstimates } from "./lib/sections/estimates";
+import { extractRisks } from "./lib/sections/risks";
+import { extractIntegrity } from "./lib/sections/integrity";
 import { sanityCheck } from "./lib/sanity";
 import { reviewReport } from "./lib/review";
 import {
@@ -75,6 +91,14 @@ const emptyThesis = (): ThesisSection => ({
   change_my_mind: [],
   scenarios: [],
 });
+const emptyCustomers = (): CustomersSection => ({ applicable: false, not_applicable_reason: "Not available", groups: [], order_book: [] });
+const emptyCapacity = (): CapacitySection => ({ applicable: false, kind: "Not available", sites: [], metrics: [] });
+const emptyGrowth = (): GrowthSection => ({ drivers: [], catalysts: [], downside_triggers: [] });
+const emptyConcall = (): ConcallSection => ({ available: false, highlights: [], insights: [] });
+const emptyMna = (): MnaSection => ({ found: false, deals: [] });
+const emptyEstimates = (): EstimatesSection => ({ available: false, forward: [] });
+const emptyRisks = (): RisksSection => ({ register: [], downside_scenarios: [] });
+const emptyIntegrity = (): IntegritySection => ({ checks: [] });
 
 function parseArgs(argv: string[]): { ticker: string; company: string; sections: SectionKey[] | null } {
   const positional: string[] = [];
@@ -155,6 +179,14 @@ async function main() {
     { key: "business", run: () => extractBusiness(ctx), empty: emptyBusiness },
     { key: "peers", run: () => extractPeers(ctx), empty: emptyPeers },
     { key: "thesis", run: () => extractThesis(ctx), empty: emptyThesis },
+    { key: "customers", run: () => extractCustomers(ctx), empty: emptyCustomers },
+    { key: "capacity", run: () => extractCapacity(ctx), empty: emptyCapacity },
+    { key: "growth", run: () => extractGrowth(ctx), empty: emptyGrowth },
+    { key: "concall", run: () => extractConcall(ctx), empty: emptyConcall },
+    { key: "mna", run: () => extractMna(ctx), empty: emptyMna },
+    { key: "estimates", run: () => extractEstimates(ctx), empty: emptyEstimates },
+    { key: "risks", run: () => extractRisks(ctx), empty: emptyRisks },
+    { key: "integrity", run: () => extractIntegrity(ctx), empty: emptyIntegrity },
   ];
 
   const results: Record<string, unknown> = {};
@@ -186,6 +218,14 @@ async function main() {
   const financials = (results.financials as FinancialsSection) ?? emptyFinancials();
   const peers = (results.peers as PeersSection) ?? emptyPeers();
   const thesis = (results.thesis as ThesisSection) ?? emptyThesis();
+  const customers = (results.customers as CustomersSection) ?? emptyCustomers();
+  const capacity = (results.capacity as CapacitySection) ?? emptyCapacity();
+  const growth = (results.growth as GrowthSection) ?? emptyGrowth();
+  const concall = (results.concall as ConcallSection) ?? emptyConcall();
+  const mna = (results.mna as MnaSection) ?? emptyMna();
+  const estimates = (results.estimates as EstimatesSection) ?? emptyEstimates();
+  const risks = (results.risks as RisksSection) ?? emptyRisks();
+  const integrity = (results.integrity as IntegritySection) ?? emptyIntegrity();
 
   const now = new Date().toISOString();
   const asOf =
@@ -216,6 +256,14 @@ async function main() {
       financials: !!financials.latest_fy || financials.history.length > 0,
       peers: peers.peers.length > 0,
       thesis: thesis.supports.length > 0 || thesis.scenarios.length > 0,
+      customers: customers.groups.length > 0 || customers.order_book.length > 0 || (!customers.applicable && !!customers.not_applicable_reason),
+      capacity: capacity.sites.length > 0 || capacity.metrics.length > 0 || (!capacity.applicable && !!capacity.not_applicable_reason),
+      growth: growth.drivers.length > 0 || growth.catalysts.length > 0,
+      concall: concall.available && concall.highlights.length > 0,
+      mna: mna.deals.length > 0 || mna.found === false,
+      estimates: estimates.available && estimates.forward.length > 0,
+      risks: risks.register.length > 0,
+      integrity: integrity.checks.length > 0,
       notes: harvest.note,
     },
     snapshot,
@@ -223,6 +271,14 @@ async function main() {
     financials,
     peers,
     thesis,
+    customers,
+    capacity,
+    growth,
+    concall,
+    mna,
+    estimates,
+    risks,
+    integrity,
     sources,
     sources_seen: [...mergedSeen],
   };

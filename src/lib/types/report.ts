@@ -215,6 +215,215 @@ export interface SourceRef {
   url: string | null;
 }
 
+/* ----------------------------------------------------------------- customers */
+
+export interface CustomerGroup {
+  /** e.g. "Top 5 clients", "BFSI clients", "Single largest client". */
+  segment: string;
+  /** Disclosed key client names, if any. */
+  names?: string;
+  /** Concentration as % of revenue. */
+  concentration: Cited<number>;
+  risk?: string;
+}
+
+/** Order book / deal pipeline (for IT services: TCV / large-deal wins). */
+export interface OrderBookItem {
+  /** e.g. "Order book", "TCV FY25", "Large-deal wins", "Book-to-bill". */
+  metric: string;
+  value: Cited<number>;
+  mix?: string;
+  /** Coverage / book-to-bill (x or months). */
+  coverage?: Cited<number>;
+  /** QoQ change (%). */
+  qoq_change?: Cited<number>;
+}
+
+export interface CustomersSection {
+  /** false => order-book model doesn't apply; show not_applicable_reason. */
+  applicable: boolean;
+  not_applicable_reason?: string;
+  summary?: string;
+  groups: CustomerGroup[];
+  order_book: OrderBookItem[];
+}
+
+/* ----------------------------------------------------------------- capacity */
+
+export interface CapacitySite {
+  site: string;
+  product?: string;
+  capacity?: Cited<number>;
+  /** Utilization %. */
+  utilization?: Cited<number>;
+  expansion?: string;
+  capex?: Cited<number>;
+  timeline?: string;
+}
+
+export interface CapacitySection {
+  applicable: boolean;
+  not_applicable_reason?: string;
+  /** "manufacturing" | "delivery" (IT) | "other". */
+  kind: "manufacturing" | "delivery" | "other" | "Not available";
+  summary?: string;
+  sites: CapacitySite[];
+  /** Headline footprint metrics (headcount, delivery centres, countries, …). */
+  metrics: Metric[];
+}
+
+/* ------------------------------------------------------------------- growth */
+
+export type DriverDirection = "tailwind" | "headwind" | "neutral" | "Not available";
+
+export interface GrowthDriver {
+  /** pricing / volumes / capacity / margins / order wins / new products / exports / capex / working capital. */
+  name: string;
+  detail: string;
+  /** Optional quantified figure. */
+  metric?: Cited<number>;
+  direction: DriverDirection;
+}
+
+export interface Catalyst {
+  catalyst: string;
+  timing: string;
+  kpi: string;
+  /** What would confirm the thesis. */
+  confirms?: string;
+  /** What would falsify it. */
+  falsifies?: string;
+}
+
+export interface GrowthSection {
+  summary?: string;
+  drivers: GrowthDriver[];
+  catalysts: Catalyst[];
+  downside_triggers: string[];
+}
+
+/* ------------------------------------------------------------------ concall */
+
+export interface ConcallHighlight {
+  theme: string;
+  /** Exact quote from the transcript. */
+  quote: string;
+  speaker: string;
+  date: string | null;
+  source?: string;
+  url?: string | null;
+  source_id?: string;
+}
+
+export interface ConcallSection {
+  available: boolean;
+  period?: string;
+  date?: string | null;
+  highlights: ConcallHighlight[];
+  /** 5 "so what" insights. */
+  insights: string[];
+  /** Management tone / guidance. */
+  tone?: string;
+}
+
+/* --------------------------------------------------------------------- mna */
+
+export interface MnaDeal {
+  date: string | null;
+  target: string;
+  /** What the target does. */
+  what: string;
+  deal_size?: Cited<number>;
+  /** cash / stock / mixed. */
+  payment?: string;
+  rationale?: string;
+  /** announced / completed / pending / terminated. */
+  status?: string;
+  source?: string;
+  url?: string | null;
+  source_id?: string;
+}
+
+export interface MnaSection {
+  /** false => "No material M&A found." */
+  found: boolean;
+  summary?: string;
+  deals: MnaDeal[];
+}
+
+/* --------------------------------------------------------------- estimates */
+
+export interface EstimateYear {
+  /** e.g. "FY26E", "FY27E". */
+  period: string;
+  revenue?: Cited<number>;
+  eps?: Cited<number>;
+  /** Growth % for the year. */
+  growth?: Cited<number>;
+}
+
+export interface EstimatesSection {
+  available: boolean;
+  summary?: string;
+  /** Forward 2–3yr estimates. */
+  forward: EstimateYear[];
+  /** EPS revision trend ("upgrades", "flat", "downgrades"). */
+  eps_revision?: string;
+  target_low?: Cited<number>;
+  target_mean?: Cited<number>;
+  target_high?: Cited<number>;
+  /** Consensus rating (e.g. "Buy / Hold / Sell split" or a label). */
+  rating?: Cited<number | string>;
+  /** Number of analysts covering. */
+  analysts?: Cited<number>;
+}
+
+/* ------------------------------------------------------------------- risks */
+
+export type RiskLevel = "Low" | "Medium" | "High" | "Not available";
+
+export interface RiskRow {
+  risk: string;
+  /** Company-specific evidence. */
+  evidence?: string;
+  /** Transmission mechanism (how it hits the financials). */
+  transmission?: string;
+  severity: RiskLevel;
+  probability: RiskLevel;
+  leading_indicators?: string;
+  mitigants?: string;
+}
+
+export interface DownsideScenario {
+  name: string;
+  trigger: string;
+  impact?: string;
+  probability?: Cited<number>;
+}
+
+export interface RisksSection {
+  summary?: string;
+  register: RiskRow[];
+  /** Top-3 downside scenarios. */
+  downside_scenarios: DownsideScenario[];
+}
+
+/* --------------------------------------------------------------- integrity */
+
+export type IntegrityStatus = "pass" | "warn" | "fail" | "Not available";
+
+export interface IntegrityCheck {
+  /** issuer↔ticker match / primary listing / consolidated vs standalone / FY alignment / restatements / corporate actions. */
+  check: string;
+  status: IntegrityStatus;
+  detail?: string;
+}
+
+export interface IntegritySection {
+  checks: IntegrityCheck[];
+  coverage_note?: string;
+}
+
 /* ----------------------------------------------------------------- coverage */
 
 /** Which sections the engine actually filled (drives partial-data UI + refresh). */
@@ -224,6 +433,14 @@ export interface ReportCoverage {
   financials: boolean;
   peers: boolean;
   thesis: boolean;
+  customers?: boolean;
+  capacity?: boolean;
+  growth?: boolean;
+  concall?: boolean;
+  mna?: boolean;
+  estimates?: boolean;
+  risks?: boolean;
+  integrity?: boolean;
   /** Harvest notes / degradations (logged-out scrape, missing AR, …). */
   notes?: string;
 }
@@ -253,6 +470,16 @@ export interface CompanyReport {
   financials: FinancialsSection;
   peers: PeersSection;
   thesis: ThesisSection;
+  // Prompt-2 sections (optional so older reports stay valid; the engine always
+  // writes them, and the UI renders "Not available" when a section is absent).
+  customers?: CustomersSection;
+  capacity?: CapacitySection;
+  growth?: GrowthSection;
+  concall?: ConcallSection;
+  mna?: MnaSection;
+  estimates?: EstimatesSection;
+  risks?: RisksSection;
+  integrity?: IntegritySection;
   sources: SourceRef[];
 
   /**
@@ -269,5 +496,13 @@ export const SECTION_KEYS = [
   "financials",
   "peers",
   "thesis",
+  "customers",
+  "capacity",
+  "growth",
+  "concall",
+  "mna",
+  "estimates",
+  "risks",
+  "integrity",
 ] as const;
 export type SectionKey = (typeof SECTION_KEYS)[number];

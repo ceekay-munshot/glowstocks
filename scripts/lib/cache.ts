@@ -7,7 +7,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import path from "node:path";
-import type { CompanyReport, SectionKey } from "@/lib/types/report";
+import { SECTION_KEYS, type CompanyReport, type SectionKey } from "@/lib/types/report";
 
 export const COMPANIES_DIR = path.join(process.cwd(), "data", "companies");
 
@@ -43,7 +43,7 @@ export function refreshPlan(
   existing: CompanyReport | null,
   requested: SectionKey[] | null,
 ): { refresh: Set<SectionKey>; carry: CompanyReport | null } {
-  const all: SectionKey[] = ["snapshot", "business", "financials", "peers", "thesis"];
+  const all: SectionKey[] = [...SECTION_KEYS];
   if (requested && requested.length) {
     return { refresh: new Set(requested), carry: existing };
   }
