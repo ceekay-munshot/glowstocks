@@ -61,6 +61,5 @@ export async function extractPeers(ctx: SectionCtx): Promise<PeersSection> {
     instruction,
     evidence,
     schema: PEERS_SCHEMA,
-    maxTokens: 3000,
   });
 }

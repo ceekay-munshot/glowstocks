@@ -43,7 +43,17 @@ export interface CompleteOpts {
 
 export interface CompleteResult {
   text: string;
+  /** Why generation stopped (Bedrock Converse `stopReason`). "max_tokens" ⇒ truncated. */
+  stopReason?: string;
 }
+
+/**
+ * Hard ceiling for the self-healing escalation below. A single section's JSON
+ * never approaches this; it only bounds a runaway. (`maxTokens` is a CEILING,
+ * not a target — you pay per token actually generated, so a generous ceiling is
+ * free and simply stops the model from being cut off mid-JSON.)
+ */
+export const MAX_TOKENS_CAP = 16_000;
 
 export class LlmError extends Error {
   constructor(message: string, public readonly cause?: unknown) {
@@ -65,27 +75,47 @@ export async function completeJSONWith<T>(
   const schemaText = JSON.stringify(schema);
   let lastError: string | undefined;
   let lastText: string | undefined;
+  // The token ceiling for the NEXT attempt. Starts at the caller's budget and
+  // climbs only if a response is cut off at the limit (see `truncated`), so a
+  // section that outgrows its budget self-heals instead of failing — the guard
+  // that keeps "section truncated into invalid JSON" from recurring.
+  let budget = opts.maxTokens;
+  let truncated = false;
 
   for (let attempt = 0; attempt <= JSON_MAX_RETRIES; attempt++) {
+    if (truncated) {
+      budget = Math.min(MAX_TOKENS_CAP, Math.max((budget ?? 8192) * 2, 8192));
+    }
+
+    const feedback = !lastError
+      ? ""
+      : truncated
+        ? "\n\nYour previous response was cut off at the token limit before the JSON " +
+          "closed. Return the SAME JSON but more concisely (shorter prose in string " +
+          "fields) so the whole value fits. Output only the JSON."
+        : `\n\nYour previous response was invalid: ${lastError}\nReturn corrected JSON only.`;
+
     const instructions =
       "Respond with a single JSON value and nothing else (no prose, no markdown, " +
       `no code fences). It MUST validate against this JSON Schema:\n${schemaText}` +
-      (lastError
-        ? `\n\nYour previous response was invalid: ${lastError}\nReturn corrected JSON only.`
-        : "");
+      feedback;
 
-    const { text } = await complete({
+    const { text, stopReason } = await complete({
       ...opts,
+      maxTokens: budget,
       json: true,
       prompt: `${opts.prompt}\n\n${instructions}`,
     });
     lastText = text;
+    truncated = stopReason === "max_tokens";
 
     let parsed: unknown;
     try {
       parsed = JSON.parse(extractJson(text));
     } catch (e) {
-      lastError = `not valid JSON (${(e as Error).message})`;
+      lastError = truncated
+        ? "response was truncated at the output-token limit (JSON incomplete)"
+        : `not valid JSON (${(e as Error).message})`;
       continue;
     }
     if (validate(parsed)) return parsed as T;

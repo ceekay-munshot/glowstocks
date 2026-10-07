@@ -83,6 +83,5 @@ export async function extractFinancials(ctx: SectionCtx): Promise<FinancialsSect
     instruction,
     evidence,
     schema: FINANCIALS_SCHEMA,
-    maxTokens: 3000,
   });
 }

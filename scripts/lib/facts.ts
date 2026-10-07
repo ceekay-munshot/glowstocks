@@ -124,7 +124,7 @@ export async function buildCompanyFacts(company: string, harvest: HarvestResult)
 
   try {
     const f = await completeJSON<FactsShape>(
-      { prompt, system: SYSTEM, maxTokens: 1200 },
+      { prompt, system: SYSTEM, maxTokens: 4000 },
       FACTS_SCHEMA,
     );
     return formatFacts(company, f);

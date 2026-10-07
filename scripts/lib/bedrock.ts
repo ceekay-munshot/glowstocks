@@ -13,7 +13,11 @@ import {
 } from "./json";
 
 const PING_TIMEOUT_MS = 12_000;
-const COMPLETE_TIMEOUT_MS = 90_000;
+// Generous: a data-rich section can legitimately generate several thousand
+// output tokens, which takes longer than a short answer. Too tight a timeout
+// would truncate the transfer the same way too low a `maxTokens` truncates the
+// JSON — the exact failure class this module now guards against.
+const COMPLETE_TIMEOUT_MS = 180_000;
 
 const API_KEY_ENV = "CLAUDE_BEDROCK_API_KEY";
 const DEFAULT_REGION = "us-east-1";
@@ -33,6 +37,7 @@ function endpoint(model: string): string {
 
 interface ConverseResponse {
   output?: { message?: { content?: Array<{ text?: string }> } };
+  stopReason?: string;
   usage?: { inputTokens?: number; outputTokens?: number };
 }
 
@@ -46,7 +51,11 @@ export async function complete(opts: CompleteOpts): Promise<CompleteResult> {
     messages: [{ role: "user", content: [{ text: opts.prompt }] }],
     inferenceConfig: {
       temperature: opts.temperature ?? 0.2,
-      maxTokens: opts.maxTokens ?? 2000,
+      // A CEILING, not a target — billed per token actually generated, so a
+      // high default is free and simply keeps a section's JSON from being cut
+      // off mid-stream. The driver (completeJSONWith) raises it further if a
+      // response ever still stops on "max_tokens".
+      maxTokens: opts.maxTokens ?? 8192,
     },
   };
 
@@ -82,7 +91,7 @@ export async function complete(opts: CompleteOpts): Promise<CompleteResult> {
   const text = (data.output?.message?.content ?? [])
     .map((c) => c.text ?? "")
     .join("");
-  return { text };
+  return { text, stopReason: data.stopReason };
 }
 
 /** Structured output validated against a strict JSON Schema (with retries). */

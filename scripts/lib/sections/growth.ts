@@ -71,5 +71,5 @@ export async function extractGrowth(ctx: SectionCtx): Promise<GrowthSection> {
     `- downside_triggers: 3–5 concrete bear-case triggers. Mark any metric the evidence doesn't support as ` +
     `available:false (never guess a figure).`;
 
-  return extractSection<GrowthSection>({ ctx, instruction, evidence, schema: GROWTH_SCHEMA, maxTokens: 2800 });
+  return extractSection<GrowthSection>({ ctx, instruction, evidence, schema: GROWTH_SCHEMA });
 }
