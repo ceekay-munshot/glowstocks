@@ -68,7 +68,7 @@ export function CompanySearch({ onSelect }: { onSelect: (ticker: string, name: s
   };
 
   return (
-    <div ref={boxRef} style={{ position: "relative", width: "min(420px, 48vw)" }}>
+    <div ref={boxRef} className="gs-search" style={{ position: "relative", width: "min(420px, 48vw)" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 8, height: 32, padding: "0 12px", background: "#fff", border: "1px solid var(--border-default)", borderRadius: 99 }}>
         <span style={{ color: "var(--text-hint)", fontSize: 13 }}>⌕</span>
         <input

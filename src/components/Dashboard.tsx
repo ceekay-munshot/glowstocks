@@ -174,10 +174,29 @@ export function Dashboard({ initialReport }: { initialReport: CompanyReport | nu
     }
   }, [report]);
 
+  // Hand the CURRENTLY displayed report to the print tab (same-origin
+  // localStorage), so the PDF renders exactly what's on screen rather than a
+  // fresh /api/report/get that could diverge or 404 if the artifact changed or
+  // expired. The print route still falls back to fetch for direct URLs.
+  const stashForPrint = useCallback((rep: CompanyReport) => {
+    try {
+      localStorage.setItem(`gs:print:${rep.ticker}`, JSON.stringify({ at: Date.now(), report: rep }));
+    } catch {
+      /* storage blocked — the print route falls back to fetching by ticker */
+    }
+  }, []);
+
   const exportPdf = useCallback(() => {
     if (!report) return;
+    stashForPrint(report);
     window.open(`/onepager/${encodeURIComponent(report.ticker)}`, "_blank", "noopener");
-  }, [report]);
+  }, [report, stashForPrint]);
+
+  const exportFullPdf = useCallback(() => {
+    if (!report) return;
+    stashForPrint(report);
+    window.open(`/report/${encodeURIComponent(report.ticker)}/print`, "_blank", "noopener");
+  }, [report, stashForPrint]);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", height: "100vh", overflow: "hidden" }}>
@@ -189,6 +208,7 @@ export function Dashboard({ initialReport }: { initialReport: CompanyReport | nu
         onRun={() => report && handleRun(report.ticker, report.company)}
         onExportExcel={exportExcel}
         onExportPdf={exportPdf}
+        onExportFullPdf={exportFullPdf}
       />
 
       {/* Sub-nav + coverage bar */}

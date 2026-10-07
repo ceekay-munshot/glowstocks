@@ -35,8 +35,11 @@ src/
   lib/{env,bundledReports,githubReports,format,palette,charts}.ts
   app/api/report/{run,get,status}/route.ts   dispatch · read-back · poll
   app/api/stock-search/route.ts              server-side Screener search proxy
-  app/api/export/excel/route.ts              exceljs workbook
-  app/onepager/[ticker]/page.tsx             print one-pager (PDF via browser print)
+  lib/export/excelWorkbook.ts                PREMIUM bespoke .xlsx builder (Cover + 9 sheets)
+  app/api/export/excel/route.ts              thin route → buildWorkbook()
+  components/print/PrintKit.tsx              shared print kit (loader, brand header/footer, auto-print)
+  app/onepager/[ticker]/page.tsx             premium one-pager (landscape, real ECharts)
+  app/report/[ticker]/print/page.tsx         full multi-page report (print → PDF)
   components/                 Dashboard shell, Header, tabs/*, charts/EChart, WidgetCard, CitedValue…
 
 data/companies/<TICKER>.json  committed reports (durable cache). TCS.json is the sample.
@@ -88,5 +91,12 @@ type-clean. ESLint does not run during `next build` (Next 16 removed it); run
 - **Tab map (8 tabs):** Snapshot · Business · Customers & Capacity · Financials ·
   Growth & Concall · Peers & Estimates · Thesis & Risks · Sources & Integrity. Composite
   tabs stack section components (e.g. `PeersTab` + `EstimatesSection`).
+- **Exports (3):** One-pager (PDF) `/onepager/[ticker]`, Full report (PDF)
+  `/report/[ticker]/print`, Full data (Excel) `/api/export/excel` →
+  `lib/export/excelWorkbook.ts`. All read the CURRENT loaded report and work on the
+  sample with no keys. When you add a section, extend `excelWorkbook.ts` (a sheet or
+  block) and the full-report print page; every exported figure keeps its source, and
+  "Not available" renders as "n/a"/"Not available", never blank. Print routes render
+  real ECharts with `animate={false}`; keep charts single-axis (dataviz).
 - **Status matching:** the workflow's `run-name` is `analyze <ticker>`; the status
   route matches on it. Keep them in sync.
