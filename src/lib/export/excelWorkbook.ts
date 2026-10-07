@@ -9,6 +9,7 @@ import ExcelJS from "exceljs";
 import type {
   Cited,
   CompanyReport,
+  Peer,
   PeriodFinancials,
 } from "@/lib/types/report";
 
@@ -33,6 +34,17 @@ const val = (c: AnyCited): number | string => (!c || !c.available || c.value ===
 const src = (c: AnyCited): string => (!c || !c.available ? "" : c.source ?? "");
 const dt = (c: AnyCited): string => (!c || !c.available ? "" : c.date ?? "");
 const loc = (c: AnyCited): string => (!c || !c.available ? "" : c.locator ?? "");
+
+/** Unique source list across every cited metric a peer row carries. */
+function peerSources(p: Peer): string {
+  const metrics: AnyCited[] = [p.price, p.mcap, p.pe, p.ev_ebitda, p.roe, p.roce, p.roa, p.sales_growth_5y, p.profit_growth_5y, p.de];
+  const seen: string[] = [];
+  for (const m of metrics) {
+    const s = src(m);
+    if (s && !seen.includes(s)) seen.push(s);
+  }
+  return seen.join(" · ");
+}
 
 interface H {
   wb: ExcelJS.Workbook;
@@ -376,10 +388,10 @@ function growthConcallSheet({ wb }: H, r: CompanyReport) {
 function peersEstimatesSheet({ wb }: H, r: CompanyReport) {
   const ws = wb.addWorksheet("Peers & Estimates");
   title(ws, "Peer comparison");
-  const ph = headerRow(ws, ["Company", "Ticker", "Price", "M-cap", "P/E", "EV/EBITDA", "ROE", "ROCE", "ROA", "Sales 5Y", "Profit 5Y", "D/E", "Source"]);
+  const ph = headerRow(ws, ["Company", "Ticker", "Price", "M-cap", "P/E", "EV/EBITDA", "ROE", "ROCE", "ROA", "Sales 5Y", "Profit 5Y", "D/E", "Source(s)"]);
   const pStart = ph.number + 1;
   for (const p of r.peers?.peers ?? []) {
-    const row = ws.addRow([`${p.name}${p.is_self ? " ★" : ""}`, p.ticker ?? "", val(p.price), val(p.mcap), val(p.pe), val(p.ev_ebitda), val(p.roe), val(p.roce), val(p.roa), val(p.sales_growth_5y), val(p.profit_growth_5y), val(p.de), src(p.pe)]);
+    const row = ws.addRow([`${p.name}${p.is_self ? " ★" : ""}`, p.ticker ?? "", val(p.price), val(p.mcap), val(p.pe), val(p.ev_ebitda), val(p.roe), val(p.roce), val(p.roa), val(p.sales_growth_5y), val(p.profit_growth_5y), val(p.de), peerSources(p)]);
     row.getCell(3).numFmt = FMT.price;
     row.getCell(4).numFmt = FMT.cr;
     [5, 6, 12].forEach((i) => (row.getCell(i).numFmt = FMT.mult));

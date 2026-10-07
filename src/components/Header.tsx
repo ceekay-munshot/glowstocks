@@ -95,7 +95,7 @@ export function Header({
         )}
       </div>
 
-      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+      <div className="gs-actions" style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <CompanySearch onSelect={onSelect} />
 
         <button style={btn(true)} onClick={onRun} disabled={running || !report} title="Run the research engine for this company">

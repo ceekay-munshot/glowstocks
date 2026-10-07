@@ -33,13 +33,54 @@ export function usePrintReport(ticker: string): { report: CompanyReport | null; 
   return { report, state };
 }
 
-/** Auto-open the print dialog once the view is ready (charts have drawn). */
-export function useAutoPrint(state: LoadState, delay = 1500) {
+/**
+ * Auto-open the print dialog once the view is genuinely ready — i.e. every
+ * chart skeleton (`.gs-shimmer`) is gone AND the ECharts `<canvas>` count has
+ * stopped changing (charts finished painting). This beats a blind timer: a
+ * slow report never prints half-drawn, a fast one never waits the full delay.
+ * A `maxWaitMs` fallback guarantees the dialog still opens if a signal stalls.
+ */
+export function useAutoPrint(state: LoadState, maxWaitMs = 9000) {
   useEffect(() => {
     if (state !== "ready") return;
-    const t = setTimeout(() => window.print(), delay);
-    return () => clearTimeout(t);
-  }, [state, delay]);
+    let cancelled = false;
+    let timer: ReturnType<typeof setTimeout>;
+    const start = Date.now();
+    let prevCanvas = -1;
+    let stableTicks = 0;
+
+    const fire = () => {
+      // Double rAF so the final paint lands before the print snapshot.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          if (!cancelled) window.print();
+        }),
+      );
+    };
+
+    const tick = () => {
+      if (cancelled) return;
+      const shimmers = document.querySelectorAll(".gs-shimmer").length;
+      const canvases = document.querySelectorAll("canvas").length;
+      const elapsed = Date.now() - start;
+
+      stableTicks = canvases === prevCanvas ? stableTicks + 1 : 0;
+      prevCanvas = canvases;
+
+      const settled = shimmers === 0 && stableTicks >= 2 && elapsed > 600;
+      if (settled || elapsed > maxWaitMs) {
+        fire();
+        return;
+      }
+      timer = setTimeout(tick, 250);
+    };
+
+    timer = setTimeout(tick, 250);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [state, maxWaitMs]);
 }
 
 /** Floating "Download PDF" control — hidden when printing. */

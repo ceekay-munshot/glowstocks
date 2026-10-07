@@ -28,7 +28,7 @@ export default function OnePager() {
   const params = useParams<{ ticker: string }>();
   const ticker = decodeURIComponent(params.ticker);
   const { report, state } = usePrintReport(ticker);
-  useAutoPrint(state, 1600);
+  useAutoPrint(state);
 
   if (state !== "ready" || !report) {
     return (

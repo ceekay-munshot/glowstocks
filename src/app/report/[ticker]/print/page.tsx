@@ -33,7 +33,7 @@ export default function FullReport() {
   const params = useParams<{ ticker: string }>();
   const ticker = decodeURIComponent(params.ticker);
   const { report, state } = usePrintReport(ticker);
-  useAutoPrint(state, 1900);
+  useAutoPrint(state, 12000);
 
   if (state !== "ready" || !report) {
     return (
@@ -110,7 +110,7 @@ export default function FullReport() {
       <PrintSection title="Customers & capacity" breakBefore>
         <Two>
           <Chart title="Customer mix" has={r.customers?.groups?.some((g) => g.concentration.available)}>
-            <EChart option={customerMixDonutOption(r.customers!.groups)} height={190} animate={false} />
+            <EChart option={customerMixDonutOption(r.customers?.groups ?? [])} height={190} animate={false} />
           </Chart>
           <Chart title="Order book / TCV (₹ cr)" has={orderRows(r).length}>
             <EChart option={valueBarsOption(orderRows(r), fmtCr)} height={190} animate={false} />
@@ -162,6 +162,23 @@ export default function FullReport() {
           head={["Driver", "Direction", "Detail", "Source"]}
           rows={(r.growth?.drivers ?? []).map((d) => [d.name, d.direction, d.detail, srcOf(d.metric ?? null)])}
         />
+        {(r.growth?.catalysts ?? []).length > 0 && (
+          <>
+            <Caption>Catalyst watchlist</Caption>
+            <CitedTable
+              head={["Catalyst", "Timing", "KPI", "Confirms", "Falsifies"]}
+              rows={(r.growth?.catalysts ?? []).map((c) => [c.catalyst, c.timing, c.kpi, c.confirms ?? "—", c.falsifies ?? "—"])}
+            />
+          </>
+        )}
+        {(r.growth?.downside_triggers ?? []).length > 0 && (
+          <>
+            <Caption>Downside triggers</Caption>
+            <ul style={{ ...ulS, color: "#b42318" }}>
+              {(r.growth?.downside_triggers ?? []).map((t, i) => <li key={i}>{t}</li>)}
+            </ul>
+          </>
+        )}
         {r.concall?.available && (
           <div style={{ marginTop: 8 }}>
             <Caption>Concall highlights — {r.concall.period}</Caption>

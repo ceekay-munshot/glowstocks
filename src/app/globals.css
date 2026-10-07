@@ -205,14 +205,36 @@ body {
 @media (max-width: 640px) {
   .gs-header {
     padding: 0 10px !important;
-    gap: 6px !important;
+    gap: 8px !important;
   }
   .gs-hide-sm {
     display: none !important;
   }
+  /* The actions cluster (search + Run + Export) fills the row and may shrink;
+     the search is the only flexible item, so it absorbs the squeeze and the
+     buttons — Export included — stay fully visible at any phone width. */
+  .gs-actions {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 6px !important;
+  }
   .gs-search {
-    width: 38vw !important;
-    min-width: 110px;
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    width: auto !important;
+  }
+}
+
+/* Very narrow (≈320px): trim the action buttons' padding so the whole cluster
+   still fits. !important overrides their inline padding. */
+@media (max-width: 380px) {
+  .gs-header {
+    padding: 0 8px !important;
+    gap: 6px !important;
+  }
+  .gs-actions > button,
+  .gs-actions > div > button {
+    padding: 0 9px !important;
   }
 }
 
