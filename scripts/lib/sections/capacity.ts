@@ -78,5 +78,5 @@ export async function extractCapacity(ctx: SectionCtx): Promise<CapacitySection>
     `- metrics: 2–5 headline footprint KPIs, each cited.\n` +
     `- Only if the company truly has no operating footprint set applicable=false + a reason. Never guess a number.`;
 
-  return extractSection<CapacitySection>({ ctx, instruction, evidence, schema: CAPACITY_SCHEMA, maxTokens: 2600 });
+  return extractSection<CapacitySection>({ ctx, instruction, evidence, schema: CAPACITY_SCHEMA });
 }

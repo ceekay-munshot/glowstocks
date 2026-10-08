@@ -66,5 +66,5 @@ export async function extractRisks(ctx: SectionCtx): Promise<RisksSection> {
     `- downside_scenarios: the top 3, each with its trigger, the financial impact, and a probability (%) if ` +
     `you can reason one. Mark severity/probability "Not available" rather than guessing when unclear.`;
 
-  return extractSection<RisksSection>({ ctx, instruction, evidence, schema: RISKS_SCHEMA, maxTokens: 2800 });
+  return extractSection<RisksSection>({ ctx, instruction, evidence, schema: RISKS_SCHEMA });
 }

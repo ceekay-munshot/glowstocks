@@ -54,5 +54,5 @@ export async function extractMna(ctx: SectionCtx): Promise<MnaSection> {
     `- If no material M&A is found in the evidence, set found=false, deals=[] and summary="No material M&A found." ` +
     `Never invent a deal or a deal size.`;
 
-  return extractSection<MnaSection>({ ctx, instruction, evidence, schema: MNA_SCHEMA, maxTokens: 2200 });
+  return extractSection<MnaSection>({ ctx, instruction, evidence, schema: MNA_SCHEMA });
 }

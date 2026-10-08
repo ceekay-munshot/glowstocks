@@ -75,6 +75,5 @@ export async function extractBusiness(ctx: SectionCtx): Promise<BusinessSection>
     instruction,
     evidence,
     schema: BUSINESS_SCHEMA,
-    maxTokens: 2400,
   });
 }

@@ -69,8 +69,13 @@ export async function extractSection<T>(args: {
 
   const prompt = `${args.instruction}\n\nEVIDENCE (use ONLY this — cite precisely, never guess):\n${args.evidence}`;
 
+  // ONE ceiling governs every section (sections no longer set their own). It is
+  // a ceiling, not a target — billed per token generated — so it is set well
+  // above what the data-richest company needs and costs nothing extra for small
+  // sections, which stop as soon as their JSON is complete. The driver escalates
+  // further if a response ever still stops on "max_tokens".
   const out = await completeJSON<T>(
-    { prompt, system, maxTokens: args.maxTokens ?? 2200, temperature: 0.1, cacheSystem: true },
+    { prompt, system, maxTokens: args.maxTokens ?? 8192, temperature: 0.1, cacheSystem: true },
     args.schema,
   );
   // Register every cited url + stamp source_id onto each cited datum.

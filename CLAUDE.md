@@ -72,6 +72,14 @@ data/companies/<TICKER>.json  committed reports (durable cache). TCS.json is the
   FAILS if the model drops any populated leaf of the TCS sample; keep it green.
 - **Never waste credits.** Keep read-once harvest, run-level Firecrawl cache,
   Bedrock prompt caching, and incremental `--sections` refresh intact.
+- **Extraction output ceiling is central + self-healing — don't re-tune it
+  per section.** `maxTokens` is a CEILING (billed per token actually generated),
+  so a low one silently truncates a data-rich section's JSON mid-stream → invalid
+  JSON → the section fails. ONE generous ceiling governs all sections
+  (`extractSection` default in `scripts/lib/sections/common.ts`); sections do NOT
+  pass their own `maxTokens`. If a response ever still stops on `max_tokens`,
+  `completeJSONWith` (`scripts/lib/json.ts`) escalates the budget and retries, so
+  the truncation class can't recur. Never reintroduce small per-section ceilings.
 - **Charts follow the dataviz skill:** validated palette (`src/lib/palette.ts`),
   ONE axis per chart, **no scatter / bubble / dual-axis**, legend for ≥2 series,
   crosshair tooltips, text in ink tokens. The palette is validated by

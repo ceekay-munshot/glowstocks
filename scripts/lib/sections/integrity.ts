@@ -56,5 +56,5 @@ export async function extractIntegrity(ctx: SectionCtx): Promise<IntegritySectio
     `  6. Corporate actions — recent bonus/split/buyback that affects per-share figures?\n` +
     `- coverage_note: one line on overall data confidence and any gaps. Base every status on the evidence.`;
 
-  return extractSection<IntegritySection>({ ctx, instruction, evidence, schema: INTEGRITY_SCHEMA, maxTokens: 1800 });
+  return extractSection<IntegritySection>({ ctx, instruction, evidence, schema: INTEGRITY_SCHEMA });
 }

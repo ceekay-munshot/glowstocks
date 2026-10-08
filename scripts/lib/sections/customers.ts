@@ -73,5 +73,5 @@ export async function extractCustomers(ctx: SectionCtx): Promise<CustomersSectio
     `- If the company has NO order-book or pipeline concept and discloses no client concentration, set ` +
     `applicable=false and give a one-line not_applicable_reason; otherwise applicable=true. Never guess a %.`;
 
-  return extractSection<CustomersSection>({ ctx, instruction, evidence, schema: CUSTOMERS_SCHEMA, maxTokens: 2400 });
+  return extractSection<CustomersSection>({ ctx, instruction, evidence, schema: CUSTOMERS_SCHEMA });
 }

@@ -60,6 +60,5 @@ export async function extractConcall(ctx: SectionCtx): Promise<ConcallSection> {
     instruction,
     evidence: `CONCALL TRANSCRIPT (${concall.name}, url ${concall.url ?? "n/a"}):\n${picked.text}`,
     schema: CONCALL_SCHEMA,
-    maxTokens: 2800,
   });
 }

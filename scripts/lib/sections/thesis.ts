@@ -88,6 +88,5 @@ export async function extractThesis(ctx: SectionCtx): Promise<ThesisSection> {
     instruction,
     evidence,
     schema: THESIS_SCHEMA,
-    maxTokens: 2800,
   });
 }

@@ -53,5 +53,5 @@ export async function extractEstimates(ctx: SectionCtx): Promise<EstimatesSectio
     `- Be CONSERVATIVE: if the evidence is thin, set available=false or mark individual fields available:false. ` +
     `Never fabricate an estimate.`;
 
-  return extractSection<EstimatesSection>({ ctx, instruction, evidence, schema: ESTIMATES_SCHEMA, maxTokens: 2200 });
+  return extractSection<EstimatesSection>({ ctx, instruction, evidence, schema: ESTIMATES_SCHEMA });
 }

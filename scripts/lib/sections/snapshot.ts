@@ -76,6 +76,5 @@ export async function extractSnapshot(ctx: SectionCtx): Promise<SnapshotSection>
     instruction,
     evidence,
     schema: SNAPSHOT_SCHEMA,
-    maxTokens: 1800,
   });
 }
