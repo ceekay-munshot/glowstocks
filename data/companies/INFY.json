@@ -5,62 +5,63 @@
   "exchange": "NSE/BSE",
   "country": "India",
   "currency": "INR",
-  "as_of": "2026-10-07",
-  "last_updated": "2026-10-07T19:26:26.186Z",
+  "as_of": "Mar 2026",
+  "last_updated": "2026-10-08T05:50:23.913Z",
   "units_note": "Figures in INR crore unless the datum states otherwise; margins & returns in %, multiples in x.",
   "generated_by": "glowstocks engine",
   "coverage": {
     "snapshot": true,
-    "business": false,
-    "financials": false,
-    "peers": false,
-    "thesis": false,
+    "business": true,
+    "financials": true,
+    "peers": true,
+    "thesis": true,
     "customers": true,
     "capacity": true,
     "growth": true,
-    "concall": true,
+    "concall": false,
     "mna": true,
     "estimates": true,
     "risks": true,
-    "integrity": true
+    "integrity": true,
+    "notes": "segment revenue mix sums to 0% (expected ~100%)"
   },
   "snapshot": {
-    "business_model": "Infosys is a global IT services and consulting company that helps clients drive digital transformation. The company generates revenue by providing software development, maintenance, consulting, and business process outsourcing services across industries. It leverages intellectual capital through innovation hubs, digital studios, and partnerships to deliver technology solutions and services to enterprises worldwide.",
+    "business_model": "Infosys is a global IT services and consulting company that provides software development, maintenance, and business process outsourcing services to clients worldwide. The company generates revenue primarily through long-term contracts for digital transformation, cloud services, AI implementation, and application management across industries including financial services, retail, manufacturing, and healthcare. It operates on a time-and-materials and fixed-price engagement model, leveraging its global delivery centers to serve clients in North America, Europe, and other regions.",
     "sector": "Information Technology",
     "industry": "IT Services & Consulting",
     "stance": "HOLD",
-    "stance_rationale": "Despite strong fundamentals (40% ROCE, 31.9% ROE, debt-free balance sheet), the stock trades at a modest P/E of 12.9 with single-digit revenue growth (6.1% YoY) and declining margins (OPM 23.7% vs 24.1% prior year), suggesting limited near-term upside at current valuation.",
+    "stance_rationale": "Despite strong fundamentals with 40% ROCE and healthy cash generation, the stock trades at a modest P/E of 13.1x with revenue growth moderating to single digits (9.6% YoY in FY26), while promoter holding has declined and FII stake has reduced significantly, suggesting cautious sentiment on near-term growth prospects.",
     "kpis": [
       {
-        "label": "Market cap",
-        "value": 402919,
+        "label": "Market Cap",
+        "value": 408425,
         "available": true,
         "unit": "INR cr",
         "source": "Screener — Infosys Ltd",
-        "date": null,
-        "locator": "Key ratios",
+        "date": "Mar 2026",
+        "locator": "Key ratios section",
         "url": "https://www.screener.in/company/INFY/consolidated/",
         "source_id": "S1"
       },
       {
-        "label": "Price",
-        "value": 992,
+        "label": "Current Price",
+        "value": 1006,
         "available": true,
         "unit": "INR",
         "source": "Screener — Infosys Ltd",
-        "date": null,
-        "locator": "Key ratios",
+        "date": "Mar 2026",
+        "locator": "Key ratios section",
         "url": "https://www.screener.in/company/INFY/consolidated/",
         "source_id": "S1"
       },
       {
-        "label": "Revenue (FY Mar 2026)",
+        "label": "Revenue (FY26)",
         "value": 178650,
         "available": true,
         "unit": "INR cr",
         "source": "Screener — Infosys Ltd",
         "date": "Mar 2026",
-        "locator": "Profit & Loss",
+        "locator": "Profit & Loss statement",
         "url": "https://www.screener.in/company/INFY/consolidated/",
         "source_id": "S1",
         "delta": {
@@ -68,33 +69,29 @@
           "unit": "%",
           "period": "YoY",
           "good": true
-        }
+        },
+        "note": "Revenue growth from Mar 2025 (162,990 cr) to Mar 2026 (178,650 cr)"
       },
       {
-        "label": "EBITDA margin",
-        "value": 23.7,
+        "label": "EBITDA Margin",
+        "value": 26.4,
         "available": true,
         "unit": "%",
         "source": "Screener — Infosys Ltd",
-        "date": null,
-        "locator": "Key ratios - OPM last year",
+        "date": "Mar 2026",
+        "locator": "Profit & Loss statement",
         "url": "https://www.screener.in/company/INFY/consolidated/",
         "source_id": "S1",
-        "delta": {
-          "value": -0.4,
-          "unit": "pp",
-          "period": "YoY",
-          "good": false
-        }
+        "note": "Calculated as (Operating Profit 42,280 + Depreciation 4,902) / Sales 178,650"
       },
       {
-        "label": "PAT (FY Mar 2026)",
+        "label": "PAT (FY26)",
         "value": 29474,
         "available": true,
         "unit": "INR cr",
         "source": "Screener — Infosys Ltd",
         "date": "Mar 2026",
-        "locator": "Profit & Loss",
+        "locator": "Profit & Loss statement",
         "url": "https://www.screener.in/company/INFY/consolidated/",
         "source_id": "S1",
         "delta": {
@@ -102,16 +99,17 @@
           "unit": "%",
           "period": "YoY",
           "good": true
-        }
+        },
+        "note": "PAT growth from Mar 2025 (26,750 cr) to Mar 2026 (29,474 cr)"
       },
       {
-        "label": "P/E",
-        "value": 12.9,
+        "label": "P/E Ratio",
+        "value": 13.1,
         "available": true,
         "unit": "x",
         "source": "Screener — Infosys Ltd",
-        "date": null,
-        "locator": "Key ratios - Stock P/E",
+        "date": "Mar 2026",
+        "locator": "Key ratios section",
         "url": "https://www.screener.in/company/INFY/consolidated/",
         "source_id": "S1"
       },
@@ -121,92 +119,1530 @@
         "available": true,
         "unit": "%",
         "source": "Screener — Infosys Ltd",
-        "date": null,
-        "locator": "Key ratios",
+        "date": "Mar 2026",
+        "locator": "Key ratios section",
         "url": "https://www.screener.in/company/INFY/consolidated/",
         "source_id": "S1"
       },
       {
-        "label": "Promoter holding",
+        "label": "Promoter Holding",
         "value": 13.82,
         "available": true,
         "unit": "%",
         "source": "Screener — Infosys Ltd",
         "date": "Mar 2026",
-        "locator": "Shareholding",
+        "locator": "Shareholding pattern",
         "url": "https://www.screener.in/company/INFY/consolidated/",
         "source_id": "S1",
-        "note": "Pledged: 0%"
+        "note": "Pledged percentage: 0%"
       }
     ]
   },
   "business": {
-    "segments": [],
-    "geographies": []
+    "summary": "Infosys operates as a global IT services company with revenue primarily from technology consulting, digital transformation, and outsourcing services across multiple geographies.",
+    "segments": [
+      {
+        "name": "Financial Services",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Business segment revenue breakdown not disclosed in provided evidence"
+        },
+        "trend": "Not available",
+        "note": "Segment identified in S8 and S10 but no revenue percentage provided"
+      },
+      {
+        "name": "Retail & CPG",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Business segment revenue breakdown not disclosed in provided evidence"
+        },
+        "trend": "Not available",
+        "note": "Segment identified in S10 but no revenue percentage provided"
+      },
+      {
+        "name": "Communication Services",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Business segment revenue breakdown not disclosed in provided evidence"
+        },
+        "trend": "Not available",
+        "note": "Segment identified in S9 but no revenue percentage provided"
+      },
+      {
+        "name": "Manufacturing",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Business segment revenue breakdown not disclosed in provided evidence"
+        },
+        "trend": "Not available",
+        "note": "Segment identified in S10 but no revenue percentage provided"
+      },
+      {
+        "name": "Energy & Utilities",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Business segment revenue breakdown not disclosed in provided evidence"
+        },
+        "trend": "Not available",
+        "note": "Segment identified in S10 but no revenue percentage provided"
+      },
+      {
+        "name": "Hi-Tech",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Business segment revenue breakdown not disclosed in provided evidence"
+        },
+        "trend": "Not available",
+        "note": "Segment identified in S10 but no revenue percentage provided"
+      },
+      {
+        "name": "Life Sciences",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Business segment revenue breakdown not disclosed in provided evidence"
+        },
+        "trend": "Not available",
+        "note": "Segment identified in S10 but no revenue percentage provided"
+      }
+    ],
+    "geographies": [
+      {
+        "region": "North America",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Geographic revenue breakdown not disclosed in provided evidence"
+        },
+        "driver": "Not available - no geographic revenue data in evidence",
+        "risk": "Not available - no geographic revenue data in evidence"
+      },
+      {
+        "region": "Europe",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Geographic revenue breakdown not disclosed in provided evidence"
+        },
+        "driver": "Not available - no geographic revenue data in evidence",
+        "risk": "Not available - no geographic revenue data in evidence"
+      },
+      {
+        "region": "India",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Geographic revenue breakdown not disclosed in provided evidence"
+        },
+        "driver": "Not available - no geographic revenue data in evidence",
+        "risk": "Not available - no geographic revenue data in evidence"
+      },
+      {
+        "region": "Rest of World",
+        "pct_revenue": {
+          "value": null,
+          "available": false,
+          "note": "Geographic revenue breakdown not disclosed in provided evidence"
+        },
+        "driver": "Not available - no geographic revenue data in evidence",
+        "risk": "Not available - no geographic revenue data in evidence"
+      }
+    ]
   },
   "financials": {
-    "history": []
+    "latest_quarter": {
+      "period": "Jun 2026",
+      "period_type": "quarter",
+      "revenue": {
+        "value": 48211,
+        "available": true,
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Quarterly Results, Jun 2026",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      "ebitda": {
+        "value": 12655,
+        "available": true,
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Quarterly Results, Jun 2026 (Operating Profit + Depreciation)",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1",
+        "note": "EBITDA = Operating Profit 11409 + Depreciation 1246 = 12655"
+      },
+      "ebitda_margin": {
+        "value": 26.2,
+        "available": true,
+        "unit": "%",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Quarterly Results, Jun 2026 (calculated from EBITDA/Revenue)",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1",
+        "note": "EBITDA margin = 12655/48211 = 26.2%"
+      },
+      "pat": {
+        "value": 7775,
+        "available": true,
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Quarterly Results, Jun 2026",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      "pat_margin": {
+        "value": 16.1,
+        "available": true,
+        "unit": "%",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Quarterly Results, Jun 2026 (calculated from PAT/Revenue)",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1",
+        "note": "PAT margin = 7775/48211 = 16.1%"
+      },
+      "ocf": {
+        "value": null,
+        "available": false,
+        "unit": "INR crore",
+        "note": "Quarterly OCF not provided in Screener data"
+      },
+      "fcf": {
+        "value": null,
+        "available": false,
+        "unit": "INR crore",
+        "note": "Quarterly FCF not provided in Screener data"
+      },
+      "net_debt": {
+        "value": null,
+        "available": false,
+        "unit": "INR crore",
+        "note": "Quarterly net debt not provided in Screener data"
+      },
+      "roce": {
+        "value": null,
+        "available": false,
+        "unit": "%",
+        "note": "Quarterly ROCE not provided in Screener data"
+      },
+      "roe": {
+        "value": null,
+        "available": false,
+        "unit": "%",
+        "note": "Quarterly ROE not provided in Screener data"
+      }
+    },
+    "latest_fy": {
+      "period": "Mar 2026",
+      "period_type": "annual",
+      "revenue": {
+        "value": 178650,
+        "available": true,
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Profit & Loss, Mar 2026",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      "ebitda": {
+        "value": 47182,
+        "available": true,
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Profit & Loss, Mar 2026 (Operating Profit + Depreciation)",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1",
+        "note": "EBITDA = Operating Profit 42280 + Depreciation 4902 = 47182"
+      },
+      "ebitda_margin": {
+        "value": 26.4,
+        "available": true,
+        "unit": "%",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Profit & Loss, Mar 2026 (calculated from EBITDA/Revenue)",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1",
+        "note": "EBITDA margin = 47182/178650 = 26.4%"
+      },
+      "pat": {
+        "value": 29474,
+        "available": true,
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Profit & Loss, Mar 2026",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      "pat_margin": {
+        "value": 16.5,
+        "available": true,
+        "unit": "%",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Profit & Loss, Mar 2026 (calculated from PAT/Revenue)",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1",
+        "note": "PAT margin = 29474/178650 = 16.5%"
+      },
+      "ocf": {
+        "value": 33986,
+        "available": true,
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Cash Flow, Mar 2026",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      "fcf": {
+        "value": 31259,
+        "available": true,
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Cash Flow, Mar 2026",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      "net_debt": {
+        "value": null,
+        "available": false,
+        "unit": "INR crore",
+        "note": "Net debt calculation requires cash balance which is not explicitly provided in Screener balance sheet"
+      },
+      "roce": {
+        "value": 40,
+        "available": true,
+        "unit": "%",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Ratios, Mar 2026",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      "roe": {
+        "value": 31.9,
+        "available": true,
+        "unit": "%",
+        "source": "Screener — Infosys Ltd",
+        "date": null,
+        "locator": "Key ratios",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      }
+    },
+    "history": [
+      {
+        "period": "Mar 2022",
+        "revenue": {
+          "value": 121641,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2022",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ebitda": {
+          "value": 34967,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2022 (Operating Profit + Depreciation)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA = Operating Profit 31491 + Depreciation 3476 = 34967"
+        },
+        "ebitda_margin": {
+          "value": 28.7,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2022 (calculated from EBITDA/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA margin = 34967/121641 = 28.7%"
+        },
+        "pat": {
+          "value": 22146,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2022",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pat_margin": {
+          "value": 18.2,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2022 (calculated from PAT/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "PAT margin = 22146/121641 = 18.2%"
+        },
+        "eps": {
+          "value": 52.56,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2022",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        }
+      },
+      {
+        "period": "Mar 2023",
+        "revenue": {
+          "value": 146767,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2023",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ebitda": {
+          "value": 39355,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2023 (Operating Profit + Depreciation)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA = Operating Profit 35130 + Depreciation 4225 = 39355"
+        },
+        "ebitda_margin": {
+          "value": 26.8,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2023 (calculated from EBITDA/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA margin = 39355/146767 = 26.8%"
+        },
+        "pat": {
+          "value": 24108,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2023",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pat_margin": {
+          "value": 16.4,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2023 (calculated from PAT/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "PAT margin = 24108/146767 = 16.4%"
+        },
+        "eps": {
+          "value": 58.08,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2023",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        }
+      },
+      {
+        "period": "Mar 2024",
+        "revenue": {
+          "value": 153670,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2024",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ebitda": {
+          "value": 41103,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2024 (Operating Profit + Depreciation)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA = Operating Profit 36425 + Depreciation 4678 = 41103"
+        },
+        "ebitda_margin": {
+          "value": 26.7,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2024 (calculated from EBITDA/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA margin = 41103/153670 = 26.7%"
+        },
+        "pat": {
+          "value": 26248,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2024",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pat_margin": {
+          "value": 17.1,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2024 (calculated from PAT/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "PAT margin = 26248/153670 = 17.1%"
+        },
+        "eps": {
+          "value": 63.2,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2024",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        }
+      },
+      {
+        "period": "Mar 2025",
+        "revenue": {
+          "value": 162990,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2025",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ebitda": {
+          "value": 44048,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2025 (Operating Profit + Depreciation)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA = Operating Profit 39236 + Depreciation 4812 = 44048"
+        },
+        "ebitda_margin": {
+          "value": 27,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2025 (calculated from EBITDA/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA margin = 44048/162990 = 27.0%"
+        },
+        "pat": {
+          "value": 26750,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2025",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pat_margin": {
+          "value": 16.4,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2025 (calculated from PAT/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "PAT margin = 26750/162990 = 16.4%"
+        },
+        "eps": {
+          "value": 64.32,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2025",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        }
+      },
+      {
+        "period": "Mar 2026",
+        "revenue": {
+          "value": 178650,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2026",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ebitda": {
+          "value": 47182,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2026 (Operating Profit + Depreciation)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA = Operating Profit 42280 + Depreciation 4902 = 47182"
+        },
+        "ebitda_margin": {
+          "value": 26.4,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2026 (calculated from EBITDA/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "EBITDA margin = 47182/178650 = 26.4%"
+        },
+        "pat": {
+          "value": 29474,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2026",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pat_margin": {
+          "value": 16.5,
+          "available": true,
+          "unit": "%",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2026 (calculated from PAT/Revenue)",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1",
+          "note": "PAT margin = 29474/178650 = 16.5%"
+        },
+        "eps": {
+          "value": 72.59,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener — Infosys Ltd",
+          "date": null,
+          "locator": "Profit & Loss, Mar 2026",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        }
+      }
+    ]
   },
   "peers": {
-    "peers": []
+    "peers": [
+      {
+        "name": "TCS",
+        "ticker": "TCS",
+        "is_self": false,
+        "price": {
+          "value": 2115.05,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 1",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "mcap": {
+          "value": 765243.61,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 1",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pe": {
+          "value": 9.74,
+          "available": true,
+          "unit": "x",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 1",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ev_ebitda": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        },
+        "roe": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roce": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roa": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "sales_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "profit_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "de": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        }
+      },
+      {
+        "name": "Infosys",
+        "ticker": "INFY",
+        "is_self": true,
+        "price": {
+          "value": 1006.4,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 2",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "mcap": {
+          "value": 408424.97,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 2",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pe": {
+          "value": 8.24,
+          "available": true,
+          "unit": "x",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 2",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ev_ebitda": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        },
+        "roe": {
+          "value": 31.9,
+          "available": true,
+          "unit": "%",
+          "source": "Screener",
+          "date": null,
+          "locator": "Key ratios section",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "roce": {
+          "value": 40,
+          "available": true,
+          "unit": "%",
+          "source": "Screener",
+          "date": null,
+          "locator": "Key ratios section",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "roa": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "sales_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%",
+          "note": "Screener shows EPS growth 5Years: 10.4% but not sales growth 5y"
+        },
+        "profit_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%",
+          "note": "Screener shows Profit Var 3Yrs: 7.84% but not 5y"
+        },
+        "de": {
+          "value": 0.1,
+          "available": true,
+          "unit": "x",
+          "source": "Screener",
+          "date": null,
+          "locator": "Key ratios section",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        }
+      },
+      {
+        "name": "HCL Technologies",
+        "ticker": "HCLTECH",
+        "is_self": false,
+        "price": {
+          "value": 1202.55,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 3",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "mcap": {
+          "value": 326331.84,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 3",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pe": {
+          "value": 10.62,
+          "available": true,
+          "unit": "x",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 3",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ev_ebitda": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        },
+        "roe": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roce": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roa": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "sales_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "profit_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "de": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        }
+      },
+      {
+        "name": "Wipro",
+        "ticker": "WIPRO",
+        "is_self": false,
+        "price": {
+          "value": 161.7,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 4",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "mcap": {
+          "value": 160169.44,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 4",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pe": {
+          "value": 7.72,
+          "available": true,
+          "unit": "x",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 4",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ev_ebitda": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        },
+        "roe": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roce": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roa": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "sales_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "profit_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "de": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        }
+      },
+      {
+        "name": "Tech Mahindra",
+        "ticker": "TECHM",
+        "is_self": false,
+        "price": {
+          "value": 1517.2,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 5",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "mcap": {
+          "value": 148709.76,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 5",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pe": {
+          "value": 15.28,
+          "available": true,
+          "unit": "x",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 5",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ev_ebitda": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        },
+        "roe": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roce": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roa": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "sales_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "profit_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "de": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        }
+      },
+      {
+        "name": "LTM",
+        "ticker": "LTM",
+        "is_self": false,
+        "price": {
+          "value": 3991.95,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 6",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "mcap": {
+          "value": 118409.79,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 6",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pe": {
+          "value": 13.21,
+          "available": true,
+          "unit": "x",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 6",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ev_ebitda": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        },
+        "roe": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roce": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roa": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "sales_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "profit_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "de": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        }
+      },
+      {
+        "name": "Persistent Systems",
+        "ticker": "PERSISTENT",
+        "is_self": false,
+        "price": {
+          "value": 5580.3,
+          "available": true,
+          "unit": "INR",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 7",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "mcap": {
+          "value": 88029.24,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 7",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "pe": {
+          "value": 28.37,
+          "available": true,
+          "unit": "x",
+          "source": "Screener",
+          "date": null,
+          "locator": "Peer comparison table, row 7",
+          "url": "https://www.screener.in/company/INFY/consolidated/",
+          "source_id": "S1"
+        },
+        "ev_ebitda": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        },
+        "roe": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roce": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "roa": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "sales_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "profit_growth_5y": {
+          "value": null,
+          "available": false,
+          "unit": "%"
+        },
+        "de": {
+          "value": null,
+          "available": false,
+          "unit": "x"
+        }
+      }
+    ],
+    "note": "Infosys trades at the lowest P/E (8.24x) among its IT services peers, below TCS (9.74x), HCL Tech (10.62x), and significantly below Persistent Systems (28.37x). With strong ROCE (40.0%) and ROE (31.9%), and minimal debt (D/E 0.10), Infosys screens as a quality business trading at a valuation discount to most peers."
   },
   "thesis": {
-    "stance": "Not available",
-    "supports": [],
-    "counters": [],
-    "change_my_mind": [],
-    "scenarios": []
+    "stance": "HOLD",
+    "supports": [
+      {
+        "text": "Strong cash generation with quarterly free cash flow of ₹8,282 crore (Mar 2026) and CFO/OP ratio consistently above 100%, demonstrating operational efficiency.",
+        "source": "Screener — Infosys Ltd",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      {
+        "text": "Robust return ratios with ROCE of 40.0% and ROE of 31.9%, significantly above industry averages, indicating efficient capital deployment.",
+        "source": "Screener — Infosys Ltd",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      {
+        "text": "Healthy balance sheet with current ratio of 1.86 and minimal debt-to-equity of 0.10, providing financial flexibility.",
+        "source": "Screener — Infosys Ltd",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      {
+        "text": "Consistent dividend payout with 4.76% yield and zero promoter pledging, reflecting shareholder-friendly capital allocation.",
+        "source": "Screener — Infosys Ltd",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      }
+    ],
+    "counters": [
+      {
+        "text": "Jefferies downgraded Infosys to Hold from Buy on 22 February 2026, citing that AI could shrink traditional managed services, increase cyclicality and add operating model risk.",
+        "source": "How The Infosys (NSEI:INFY) Story Is Shifting As AI Recasts Earnings",
+        "url": "https://finance.yahoo.com/markets/stocks/articles/infosys-nsei-infy-story-shifting-031154728.html",
+        "source_id": "S15"
+      },
+      {
+        "text": "Stock has fallen 50% from highs with forward P/E of 14x accompanying just 0.55% organic growth at FY27 guidance midpoint, indicating weak growth prospects.",
+        "source": "Infosys: It Looks Cheap Technically, But It Isn't Fundamentally",
+        "url": "https://seekingalpha.com/article/4947817-infosys-stock-looks-cheap-technically-but-not-fundamentally",
+        "source_id": "S18"
+      },
+      {
+        "text": "Operating margin compressed from 28% (Mar 2015) to 24% (Mar 2026), reflecting pricing pressure and competitive intensity.",
+        "source": "Screener — Infosys Ltd",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      },
+      {
+        "text": "Analysts expect Infosys to trim FY27 guidance citing AI-driven price deflation, European auto client ramp-down and weak deal conversion.",
+        "source": "Infosys Limited Stock Price: Quote, Forecast, Splits & News",
+        "url": "https://www.perplexity.ai/finance/INFY",
+        "source_id": "S19"
+      },
+      {
+        "text": "FII and DII holdings declined by 1.36% and 0.41% respectively, indicating institutional selling pressure.",
+        "source": "Screener — Infosys Ltd",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
+      }
+    ],
+    "change_my_mind": [
+      "Revenue growth accelerates above 8% for two consecutive quarters, signaling successful AI monetization and demand recovery",
+      "Operating margin expands above 25% for two quarters, demonstrating pricing power and operational leverage",
+      "Large deal TCV exceeds $5 billion per quarter for three consecutive quarters, indicating robust pipeline conversion",
+      "Stock sustains above ₹1,200 for 30 days with improving institutional ownership, confirming technical and fundamental turnaround"
+    ],
+    "scenarios": [
+      {
+        "name": "Bear",
+        "probability": {
+          "value": 30,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S2",
+          "note": "AI disruption accelerates margin compression and revenue decline"
+        },
+        "revenue_cagr": {
+          "value": 2,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S3",
+          "note": "Weak Western IT spending and AI pricing pressure limit growth to low single digits"
+        },
+        "margin": {
+          "value": 22,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S4",
+          "note": "Operating margin contracts 200 bps due to competitive pricing and AI transition costs"
+        },
+        "pe_exit": {
+          "value": 12,
+          "available": true,
+          "unit": "x",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S5",
+          "note": "De-rating continues as growth concerns persist and AI disruption materializes"
+        },
+        "target_price": {
+          "value": 780,
+          "available": true,
+          "unit": "INR",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S6",
+          "note": "Based on FY27E EPS of ₹65 at 12x P/E"
+        },
+        "upside": {
+          "value": -22.5,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S7",
+          "note": "Downside from current price of ₹1,006"
+        },
+        "narrative": "AI disruption accelerates faster than anticipated, shrinking traditional managed services revenue. Pricing pressure intensifies as clients demand AI-driven cost reductions. European auto sector weakness and weak deal conversion lead to revenue decline. Operating margins compress to 22% due to competitive pricing and transition costs. Stock de-rates to 12x P/E reflecting structural growth concerns."
+      },
+      {
+        "name": "Base",
+        "probability": {
+          "value": 50,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S8",
+          "note": "Modest growth with stable margins as AI transition progresses"
+        },
+        "revenue_cagr": {
+          "value": 4.5,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S9",
+          "note": "Mid-single digit growth aligned with historical 3-year CAGR of 6.77% but tempered by near-term headwinds"
+        },
+        "margin": {
+          "value": 23.5,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S10",
+          "note": "Operating margin stabilizes near current 24% with modest compression as AI investments offset efficiency gains"
+        },
+        "pe_exit": {
+          "value": 14,
+          "available": true,
+          "unit": "x",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S11",
+          "note": "Valuation remains at current forward P/E as growth-margin trade-off persists"
+        },
+        "target_price": {
+          "value": 1050,
+          "available": true,
+          "unit": "INR",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S12",
+          "note": "Based on FY27E EPS of ₹75 at 14x P/E"
+        },
+        "upside": {
+          "value": 4.4,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S13",
+          "note": "Limited upside from current price of ₹1,006"
+        },
+        "narrative": "Infosys navigates AI transition with modest revenue growth of 4-5% CAGR. Large deal pipeline converts steadily but not spectacularly. Operating margins stabilize around 23.5% as efficiency gains offset pricing pressure. Strong cash generation and dividend yield provide downside support. Valuation remains range-bound at 14x forward P/E reflecting balanced risk-reward."
+      },
+      {
+        "name": "Bull",
+        "probability": {
+          "value": 20,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S14",
+          "note": "AI monetization accelerates with margin expansion"
+        },
+        "revenue_cagr": {
+          "value": 8,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S15",
+          "note": "Strong AI-led consulting and implementation growth drives revenue acceleration above historical trends"
+        },
+        "margin": {
+          "value": 25.5,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S16",
+          "note": "Operating margin expands 150 bps as AI services command premium pricing and automation drives efficiency"
+        },
+        "pe_exit": {
+          "value": 17,
+          "available": true,
+          "unit": "x",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S17",
+          "note": "Re-rating to 17x P/E as growth accelerates and AI monetization validates premium valuation"
+        },
+        "target_price": {
+          "value": 1490,
+          "available": true,
+          "unit": "INR",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S18",
+          "note": "Based on FY27E EPS of ₹87.50 at 17x P/E, aligned with Seeking Alpha bull case"
+        },
+        "upside": {
+          "value": 48.1,
+          "available": true,
+          "unit": "%",
+          "source": "glowstocks estimate",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S19",
+          "note": "Significant upside from current price of ₹1,006"
+        },
+        "narrative": "AI transformation accelerates faster than expected with Infosys successfully monetizing consulting, implementation and managed services. Large deal pipeline converts strongly with TCV exceeding $5 billion per quarter. Operating margins expand to 25.5% as premium AI pricing offsets wage inflation. Western IT spending recovers driving broad-based growth. Stock re-rates to 17x P/E reflecting renewed growth momentum."
+      }
+    ]
   },
   "customers": {
     "applicable": true,
-    "summary": "Infosys does not disclose client concentration percentages or individual client names. The company reports strong large-deal momentum with FY26 TCV of $14.9 billion (55% net new) and 88 clients generating US$50 million+ in annual revenue. Order book metrics demonstrate robust pipeline with Q4 FY26 large deal TCV of $3.1 billion (67% net new). Client dependency risk is mitigated by diversified portfolio across sectors, though Manufacturing segment shows concentration risk from one large client.",
+    "summary": "Infosys does not disclose client concentration percentages or individual client names. The company reports large-deal TCV (Total Contract Value) as its primary order-book metric, with FY24 recording $17.7 billion (52% net new), FY26 recording $14.9 billion (55% net new), and Q4 FY24 recording $4.5 billion (44% net new). Q4 FY25 large deals were $3.1 billion (67% net new). The company's business model has shifted from traditional outsourcing to AI-enabled transformation platforms with longer, strategic client programs.",
     "groups": [
       {
-        "segment": "US$50 million+ clients",
-        "names": "Not disclosed",
+        "segment": "Client concentration disclosure",
         "concentration": {
           "value": null,
           "available": false,
-          "unit": "% of revenue",
-          "source": "Annual Report 2026",
-          "date": "FY 2026",
-          "locator": "p.17",
-          "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-          "source_id": "S2",
-          "note": "Company reports 88 clients with US$50 million+ revenue (increase of 3 clients Y-o-Y) but does not disclose concentration percentage"
+          "note": "Infosys does not disclose client concentration percentages or individual client names in the available evidence"
         },
-        "risk": "Low - diversified client base with 88 large clients, up 3 Y-o-Y, indicates broad revenue distribution"
-      },
-      {
-        "segment": "Manufacturing - Single large client",
-        "names": "Not disclosed",
-        "concentration": {
-          "value": null,
-          "available": false,
-          "unit": "% of revenue",
-          "source": "Concall Jul 2026",
-          "date": "Jul 2026",
-          "locator": "p.32",
-          "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-          "source_id": "S3",
-          "note": "Growth in Manufacturing continues to be impacted due to lower revenue from a large client - no percentage disclosed"
-        },
-        "risk": "Medium - one large Manufacturing client materially impacts segment growth, indicating concentration risk within that vertical"
+        "risk": "Unable to assess client concentration risk due to lack of disclosure. However, the company's large-deal model and strategic transformation programs suggest deeper client relationships with longer contract durations, which may reduce dependency risk compared to traditional staff-augmentation models."
       }
     ],
     "order_book": [
       {
-        "metric": "Large deal TCV - FY26 full year",
+        "metric": "Large Deal TCV - FY24",
         "value": {
-          "value": 124740.75,
+          "value": 146235.9,
           "available": true,
           "unit": "INR crore",
-          "source": "Annual Report 2026",
-          "date": "FY 2026",
-          "locator": "p.17",
-          "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-          "source_id": "S2",
-          "note": "US$14.9 billion converted at approximate rate of 83.69 INR/USD"
+          "source": "Infosys: Strong large deal TCV of $4.5 billion in Q4 and record $17.7 ...",
+          "date": "2024-04-18",
+          "locator": "FY24 highlights section",
+          "url": "https://www.prnewswire.com/in/news-releases/infosys-strong-large-deal-tcv-of-4-5-billion-in-q4-and-record-17-7-billion-in-fy24-create-robust-foundation-for-growth-302121003.html",
+          "source_id": "S20",
+          "note": "Converted from $17.7 billion at approximate rate of 82.6 INR/USD"
+        },
+        "mix": "52% net new",
+        "coverage": {
+          "value": null,
+          "available": false
+        },
+        "qoq_change": {
+          "value": null,
+          "available": false
+        }
+      },
+      {
+        "metric": "Large Deal TCV - Q4 FY24",
+        "value": {
+          "value": 37170,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Infosys: Strong large deal TCV of $4.5 billion in Q4 and record $17.7 ...",
+          "date": "2024-04-18",
+          "locator": "Q4 highlights section",
+          "url": "https://www.prnewswire.com/in/news-releases/infosys-strong-large-deal-tcv-of-4-5-billion-in-q4-and-record-17-7-billion-in-fy24-create-robust-foundation-for-growth-302121003.html",
+          "source_id": "S20",
+          "note": "Converted from $4.5 billion at approximate rate of 82.6 INR/USD"
+        },
+        "mix": "44% net new",
+        "coverage": {
+          "value": null,
+          "available": false
+        },
+        "qoq_change": {
+          "value": null,
+          "available": false
+        }
+      },
+      {
+        "metric": "Large Deal TCV - FY26",
+        "value": {
+          "value": 123074,
+          "available": true,
+          "unit": "INR crore",
+          "source": "Infosys (INFY) Has a Large-Deal and AI-Services Engine Bigger Than an ...",
+          "date": "2026-04-23",
+          "locator": "FY26 IFRS release section",
+          "url": "https://news.alphastreet.com/infosys-infy-has-a-large-deal-and-ai-services-engine-bigger-than-an-outsourcing-label/amp/",
+          "source_id": "S24",
+          "note": "Converted from $14.9 billion at approximate rate of 82.6 INR/USD"
         },
         "mix": "55% net new",
         "coverage": {
@@ -219,65 +1655,19 @@
         }
       },
       {
-        "metric": "Large deal TCV - Q4 FY26",
+        "metric": "Large Deal TCV - Q4 FY25",
         "value": {
-          "value": 25944.39,
+          "value": 25606,
           "available": true,
           "unit": "INR crore",
           "source": "Infosys ends FY25 strong, bags $11.6B in deals, eyes growth",
-          "date": "Q4 FY26",
-          "locator": "article text",
+          "date": "2025",
+          "locator": "Q4 large deal wins section",
           "url": "https://www.linkedin.com/posts/analytics-india-magazine_despite-a-117-drop-in-q4-profit-to-814-activity-7318616578772672512-RS2H",
           "source_id": "S22",
-          "note": "US$3.1 billion converted at approximate rate of 83.69 INR/USD"
+          "note": "Converted from $3.1 billion at approximate rate of 82.6 INR/USD"
         },
         "mix": "67% net new",
-        "coverage": {
-          "value": null,
-          "available": false
-        },
-        "qoq_change": {
-          "value": null,
-          "available": false
-        }
-      },
-      {
-        "metric": "Large deal TCV - Q1 Financial Services",
-        "value": {
-          "value": 83690,
-          "available": true,
-          "unit": "INR crore",
-          "source": "Concall Jul 2026",
-          "date": "Q1 FY27",
-          "locator": "p.32",
-          "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-          "source_id": "S3",
-          "note": "Approximately US$1 billion converted at 83.69 INR/USD"
-        },
-        "mix": "net new",
-        "coverage": {
-          "value": null,
-          "available": false
-        },
-        "qoq_change": {
-          "value": null,
-          "available": false
-        }
-      },
-      {
-        "metric": "Large deal TCV - FY24 (historical)",
-        "value": {
-          "value": 148151.3,
-          "available": true,
-          "unit": "INR crore",
-          "source": "Infosys: Strong large deal TCV of $4.5 billion in Q4 and record $17.7 ...",
-          "date": "FY 2024",
-          "locator": "article text",
-          "url": "https://www.prnewswire.com/in/news-releases/infosys-strong-large-deal-tcv-of-4-5-billion-in-q4-and-record-17-7-billion-in-fy24-create-robust-foundation-for-growth-302121003.html",
-          "source_id": "S20",
-          "note": "US$17.7 billion converted at approximate rate of 83.69 INR/USD; highest ever at that time with 52% net new"
-        },
-        "mix": "52% net new",
         "coverage": {
           "value": null,
           "available": false
@@ -292,169 +1682,98 @@
   "capacity": {
     "applicable": true,
     "kind": "delivery",
-    "summary": "Infosys operates a global IT services delivery model with extensive footprint across multiple geographies. The company maintains delivery centers, development centers, and offices worldwide to serve its global client base. Evidence shows integration of over 220 plants and distribution centers for client Mondelēz, and scaling of AI pods with over 100 resources onboarded through partnership for Woodside Energy, indicating significant delivery capacity.",
+    "summary": "Infosys is a global IT services company with delivery operations across multiple countries. As an IT services firm, capacity is measured by headcount and delivery infrastructure rather than manufacturing capacity.",
     "sites": [
       {
-        "site": "Global delivery network",
-        "product": "IT services and consulting delivery",
+        "site": "Global delivery centres",
+        "product": "IT services delivery",
         "capacity": {
           "value": null,
           "available": false,
-          "note": "Specific delivery center capacity not disclosed in provided evidence"
+          "note": "Number of delivery centres not specified in provided evidence"
         },
         "utilization": {
           "value": null,
           "available": false,
-          "note": "Utilization metrics not disclosed in provided evidence"
+          "note": "Utilization metrics not provided in evidence"
         },
-        "expansion": "Scaled AI delivery capacity with over 100 resources onboarded through partnership with Woodside Energy",
+        "expansion": "Not available in evidence",
         "capex": {
           "value": null,
           "available": false,
-          "note": "Specific capex for delivery center expansion not disclosed in provided evidence"
+          "note": "Specific delivery centre capex not disclosed in evidence"
         },
-        "timeline": "2025-26"
+        "timeline": "Not available"
       }
     ],
     "metrics": [
       {
-        "label": "Mondelēz platform integration - plants and distribution centers",
-        "value": 220,
-        "available": true,
-        "unit": "facilities",
-        "source": "Annual Report 2026",
-        "date": "2025-26",
-        "locator": "p.6",
-        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-        "source_id": "S2",
-        "note": "Integrates more than 220 plants and distribution centers for Mondelēz International traceability platform"
+        "label": "Total employees (headcount)",
+        "value": null,
+        "available": false,
+        "note": "Employee headcount not provided in the evidence sources"
       },
       {
-        "label": "Mondelēz platform - suppliers connected",
-        "value": 50,
+        "label": "Fixed Assets",
+        "value": 33770,
         "available": true,
-        "unit": "suppliers",
-        "source": "Annual Report 2026",
-        "date": "2025-26",
-        "locator": "p.6",
-        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-        "source_id": "S2",
-        "note": "Connects more than 50 suppliers for Mondelēz International"
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": "Mar 2026",
+        "locator": "Balance Sheet section",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1"
       },
       {
-        "label": "Woodside Energy AI partnership - resources onboarded",
-        "value": 100,
+        "label": "Capital Work in Progress",
+        "value": 960,
         "available": true,
-        "unit": "resources",
-        "source": "PPT",
-        "date": "2026",
-        "locator": "slide 76",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=048f2a46-2734-4c94-be94-07b0c483aaab.pdf",
-        "source_id": "S5",
-        "note": "Over a hundred resources onboarded through partnership with Infosys for Woodside Energy AI scale-up"
-      },
-      {
-        "label": "Woodside Energy - AI use cases implemented",
-        "value": "16+",
-        "available": true,
-        "unit": "use cases",
-        "source": "PPT",
-        "date": "2026",
-        "locator": "slide 76",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=048f2a46-2734-4c94-be94-07b0c483aaab.pdf",
-        "source_id": "S5",
-        "note": "16+ high-value AI use cases identified for implementation across Woodside Energy"
+        "unit": "INR crore",
+        "source": "Screener — Infosys Ltd",
+        "date": "Mar 2026",
+        "locator": "Balance Sheet section, CWIP row",
+        "url": "https://www.screener.in/company/INFY/consolidated/",
+        "source_id": "S1",
+        "note": "Latest available CWIP figure from balance sheet"
       }
     ]
   },
   "growth": {
-    "summary": "Infosys faces a challenging growth environment with FY27 revenue guidance of 1.5–3% in constant currency, down from prior expectations. Key headwinds include macro uncertainty, client-specific volume softness, pricing pressure from increased competition, and AI-driven project pauses. Operating margin guidance remains stable at 20–22%. Large deal wins and AI services provide some offset, but near-term momentum is weak with Q1 FY27 organic growth at ~0.5%.",
+    "summary": "Infosys faces subdued growth with FY27 revenue guidance of 1.5–3.5% in constant currency, reflecting client caution driven by macroeconomic uncertainty and AI-driven project reassessments. While the company maintains strong margins (20–22% operating margin guidance) and a debt-free balance sheet, revenue growth has slowed dramatically to under 2% amid weak discretionary spending and manufacturing sector headwinds, particularly in Europe's auto sector. Large deal wins provide some foundation, but the outlook remains cautious with revenue deflation concerns as clients pause projects expecting AI to deliver faster, cheaper solutions.",
     "drivers": [
       {
         "name": "Revenue Growth Guidance",
-        "detail": "FY27 constant currency revenue growth guidance of 1.5–3%, revised down from 1.5–3.5% (April 2026) and 2.5% midpoint in prior quarter. Organic growth excluding acquisitions at ~0.5% in Q1 FY27.",
+        "detail": "FY27 constant currency revenue growth guided at 1.5–3.5%, with lower bound raised from 1% to 2% during the year. This represents weak single-digit growth reflecting client caution and delayed discretionary spending.",
         "metric": {
-          "value": 2.25,
+          "value": 2.5,
           "available": true,
-          "unit": "% Y-o-Y",
-          "source": "Concall Jul 2026",
-          "date": "2026-07",
-          "locator": "p.6, p.34",
-          "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-          "source_id": "S3",
-          "note": "Midpoint of 1.5–3% guidance range"
-        },
-        "direction": "headwind"
-      },
-      {
-        "name": "Volume Softness & Client-Specific Impact",
-        "detail": "Lower-than-expected volumes in Q1 with cascading effect into Q2 and rest of year. One-off impact from European manufacturing client (0.75–1% revenue impact). Softer volumes through Q1 automatically impact subsequent quarters.",
-        "metric": {
-          "value": 0.875,
-          "available": true,
-          "unit": "% revenue impact",
-          "source": "Concall Jul 2026",
-          "date": "2026-07",
-          "locator": "p.34",
-          "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-          "source_id": "S3",
-          "note": "European manufacturing client impact range 0.75–1%"
-        },
-        "direction": "headwind"
-      },
-      {
-        "name": "Pricing Pressure",
-        "detail": "Increased competition in pricing leading to lower-than-expected pricing realization in Q1, with effects continuing through rest of year. Competitors reporting irrational competitive pricing in the market.",
-        "metric": {
-          "value": null,
-          "available": false
-        },
-        "direction": "headwind"
-      },
-      {
-        "name": "Onsite Mix Reduction",
-        "detail": "Expected onsite mix to be lower by approximately 0.75–1% for the year, impacting year-over-year revenue comparisons due to lower billing rates on offshore work.",
-        "metric": {
-          "value": 0.875,
-          "available": true,
-          "unit": "% revenue impact",
-          "source": "Concall Jul 2026",
-          "date": "2026-07",
-          "locator": "p.34",
-          "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-          "source_id": "S3",
-          "note": "Onsite mix reduction impact range 0.75–1%"
-        },
-        "direction": "headwind"
-      },
-      {
-        "name": "Client Productivity Demands",
-        "detail": "Increased ask for productivity improvements from clients, contributing to revenue pressure alongside competitive pricing dynamics.",
-        "metric": {
-          "value": null,
-          "available": false
+          "unit": "%",
+          "source": "Infosys Stock: Next Fiscal Year Is Another Low-Single-Digit Growth",
+          "date": "2026",
+          "locator": "FY2027 guidance",
+          "url": "https://seekingalpha.com/article/4899980-infosys-ltd-next-fiscal-year-is-another-low-single-digit-growth-year-rating-downgrade",
+          "source_id": "S25"
         },
         "direction": "headwind"
       },
       {
         "name": "Operating Margin Stability",
-        "detail": "Operating margin guidance maintained at 20–22% despite revenue headwinds, indicating cost management and operational efficiency focus.",
+        "detail": "Operating margin guidance maintained at 20–22% for FY27, demonstrating pricing discipline and cost management despite revenue pressures.",
         "metric": {
           "value": 21,
           "available": true,
           "unit": "%",
-          "source": "Concall Jul 2026",
-          "date": "2026-07",
-          "locator": "p.6",
-          "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-          "source_id": "S3",
-          "note": "Midpoint of 20–22% guidance range"
+          "source": "Simply Wall St",
+          "date": "Jul 2026",
+          "locator": "Earnings guidance",
+          "url": "https://simplywall.st/stocks/us/software/nyse-infy/infosys/future",
+          "source_id": "S26"
         },
-        "direction": "neutral"
+        "direction": "tailwind"
       },
       {
-        "name": "AI-Driven Project Pauses",
-        "detail": "Clients pausing projects like SAP implementation and application modernization midway, believing AI can deliver work faster and cheaper, causing revenue deflation.",
+        "name": "AI-Driven Revenue Deflation",
+        "detail": "Clients pausing projects like SAP implementation and application modernization midway, expecting AI to deliver work faster and cheaper. This creates revenue deflation pressure as traditional billable hours decline.",
         "metric": {
           "value": null,
           "available": false
@@ -462,8 +1781,50 @@
         "direction": "headwind"
       },
       {
-        "name": "Macro Uncertainty",
-        "detail": "Overall macro environment remains uncertain, contributing to cautious client spending and delayed discretionary projects across the IT services sector.",
+        "name": "Manufacturing Sector Weakness",
+        "detail": "Weakness in manufacturing vertical, particularly Europe's auto sector, impacting demand. This sector-specific headwind affects deal ramps and project volumes.",
+        "metric": {
+          "value": null,
+          "available": false
+        },
+        "direction": "headwind"
+      },
+      {
+        "name": "Discretionary Spending Delays",
+        "detail": "Macroeconomic uncertainty and AI tool adoption causing clients to delay discretionary spending and take longer to ramp up deals, extending sales cycles.",
+        "metric": {
+          "value": null,
+          "available": false
+        },
+        "direction": "headwind"
+      },
+      {
+        "name": "Large Deal Momentum",
+        "detail": "Company continues to win large deals providing foundation for future growth, though conversion to revenue remains slow in current environment.",
+        "metric": {
+          "value": null,
+          "available": false
+        },
+        "direction": "tailwind"
+      },
+      {
+        "name": "Balance Sheet Strength",
+        "detail": "Debt-free balance sheet with strong cash generation (profit margins around 21%) provides financial flexibility for investments and shareholder returns despite revenue challenges.",
+        "metric": {
+          "value": 21,
+          "available": true,
+          "unit": "%",
+          "source": "KoalaGains",
+          "date": "TTM",
+          "locator": "Profit margins",
+          "url": "https://koalagains.com/stocks/NYSE/INFY",
+          "source_id": "S23"
+        },
+        "direction": "tailwind"
+      },
+      {
+        "name": "Competitive Position vs Peers",
+        "detail": "Infosys lags key competitors like Accenture in growth and is less profitable than peer TCS, facing market share pressure in a slow-growth environment.",
         "metric": {
           "value": null,
           "available": false
@@ -473,252 +1834,128 @@
     ],
     "catalysts": [
       {
-        "catalyst": "Q2 FY27 Volume Recovery",
-        "timing": "Oct 2026 (Q2 FY27 results)",
-        "kpi": "Sequential revenue growth and volume trends",
-        "confirms": "Sequential QoQ revenue growth >2% with improving utilization rates, indicating Q1 softness was temporary",
-        "falsifies": "Flat or negative sequential growth with continued volume weakness, confirming structural demand issues"
+        "catalyst": "FY27 Revenue Guidance Revision",
+        "timing": "Q2 FY27 (Oct 2026) and Q3 FY27 (Jan 2027) earnings",
+        "kpi": "Constant currency revenue growth guidance range",
+        "confirms": "Guidance raised above 3.5% upper bound, indicating improved client spending and deal ramps",
+        "falsifies": "Guidance lowered below 1.5% or further narrowed, signaling prolonged demand weakness"
       },
       {
-        "catalyst": "Large Deal Momentum Acceleration",
-        "timing": "Q2–Q3 FY27 (Oct 2026–Jan 2027)",
-        "kpi": "Total Contract Value (TCV) of large deal wins",
-        "confirms": "Quarterly large deal TCV consistently >$3.5B with improving conversion rates and shorter ramp times",
-        "falsifies": "Large deal TCV declining below $2.5B per quarter or extended deal closure timelines beyond 6 months"
+        "catalyst": "Manufacturing Sector Recovery",
+        "timing": "H2 FY27 (Oct 2026 - Mar 2027)",
+        "kpi": "Manufacturing vertical revenue growth and Europe auto sector deal wins",
+        "confirms": "Sequential revenue growth in manufacturing vertical returning to positive territory",
+        "falsifies": "Continued double-digit declines in manufacturing or further auto sector project cancellations"
       },
       {
-        "catalyst": "AI Revenue Contribution Clarity",
-        "timing": "Q3–Q4 FY27 (Jan–Apr 2027)",
-        "kpi": "Disclosed AI services revenue as % of total revenue",
-        "confirms": "AI services revenue disclosed at >5% of total with clear growth trajectory and margin accretion",
-        "falsifies": "AI revenue remains <3% of total or management unable to quantify meaningful contribution"
+        "catalyst": "AI Services Monetization",
+        "timing": "FY27 throughout",
+        "kpi": "AI-related revenue contribution and new AI deal TCV",
+        "confirms": "AI services revenue disclosed as material contributor (>5% of total) with expanding margins",
+        "falsifies": "AI revenue remains immaterial while traditional services continue deflating"
       },
       {
-        "catalyst": "Manufacturing Vertical Stabilization",
-        "timing": "H2 FY27 (Jan–Mar 2027)",
-        "kpi": "Manufacturing segment revenue growth rate",
-        "confirms": "Manufacturing vertical returns to positive YoY growth or at least flat QoQ for 2 consecutive quarters",
-        "falsifies": "Manufacturing vertical declines >5% YoY in H2 FY27, indicating prolonged European auto sector weakness"
+        "catalyst": "Large Deal Conversion Acceleration",
+        "timing": "Q1-Q2 FY27 (Apr-Sep 2026)",
+        "kpi": "Large deal TCV and time-to-revenue conversion metrics",
+        "confirms": "Large deal TCV exceeds $4B per quarter with faster ramp schedules disclosed",
+        "falsifies": "Large deal TCV falls below $3B or management cites extended ramp timelines"
       },
       {
-        "catalyst": "FY28 Guidance Upgrade",
-        "timing": "Apr 2027 (FY27 results & FY28 guidance)",
-        "kpi": "FY28 constant currency revenue growth guidance",
-        "confirms": "FY28 guidance of >5% revenue growth with margin expansion to 21–23%, signaling demand recovery",
-        "falsifies": "FY28 guidance remains at or below 3% growth, indicating persistent structural headwinds"
+        "catalyst": "Discretionary Spending Resumption",
+        "timing": "H2 FY27 (Oct 2026 - Mar 2027)",
+        "kpi": "Deal pipeline conversion rates and project approval cycle times",
+        "confirms": "Management commentary on shortened sales cycles and increased discretionary project approvals",
+        "falsifies": "Continued commentary on client caution, budget freezes, or project deferrals into FY28"
       }
     ],
     "downside_triggers": [
-      "Further guidance cuts below 1.5% revenue growth if macro uncertainty deepens or additional large client-specific issues emerge beyond the European manufacturing impact already disclosed",
-      "Operating margin compression below 20% due to inability to offset pricing pressure and volume softness through cost optimization, particularly if wage inflation accelerates in India",
-      "Large deal pipeline conversion deteriorates with TCV falling below $2B per quarter for multiple consecutive quarters, indicating structural demand weakness beyond cyclical factors",
-      "AI-driven revenue deflation accelerates beyond current expectations, with clients canceling or significantly downsizing existing multi-year contracts to re-platform on AI-native solutions",
-      "Manufacturing vertical (particularly European automotive) experiences deeper contraction beyond 1% revenue impact, spreading to other geographies or adjacent industrial segments"
+      "Revenue growth falls below 1.5% guidance floor due to further manufacturing sector deterioration or broader macro weakness, forcing another guidance cut",
+      "Operating margins compress below 20% as pricing pressure from AI-driven automation outpaces cost reduction efforts and utilization rates decline",
+      "Large deal wins decelerate below $3B quarterly TCV or signed deals fail to convert to revenue within expected timeframes, indicating structural demand issues",
+      "Major client bankruptcies or project cancellations in key verticals (financial services, retail, manufacturing) trigger revenue write-downs and margin pressure",
+      "Competitive market share losses accelerate as Accenture, TCS, or new AI-native competitors win deals at Infosys's expense, evidenced by declining win rates or client defections"
     ]
   },
   "concall": {
-    "available": true,
-    "period": "Q1 FY2027",
-    "date": "July 2026",
-    "highlights": [
-      {
-        "theme": "Revenue Guidance Downgrade",
-        "quote": "With our Q1 results and a view for the rest of the financial year, we are changing our revenue growth guidance to 1.5% to 3% Y-on-Y growth in constant currency terms.",
-        "speaker": "Salil Parekh, CEO",
-        "date": "July 2026",
-        "source": "Concall Jul 2026",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-        "source_id": "S3"
-      },
-      {
-        "theme": "AI Revenue Acceleration",
-        "quote": "Our AI services revenue was 8.2% of overall revenue... This is growing at double-digit Q-on-Q over the last several quarters.",
-        "speaker": "Salil Parekh, CEO",
-        "date": "July 2026",
-        "source": "Concall Jul 2026",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-        "source_id": "S3"
-      },
-      {
-        "theme": "Topaz Fabric Differentiation",
-        "quote": "Today on AI, it is important that clients see that their own data remains sovereign to them. And the way we built Topaz Fabric, it allows the clients to do that no matter which model they are using. And that is a very big differentiator we have.",
-        "speaker": "Salil Parekh, CEO",
-        "date": "July 2026",
-        "source": "Concall Jul 2026",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-        "source_id": "S3"
-      },
-      {
-        "theme": "Large Deals and TCV",
-        "quote": "Our large deals were $3.6 bn with a net new of 61%.",
-        "speaker": "Salil Parekh, CEO",
-        "date": "July 2026",
-        "source": "Concall Jul 2026",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-        "source_id": "S3"
-      },
-      {
-        "theme": "Margin Guidance Maintained",
-        "quote": "If you look at the last three-year period, we have been consistently able to hold or improve our margins despite investment in business, whether it is AI, whether it is talent or whether it is sales and marketing and we believe the project will continue to deliver value from pricing, from utilization, etc.",
-        "speaker": "CFO (name not specified in excerpt)",
-        "date": "July 2026",
-        "source": "Concall Jul 2026",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-        "source_id": "S3"
-      },
-      {
-        "theme": "Vertical Performance Divergence",
-        "quote": "On the industries, what we see right now is, for example, Financial Services, we see the growth in that part of our business will be higher than the average growth within the company... We still see, for example, in Retail, some constraints in terms of the growth that we are not yet seeing the pickup in that.",
-        "speaker": "Salil Parekh, CEO",
-        "date": "July 2026",
-        "source": "Concall Jul 2026",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-        "source_id": "S3"
-      },
-      {
-        "theme": "Frontier Engineers Investment",
-        "quote": "We are building a team of frontier engineers to support our client work. Our plan is to have 6,000 frontier engineers over the next few years.",
-        "speaker": "Salil Parekh, CEO",
-        "date": "July 2026",
-        "source": "Concall Jul 2026",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-        "source_id": "S3"
-      },
-      {
-        "theme": "Multiple Headwinds Impacting Growth",
-        "quote": "The multiple reasons on the change in guidance is, first of all, one-off that we had in one of the EURS client, the volumes that were softer with the cascading effect, the ask of productivity from clients and increased competitiveness, competition in pricing that reflected in a lower-than-expected pricing this quarter, which will again have effect on the rest of the year.",
-        "speaker": "Jayesh Sanghrajka, CFO",
-        "date": "July 2026",
-        "source": "Concall Jul 2026",
-        "url": "https://www.bseindia.com/stockinfo/AnnPdfOpen.aspx?Pname=95f8af86-dc92-49dc-a7cf-ecce287f8cce.pdf",
-        "source_id": "S3"
-      }
-    ],
-    "insights": [
-      "The 100-150 bps guidance cut to 1.5-3% signals near-term demand weakness from softer volumes, one-time client impact, pricing pressure, and lower onsite mix—investors should expect muted growth through FY2027 despite AI momentum.",
-      "AI revenue at 8.2% with double-digit sequential growth demonstrates Infosys is successfully monetizing AI services, positioning the company for long-term relevance even as traditional IT services face headwinds.",
-      "Topaz Fabric's data sovereignty and multi-model token optimization capabilities provide a competitive moat in AI services, allowing Infosys to differentiate on both security and cost efficiency as enterprises scale AI deployments.",
-      "Financial Services outperforming while Retail remains weak indicates sector-specific recovery patterns—investors should monitor vertical mix shifts as they will drive overall growth trajectory in coming quarters.",
-      "Maintaining 20-22% margin guidance despite compensation headwinds and pricing pressure demonstrates operational resilience, but sustained margin defense will require continued productivity gains and favorable business mix."
-    ],
-    "tone": "Management tone was cautious and defensive, acknowledging macro uncertainty and multiple growth headwinds while emphasizing AI momentum and strategic investments; the guidance cut reflects a pragmatic reassessment rather than confidence in near-term recovery."
+    "available": false,
+    "highlights": [],
+    "insights": [],
+    "tone": "No concall transcript was harvested."
   },
   "mna": {
     "found": true,
-    "summary": "Infosys completed 5 acquisitions in FY26 (year ended March 31, 2026) worth a total of $808 million (~INR 6,700 cr at typical exchange rates). The company acquired MRE Consulting, The Missing Link Group, Stratus Global, and announced deals for Versent Group (75% stake via JV with Telstra) and Optimum Healthcare IT. These acquisitions strengthen capabilities in energy consulting, cybersecurity, insurance (Guidewire), cloud/digital transformation, and healthcare IT.",
+    "summary": "Infosys made multiple acquisitions in FY26 totaling approximately $808 million (INR ~6,700 crore). Key deals include Stratus (insurance consulting) and MRE Consulting Limited (technology and business consulting). Evidence confirms at least 5 acquisitions in FY26 and 24 total acquisitions historically across various sectors.",
     "deals": [
       {
-        "date": "2025-04-30",
-        "target": "MRE Consulting Ltd.",
-        "what": "Leading Energy and business consulting services company headquartered in Texas, U.S.",
+        "date": "2026",
+        "target": "Stratus",
+        "what": "Leading insurance consulting firm",
         "deal_size": {
           "value": null,
           "available": false,
-          "source": "Annual Report 2026",
+          "source": "Infosys Completes Acquisition of Leading Insurance Consulting ...",
           "date": "2026",
-          "locator": "p.40",
-          "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-          "source_id": "S2",
-          "note": "Deal size not disclosed in annual report"
+          "locator": "Press release title",
+          "url": "https://www.infosys.com/newsroom/press-releases/2026/completes-acquisition-stratus.html",
+          "source_id": "S32",
+          "note": "Deal size not disclosed in available evidence"
         },
-        "payment": "100% partnership interests acquired; payment method not specified",
-        "rationale": "Strengthen capabilities and deepen industry expertise in Energy sector",
+        "payment": "Not disclosed",
+        "rationale": "Insurance consulting capabilities",
         "status": "completed",
-        "source": "Annual Report 2026",
-        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-        "source_id": "S2"
+        "source": "Infosys Completes Acquisition of Leading Insurance Consulting ...",
+        "url": "https://www.infosys.com/newsroom/press-releases/2026/completes-acquisition-stratus.html",
+        "source_id": "S32"
       },
       {
-        "date": "2025-04-30",
-        "target": "The Missing Link Group",
-        "what": "Leading Cybersecurity service providers headquartered in Australia",
+        "date": "Announced",
+        "target": "MRE Consulting Limited",
+        "what": "Technology and business consulting service provider",
         "deal_size": {
           "value": null,
           "available": false,
-          "source": "Annual Report 2026",
-          "date": "2026",
-          "locator": "p.40",
-          "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-          "source_id": "S2",
-          "note": "Deal size not disclosed in annual report"
+          "source": "Infosys - Facebook",
+          "date": null,
+          "locator": "Post text",
+          "url": "https://www.facebook.com/Infosys/posts/infosys-recently-announced-an-agreement-to-acquire-mre-consulting-limited-a-tech/1090574769771381/",
+          "source_id": "S33",
+          "note": "Deal size not disclosed in available evidence"
         },
-        "payment": "100% voting interests acquired; payment method not specified",
-        "rationale": "Strengthen cybersecurity capabilities and expand geographical footprint in Australia",
-        "status": "completed",
-        "source": "Annual Report 2026",
-        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-        "source_id": "S2"
+        "payment": "Not disclosed",
+        "rationale": "Technology and business consulting capabilities",
+        "status": "announced",
+        "source": "Infosys - Facebook",
+        "url": "https://www.facebook.com/Infosys/posts/infosys-recently-announced-an-agreement-to-acquire-mre-consulting-limited-a-tech/1090574769771381/",
+        "source_id": "S33"
       },
       {
-        "date": "Announced during FY26; completed as on date of report",
-        "target": "Stratus Global LLC",
-        "what": "Leading insurance consulting and technology services company with a focus on Guidewire services, headquartered in the United States",
+        "date": "FY26",
+        "target": "Multiple acquisitions (5 total)",
+        "what": "Various technology and consulting firms across IT Services, Digital Transformation Services, and other sectors",
         "deal_size": {
-          "value": 787.5,
+          "value": 6700,
           "available": true,
-          "unit": "INR crore",
+          "unit": "INR crore (approx)",
           "source": "Infosys Make 5 Acquisitions Worth $808 Million In FY26 - YouTube",
-          "date": "2026-03-27",
-          "locator": "Video transcript",
+          "date": "FY26",
+          "locator": "Video title",
           "url": "https://www.youtube.com/watch?v=s43l47BIwoY",
           "source_id": "S31",
-          "note": "$95 million converted at ~INR 82.89/USD"
+          "note": "Converted from $808 million at approximate exchange rate"
         },
-        "payment": "Not specified",
-        "rationale": "Strengthen insurance consulting and Guidewire technology services capabilities",
+        "payment": "Not disclosed",
+        "rationale": "Strategic expansion across multiple sectors and geographies",
         "status": "completed",
-        "source": "Annual Report 2026",
-        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-        "source_id": "S2"
-      },
-      {
-        "date": "Announced during FY26",
-        "target": "Versent Group (75% stake via joint venture with Telstra)",
-        "what": "Australia's leading digital transformation solutions provider and a wholly owned subsidiary of the Telstra Group, delivering cloud and digital transformation services. Comprises Telstra Purple Pty Ltd and represents the integrated operations of Versent, Epicon, Telstra Purple Digital, and associated Cloud Access products.",
-        "deal_size": {
-          "value": null,
-          "available": false,
-          "source": "Annual Report 2026",
-          "date": "2026",
-          "locator": "p.40",
-          "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-          "source_id": "S2",
-          "note": "Deal size not disclosed; structured as joint venture with Infosys acquiring 75% stake"
-        },
-        "payment": "Not specified",
-        "rationale": "Form joint venture with Telstra to strengthen cloud and digital transformation capabilities in Australia",
-        "status": "announced",
-        "source": "Annual Report 2026",
-        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-        "source_id": "S2"
-      },
-      {
-        "date": "Announced during FY26",
-        "target": "Optimum Achieve Holdings, Inc. (including Optimum Healthcare IT, LLC)",
-        "what": "Leading healthcare digital transformation and consulting company headquartered in the United States",
-        "deal_size": {
-          "value": 3854.25,
-          "available": true,
-          "unit": "INR crore",
-          "source": "Infosys Make 5 Acquisitions Worth $808 Million In FY26 - YouTube",
-          "date": "2026-03-27",
-          "locator": "Video transcript",
-          "url": "https://www.youtube.com/watch?v=s43l47BIwoY",
-          "source_id": "S31",
-          "note": "$465 million converted at ~INR 82.89/USD"
-        },
-        "payment": "Not specified",
-        "rationale": "Strengthen healthcare digital transformation and consulting capabilities",
-        "status": "announced",
-        "source": "Annual Report 2026",
-        "url": "https://www.bseindia.com/xml-data/corpfiling/AttachHis/19dd605c-2b6b-4084-8dca-9d578a3eb7a0.pdf",
-        "source_id": "S2"
+        "source": "Infosys Make 5 Acquisitions Worth $808 Million In FY26 - YouTube",
+        "url": "https://www.youtube.com/watch?v=s43l47BIwoY",
+        "source_id": "S31"
       }
     ]
   },
   "estimates": {
     "available": true,
-    "summary": "Street estimates for Infosys Ltd show FY27 consensus revenue of INR 195,000 cr (9.3% growth) and EPS of INR 76.69, with FY28 revenue of INR 202,000 cr (3.7% growth) and EPS of INR 80.04. Analyst price target is INR 1,180 based on 42 analysts. Recent EPS revisions show slight downgrades over 90 days.",
+    "summary": "Street estimates for Infosys Ltd show consensus FY27 revenue of INR 195,000 cr (9.3% growth) and EPS of INR 76.69, with FY28 revenue of INR 202,000 cr (3.7% growth) and EPS of INR 80.04. Analyst target price is INR 1,180 based on 42 analysts. EPS revisions show slight downgrades over 90 days.",
     "forward": [
       {
         "period": "FY27 (2027)",
@@ -727,8 +1964,8 @@
           "available": true,
           "unit": "INR crore",
           "source": "Infosys Limited (INFY.NS) - Yahoo Finance",
-          "date": "2026-10-07",
-          "locator": "Revenue Estimates table, Current Year (2027), Avg. Estimate 1.95T",
+          "date": "2026",
+          "locator": "Revenue Estimates table - Current Year (2027): Avg. Estimate 1.95T INR",
           "url": "https://finance.yahoo.com/quote/INFY.NS/analysis/",
           "source_id": "S38",
           "note": "Converted from INR 1.95 trillion to INR crore; based on 48 analysts"
@@ -738,8 +1975,8 @@
           "available": true,
           "unit": "INR",
           "source": "Infosys Limited (INFY.NS) - Yahoo Finance",
-          "date": "2026-10-07",
-          "locator": "Earnings Estimates table, Current Year (2027), Avg. Estimate 76.69",
+          "date": "2026",
+          "locator": "EPS Estimates table - Current Year (2027): Avg. Estimate 76.69 INR",
           "url": "https://finance.yahoo.com/quote/INFY.NS/analysis/",
           "source_id": "S38",
           "note": "Based on 40 analysts"
@@ -749,11 +1986,11 @@
           "available": true,
           "unit": "%",
           "source": "Infosys Limited (INFY.NS) - Yahoo Finance",
-          "date": "2026-10-07",
-          "locator": "Revenue Estimates table, Current Year (2027), Sales Growth (year/est) 9.28%",
+          "date": "2026",
+          "locator": "Revenue Estimates table - Current Year (2027): Sales Growth (year/est) 9.28%",
           "url": "https://finance.yahoo.com/quote/INFY.NS/analysis/",
           "source_id": "S38",
-          "note": "Year-over-year sales growth estimate"
+          "note": "Revenue growth year-over-year estimate"
         }
       },
       {
@@ -763,8 +2000,8 @@
           "available": true,
           "unit": "INR crore",
           "source": "Infosys Limited (INFY.NS) - Yahoo Finance",
-          "date": "2026-10-07",
-          "locator": "Revenue Estimates table, Next Year (2028), Avg. Estimate 2.02T",
+          "date": "2026",
+          "locator": "Revenue Estimates table - Next Year (2028): Avg. Estimate 2.02T INR",
           "url": "https://finance.yahoo.com/quote/INFY.NS/analysis/",
           "source_id": "S38",
           "note": "Converted from INR 2.02 trillion to INR crore; based on 46 analysts"
@@ -774,8 +2011,8 @@
           "available": true,
           "unit": "INR",
           "source": "Infosys Limited (INFY.NS) - Yahoo Finance",
-          "date": "2026-10-07",
-          "locator": "Earnings Estimates table, Next Year (2028), Avg. Estimate 80.04",
+          "date": "2026",
+          "locator": "EPS Estimates table - Next Year (2028): Avg. Estimate 80.04 INR",
           "url": "https://finance.yahoo.com/quote/INFY.NS/analysis/",
           "source_id": "S38",
           "note": "Based on 40 analysts"
@@ -785,11 +2022,11 @@
           "available": true,
           "unit": "%",
           "source": "Infosys Limited (INFY.NS) - Yahoo Finance",
-          "date": "2026-10-07",
-          "locator": "Revenue Estimates table, Next Year (2028), Sales Growth (year/est) 3.67%",
+          "date": "2026",
+          "locator": "Revenue Estimates table - Next Year (2028): Sales Growth (year/est) 3.67%",
           "url": "https://finance.yahoo.com/quote/INFY.NS/analysis/",
           "source_id": "S38",
-          "note": "Year-over-year sales growth estimate"
+          "note": "Revenue growth year-over-year estimate"
         }
       }
     ],
@@ -797,147 +2034,127 @@
     "target_low": {
       "value": null,
       "available": false,
-      "note": "Not explicitly stated in evidence"
+      "source": "Infosys - INFY - Stock price prediction, stock forecast, Target price, analyst ...",
+      "date": null,
+      "locator": null,
+      "url": "https://trendlyne.com/equity/consensus-estimates/630/INFY/infosys-ltd/",
+      "source_id": "S35",
+      "note": "Target range not disclosed in available evidence"
     },
     "target_mean": {
       "value": 1180,
       "available": true,
       "unit": "INR",
-      "source": "Infosys - INFY - Stock price prediction, stock forecast, Target price, analyst ... (Trendlyne)",
-      "date": "2026-10-07",
-      "locator": "Page header: share price target of Rs 1180 for FY27, based on top 42 analyst calls",
+      "source": "Infosys - INFY - Stock price prediction, stock forecast, Target price, analyst ...",
+      "date": "2026",
+      "locator": "Header section: 'share price target of Rs 1180'",
       "url": "https://trendlyne.com/equity/consensus-estimates/630/INFY/infosys-ltd/",
-      "source_id": "S35"
+      "source_id": "S35",
+      "note": "Based on top 42 analyst calls"
     },
     "target_high": {
       "value": null,
       "available": false,
-      "note": "Not explicitly stated in evidence"
+      "source": "Infosys - INFY - Stock price prediction, stock forecast, Target price, analyst ...",
+      "date": null,
+      "locator": null,
+      "url": "https://trendlyne.com/equity/consensus-estimates/630/INFY/infosys-ltd/",
+      "source_id": "S35",
+      "note": "Target range not disclosed in available evidence"
     },
     "rating": {
       "value": "Hold",
       "available": true,
       "source": "Infosys Ltd. share price target and research reports - Trendlyne.com",
-      "date": "2026-07-24",
-      "locator": "Research Reports section showing Hold ratings from IDBI Capital and Axis",
+      "date": "24 Jul 2026",
+      "locator": "Research Reports section showing multiple 'Hold' ratings from IDBI Capital and Axis",
       "url": "https://trendlyne.com/research-reports/post/INFY/630/infosys-ltd/?page=2&qstime=1775110967",
       "source_id": "S36",
-      "note": "Multiple recent reports show Hold rating"
+      "note": "Multiple recent analyst reports show Hold rating"
     },
     "analysts": {
       "value": 42,
       "available": true,
-      "source": "Infosys - INFY - Stock price prediction, stock forecast, Target price, analyst ... (Trendlyne)",
-      "date": "2026-10-07",
-      "locator": "Page header: based on top 42 analyst calls",
+      "source": "Infosys - INFY - Stock price prediction, stock forecast, Target price, analyst ...",
+      "date": "2026",
+      "locator": "Header section: 'based on top 42 analyst calls'",
       "url": "https://trendlyne.com/equity/consensus-estimates/630/INFY/infosys-ltd/",
-      "source_id": "S35"
+      "source_id": "S35",
+      "note": "Number of analysts providing consensus estimates"
     }
   },
   "risks": {
-    "summary": "Infosys faces material risks from geopolitical uncertainties, client spending caution driven by AI disruption fears, cybersecurity threats, regulatory compliance across multiple jurisdictions, talent retention challenges, and climate-related operational disruptions. The company's ERM framework identifies strategy execution, operational, and legal/compliance risks as primary categories.",
+    "summary": "Infosys faces material risks from AI-driven disruption to traditional IT services, client spending caution, currency volatility, regulatory compliance burdens, and talent retention challenges. The company's revenue growth guidance of 1-3% for FY27 reflects these headwinds. Key downside scenarios include accelerated AI commoditization of core services, prolonged client discretionary spending freeze, and adverse regulatory/tax developments.",
     "register": [
       {
-        "risk": "AI-driven client caution and demand weakness",
-        "evidence": "Annual Report 2025-26 (p.131) identifies 'advances in artificial intelligence' and 'technology upheavals' as significant challenges. Reuters article (Oct 1, 2026) states 'AI pressure, client caution cloud Indian IT earnings in September quarter.' Accenture article notes 'IT consulting business hammered by worries over AI-led disruption.'",
-        "transmission": "Clients delay or reduce IT services spending due to uncertainty about AI's impact on their operations, directly reducing Infosys revenue growth. Lower utilization rates compress margins. FY27 guidance reflects 'cautious growth outlook' per Facebook post.",
+        "risk": "AI-driven disruption and commoditization of traditional IT services",
+        "evidence": "Accenture's October 2026 forecast eased AI disruption fears and lifted IT services stocks, indicating market concern about AI impact. Source S42 (Reuters) notes 'AI pressure, client caution cloud Indian IT earnings' as of October 1, 2026. Source S18 (Seeking Alpha) discusses how 'The Infosys Story Is Shifting As AI Recasts Earnings.' Source S24 notes Infosys has 'a Large-Deal and AI-Services Engine' but traditional outsourcing label persists.",
+        "transmission": "AI automation reduces demand for labor-intensive services (application maintenance, testing, infrastructure management), compressing margins and revenue per employee. Clients may insource AI-enabled capabilities, reducing outsourcing spend. Pricing pressure intensifies as AI tools commoditize routine tasks.",
         "severity": "High",
         "probability": "High",
-        "leading_indicators": "Large deal TCV trends, client discretionary spending patterns, utilization rates, revenue growth guidance revisions, commentary on client decision-making timelines in earnings calls",
-        "mitigants": "Pivot to AI-led services offerings, build AI consulting capabilities, demonstrate ROI of AI implementations to clients, diversify service portfolio beyond traditional IT services, strengthen large deal pipeline"
+        "leading_indicators": "Quarterly revenue growth rates below 3-4% constant currency; declining deal pipeline in traditional services; margin compression beyond normal ranges (sub-20% EBITDA margin); increasing proportion of fixed-price contracts converting to outcome-based pricing; client commentary on AI-driven insourcing.",
+        "mitigants": "Infosys is investing in AI services capabilities and large deal wins ($17.7B in FY24 per S20, $11.6B in FY25 per S22). Building proprietary AI platforms and tools. Repositioning from labor arbitrage to value-added consulting and transformation services. Upskilling workforce in AI/ML technologies."
       },
       {
-        "risk": "Geopolitical shifts and economic uncertainties",
-        "evidence": "Annual Report 2025-26 (p.131) states 'businesses worldwide have faced significant challenges due to geopolitical shifts, economic uncertainties' over the last fiscal year. ERM framework explicitly covers 'regulatory or geopolitical developments' under legal and compliance risks.",
-        "transmission": "Geopolitical tensions (trade wars, sanctions, regional conflicts) disrupt client operations and spending, delay project approvals, create regulatory barriers to cross-border delivery, and increase compliance costs. Currency volatility impacts margins on fixed-price contracts.",
+        "risk": "Client discretionary spending caution and macroeconomic headwinds",
+        "evidence": "Source S27 (Yahoo Finance, India's Infosys) reports 'weak revenue growth as AI-driven caution dents' client spending. Source S28 (Facebook/CNBC) notes '#InfosysADR falls 4.75% after IT major gives cautious FY27 growth outlook.' Source S42 (Reuters) states 'AI pressure, client caution cloud Indian IT earnings in September quarter' as of October 1, 2026. Source S25 (Seeking Alpha) characterizes FY27 as 'Another Low-Single-Digit Growth Year.'",
+        "transmission": "Clients delay or cancel discretionary IT projects during economic uncertainty. Reduced technology budgets lead to lower deal signings and project deferrals. Longer sales cycles and increased scrutiny of ROI extend time-to-revenue. Pricing pressure as clients negotiate harder terms.",
         "severity": "High",
-        "probability": "Medium",
-        "leading_indicators": "Trade policy announcements, visa restrictions, cross-border data flow regulations, client geographic mix shifts, hedging costs, regulatory filing volumes",
-        "mitigants": "Geographic diversification of delivery centers, local hiring in key markets, robust hedging strategies, scenario planning for regulatory changes, strong government relations, flexible delivery models"
+        "probability": "High",
+        "leading_indicators": "Total Contract Value (TCV) of large deals declining quarter-over-quarter; increasing deal cancellation or deferral rates; lengthening sales cycles (days sales outstanding increasing); client commentary on budget freezes; macroeconomic indicators (PMI, GDP growth in key markets US/Europe).",
+        "mitigants": "Diversification across industries and geographies (Source S6 shows revenue by region). Focus on cost optimization and efficiency services that remain relevant in downturns. Strong balance sheet provides resilience. Long-term client relationships and multi-year contracts provide revenue visibility."
       },
       {
-        "risk": "Cybersecurity attacks and system failures",
-        "evidence": "Annual Report 2025-26 (p.131) explicitly lists 'cybersecurity risks' as a significant challenge and 'cybersecurity attacks' under operational risks that could cause 'business activity disruptions.' Governance page emphasizes 'integrated compliance' framework.",
-        "transmission": "Successful cyberattack causes data breaches, service disruptions, client contract terminations, regulatory penalties, reputational damage, and litigation costs. System failures halt delivery operations, triggering SLA penalties and revenue loss.",
-        "severity": "High",
+        "risk": "Currency volatility and foreign exchange exposure",
+        "evidence": "Source S39 (20-F SEC filing) extensively details derivative instruments for currency hedging including 'AUD option contracts,' 'CHF forward contracts,' 'EUR forward contracts' as of March 31, 2026. The filing shows significant derivative assets and liabilities related to cash flow hedges, indicating material FX exposure. Infosys earns majority revenue in USD/EUR but has significant INR cost base.",
+        "transmission": "INR appreciation against USD/EUR reduces rupee-equivalent revenues and margins. Hedging costs increase during volatile periods. Unhedged exposures create earnings volatility. Translation losses impact reported financials. Competitive disadvantage if currency moves favor competitors in other geographies.",
+        "severity": "Medium",
         "probability": "Medium",
-        "leading_indicators": "Frequency of attempted attacks, vulnerability assessment results, incident response times, security audit findings, client security questionnaire outcomes, cyber insurance premiums",
-        "mitigants": "Multi-layered security architecture, 24/7 security operations center, regular penetration testing, employee security training, incident response protocols, cyber insurance, ISO 27001 certification, client-specific security controls"
+        "leading_indicators": "USD/INR and EUR/INR exchange rate movements (>5% quarterly volatility); increasing hedging costs visible in finance costs; management commentary on FX impact in earnings calls; derivative mark-to-market losses in OCI; widening bid-ask spreads in FX markets.",
+        "mitigants": "Comprehensive hedging program using forwards, options, and other derivatives as evidenced in 20-F filing (S39). Natural hedges through overseas expenses and acquisitions. Pricing adjustments in client contracts with FX escalation clauses. Diversified revenue currency mix reduces single-currency concentration."
       },
       {
-        "risk": "Talent retention and human capital challenges",
-        "evidence": "Annual Report 2025-26 (p.131) identifies risks 'affecting our policies, procedures, people and systems' under operational category. ERM framework covers 'human rights' risks. IT services industry faces intense competition for AI and digital skills.",
-        "transmission": "High attrition increases recruitment and training costs, disrupts project delivery, erodes institutional knowledge, weakens client relationships, and compresses margins. Inability to attract AI/digital talent limits growth in high-margin services.",
+        "risk": "Regulatory compliance and tax litigation exposure",
+        "evidence": "Source S41 (Infosys Governance page) emphasizes 'Integrated Compliance' framework. Source S40 (Form 20-F 2024) and S39 (20-F 2026) are comprehensive regulatory filings indicating significant compliance obligations across multiple jurisdictions. As a global company operating in 50+ countries, Infosys faces complex tax, labor, data privacy, and securities regulations.",
+        "transmission": "Adverse tax rulings or transfer pricing adjustments increase effective tax rate and reduce net income. Regulatory penalties or fines impact profitability. Compliance costs (legal, audit, systems) increase operating expenses. Reputational damage from violations affects client relationships and talent attraction. Litigation provisions reduce distributable earnings.",
+        "severity": "Medium",
+        "probability": "Medium",
+        "leading_indicators": "Disclosure of new tax assessments or disputes in quarterly filings; increasing provisions for contingent liabilities; regulatory investigations or inquiries announced; changes in tax laws in major jurisdictions (India, US, EU); management discussion of compliance investments; audit qualifications or internal control weaknesses.",
+        "mitigants": "Robust compliance framework and governance structure (S41). Dedicated legal and tax teams. Regular audits and internal controls. Engagement with regulators and tax authorities. Provisions for known contingencies. Insurance coverage for certain risks. Proactive tax planning and transfer pricing documentation."
+      },
+      {
+        "risk": "Talent retention and wage inflation in competitive labor market",
+        "evidence": "Source S43 (SEC Filing on stock incentives) details 'stock incentives acquired by key managerial personnel under its stock option plans,' indicating reliance on equity compensation for retention. Source S39 (20-F) shows employee stock option plans including '2015 Stock Incentive Compensation Plan' with significant grants. IT services industry faces high attrition and wage pressure, particularly for AI/digital skills.",
+        "transmission": "High attrition increases recruitment and training costs, reducing margins. Wage inflation to retain talent compresses operating leverage. Loss of key client relationships or project knowledge disrupts delivery. Increased subcontracting costs if internal capacity insufficient. Dilution from equity compensation reduces EPS growth.",
         "severity": "Medium",
         "probability": "High",
-        "leading_indicators": "Quarterly attrition rates, time-to-fill for critical roles, employee engagement scores, compensation benchmarking data, training hours per employee, internal promotion rates",
-        "mitigants": "Competitive compensation including stock incentives (per SEC 6-K filing), comprehensive training programs, career development paths, flexible work arrangements, strong employer brand, leadership development, retention bonuses for critical skills"
+        "leading_indicators": "Quarterly attrition rates exceeding 15-20%; increasing employee costs as percentage of revenue; rising subcontractor utilization rates; declining employee satisfaction scores; competitive salary benchmarking data; increasing equity compensation expense; management commentary on talent challenges.",
+        "mitigants": "Comprehensive stock incentive plans for key personnel (S43). Investments in employee training and upskilling programs. Competitive compensation and benefits. Strong employer brand (recognized as top employer). Career development opportunities. Flexible work arrangements. Automation to reduce dependency on headcount growth."
       },
       {
-        "risk": "Regulatory compliance and litigation exposure",
-        "evidence": "Annual Report 2025-26 (p.131) defines legal and compliance risks as 'threats posed to our financial, organizational, or reputational standing resulting from litigations, non-conformance with laws, regulatory or geopolitical developments, codes of conduct and contractual compliances.' Form 20-F filing indicates multi-jurisdiction regulatory obligations.",
-        "transmission": "Non-compliance with data privacy laws (GDPR, local regulations), labor laws, tax regulations, or contractual terms triggers fines, legal costs, project delays, client contract losses, and reputational damage. Litigation diverts management attention and resources.",
+        "risk": "Acquisition integration and M&A execution risk",
+        "evidence": "Source S30 (Tracxn) lists '24 Acquisitions by Infosys' as of October 2026. Source S31 (YouTube) reports 'Infosys Make 5 Acquisitions Worth $808 Million In FY26.' Source S32 announces 'Infosys Completes Acquisition of Leading Insurance Consulting' (Stratus). Source S33 (Facebook) mentions 'agreement to acquire MRE Consulting Limited.' Active M&A strategy creates integration risks.",
+        "transmission": "Overpayment for acquisitions destroys shareholder value. Integration failures lead to revenue attrition, talent loss, and cost overruns. Cultural misalignment disrupts operations. Goodwill impairments reduce book value and earnings. Distraction of management from core business. Failure to achieve revenue or cost synergies.",
         "severity": "Medium",
         "probability": "Medium",
-        "leading_indicators": "Regulatory audit findings, compliance training completion rates, legal notice volumes, changes in data privacy laws, client contract dispute frequency, regulatory filing timeliness",
-        "mitigants": "Integrated compliance framework (per Governance page), dedicated legal and compliance teams, regular training, proactive regulatory engagement, contract review processes, insurance coverage, strong governance mechanisms per ERM framework"
+        "leading_indicators": "Goodwill impairment charges in quarterly results; acquired company revenue declining post-acquisition; key talent departures from acquired entities; integration cost overruns vs. plan; delayed synergy realization; client losses at acquired businesses; management turnover in acquired units.",
+        "mitigants": "Experienced M&A team with track record of 24+ acquisitions (S30). Disciplined valuation and due diligence processes. Structured integration playbooks. Retention incentives for key acquired talent. Phased integration approach. Focus on strategic fit and capability gaps. Post-merger integration teams and governance."
       },
       {
-        "risk": "Climate change and natural calamity disruptions",
-        "evidence": "Annual Report 2025-26 (p.131) explicitly lists 'climate change events' and 'natural calamities' as operational risks causing 'business activity disruptions.' ERM framework includes 'environmental aspects' in horizon scanning.",
-        "transmission": "Extreme weather events (floods, cyclones, heat waves) disrupt delivery center operations, damage infrastructure, cause employee safety issues, and halt client service delivery. Transition risks from climate regulations increase operating costs.",
+        "risk": "Concentration risk in key client relationships and geographies",
+        "evidence": "Source S6 (Bullfincher) provides 'Infosys Limited's Revenue by Region' data. Source S8 (CSIMarket) describes 'Business Segments.' While specific concentration metrics are not disclosed in provided sources, IT services firms typically have revenue concentration in top clients and North America/Europe regions. Any major client loss or regional downturn disproportionately impacts results.",
+        "transmission": "Loss of top client(s) creates immediate revenue gap difficult to replace. Geographic concentration (e.g., North America) exposes company to regional recessions. Industry concentration (e.g., Financial Services) amplifies sector-specific downturns. Pricing pressure from large clients with negotiating leverage. Regulatory changes in key markets affect multiple clients simultaneously.",
         "severity": "Medium",
-        "probability": "Medium",
-        "leading_indicators": "Weather pattern changes in delivery center locations, climate risk assessments, business continuity test results, infrastructure resilience investments, carbon pricing trends, ESG rating changes",
-        "mitigants": "Geographic diversification of delivery centers, business continuity and disaster recovery plans, remote work capabilities, infrastructure hardening, renewable energy adoption, climate risk insurance, ESG governance framework"
-      },
-      {
-        "risk": "Supply chain disruptions",
-        "evidence": "Annual Report 2025-26 (p.131) states 'supply chain disruptions' as one of the significant challenges faced by businesses worldwide over the last fiscal year, impacting operations and decision-making.",
-        "transmission": "Disruptions in hardware supply chains delay client project implementations. Vendor failures impact service delivery. Semiconductor shortages affect clients in manufacturing and automotive sectors, reducing their IT spending and project pipelines.",
-        "severity": "Low",
-        "probability": "Medium",
-        "leading_indicators": "Vendor performance metrics, hardware lead times, client industry supply chain health, alternative vendor availability, inventory levels of critical components",
-        "mitigants": "Diversified vendor base, strategic partnerships with multiple suppliers, early warning systems for supply chain issues, flexible project delivery models, client communication protocols for delays"
+        "probability": "Low",
+        "leading_indicators": "Top 10 client revenue concentration increasing; single client exceeding 5-10% of revenue; geographic revenue concentration above 60% in one region; client-specific revenue declining sharply; major client announcing insourcing or vendor consolidation; industry-specific headwinds (e.g., banking crisis).",
+        "mitigants": "Diversification strategy across industries and geographies (S6, S8). Large client base reduces single-client dependency. Multi-year contracts provide revenue stability. Cross-selling and account mining to deepen relationships. New client acquisition focus. Geographic expansion into emerging markets. Industry vertical diversification."
       }
     ],
     "downside_scenarios": [
       {
-        "name": "Severe AI-driven demand collapse",
-        "trigger": "Widespread client adoption of generative AI tools leads to 30-40% reduction in traditional IT services demand as clients automate tasks previously outsourced. Concurrent economic recession reduces discretionary IT spending.",
-        "impact": "Revenue declines 15-20% over 2 years as large deal conversions stall and renewals compress. EBITDA margin contracts 400-500 bps due to underutilization and pricing pressure. Market cap falls 30-40%. Forced workforce reductions of 50,000-70,000 employees. Credit rating downgrade.",
-        "probability": {
-          "value": 15,
-          "available": true,
-          "unit": "%",
-          "source": "Analyst reasoning",
-          "date": null,
-          "locator": null,
-          "url": null,
-          "source_id": "S44",
-          "note": "Based on severity of AI disruption concerns in Reuters and Accenture articles, combined with historical IT services downturns. Low probability given Infosys scale and diversification, but material impact if occurs."
-        }
-      },
-      {
-        "name": "Major cybersecurity breach with client data loss",
-        "trigger": "Sophisticated cyberattack penetrates Infosys systems, exfiltrating sensitive client data across multiple accounts. Breach remains undetected for weeks, affecting Fortune 500 clients in regulated industries (financial services, healthcare).",
-        "impact": "Immediate client contract terminations worth $2-3 billion in annual revenue. Regulatory fines of $500-1000 crore across jurisdictions. Litigation costs and settlements of $1000-2000 crore. Reputational damage causes 20-30% decline in new deal wins for 12-18 months. Stock price drops 25-35%.",
-        "probability": {
-          "value": 10,
-          "available": true,
-          "unit": "%",
-          "source": "Analyst reasoning",
-          "date": null,
-          "locator": null,
-          "url": null,
-          "source_id": "S45",
-          "note": "Cybersecurity explicitly identified as material risk in Annual Report. Industry precedents show large-scale breaches occur but strong security controls reduce probability. Impact would be severe given client concentration in regulated sectors."
-        }
-      },
-      {
-        "name": "Geopolitical crisis disrupts cross-border delivery model",
-        "trigger": "Major geopolitical conflict or trade war leads to severe visa restrictions, data localization mandates, and cross-border service barriers between India and key markets (US, Europe). Concurrent regulatory crackdown on offshore IT services.",
-        "impact": "Forced restructuring of delivery model requires $3000-5000 crore investment in local hiring and infrastructure over 2-3 years. Gross margin compression of 600-800 bps due to higher local labor costs. Revenue growth stalls for 2-3 quarters during transition. 15-20% workforce reallocation. Client attrition of 5-8% due to service disruption.",
+        "name": "Accelerated AI Commoditization of Core Services",
+        "trigger": "Rapid advancement and adoption of generative AI tools by clients for application development, maintenance, and testing leads to 30-40% reduction in labor requirements for traditional IT services over 2-3 years. Major clients announce aggressive AI-driven insourcing initiatives.",
+        "impact": "Revenue growth turns negative (-5% to -10% annually) as traditional services decline faster than new AI services ramp. EBITDA margin compresses 500-700 bps to 15-18% range due to pricing pressure and stranded capacity. Market cap declines 30-40% as growth multiple contracts. Forced workforce restructuring and asset write-downs. PAT could decline from INR 29,474 cr (FY26E) to INR 20,000-22,000 cr range.",
         "probability": {
           "value": 20,
           "available": true,
@@ -946,8 +2163,40 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S46",
-          "note": "Geopolitical shifts explicitly cited as significant challenge in Annual Report p.131. Rising protectionism and data sovereignty trends increase probability. Infosys has some mitigation through existing local presence but remains vulnerable to sudden policy shifts."
+          "source_id": "S20",
+          "note": "Probability reflects high industry awareness and mitigation efforts underway, but material risk given technology disruption pace. Sources S18, S24, S27, S42 document ongoing AI pressure."
+        }
+      },
+      {
+        "name": "Prolonged Client Discretionary Spending Freeze",
+        "trigger": "Global recession or severe economic downturn in US/Europe leads to 18-24 month freeze on discretionary IT spending. Clients cut technology budgets 20-30% and defer all non-critical projects. Large deal signings collapse.",
+        "impact": "Revenue declines 8-12% in FY27-28 as project deferrals and cancellations mount. TCV of large deals falls below $8-10B annually (vs. $17.7B in FY24). Utilization drops to 70-75% range, forcing bench costs and layoffs. EBITDA margin falls to 18-20% despite cost actions. Free cash flow declines 25-30%. PAT could fall to INR 22,000-24,000 cr range. Stock price declines 25-35% from current levels.",
+        "probability": {
+          "value": 25,
+          "available": true,
+          "unit": "%",
+          "source": "Analyst reasoning",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S21",
+          "note": "Moderate probability given current client caution documented in S25, S27, S28, but not base case. Depends on macroeconomic trajectory and severity of potential recession."
+        }
+      },
+      {
+        "name": "Adverse Regulatory/Tax Ruling and Compliance Crisis",
+        "trigger": "Major adverse tax ruling in India or US (e.g., transfer pricing adjustment, permanent establishment determination) results in INR 5,000-8,000 cr liability. Concurrent data privacy violation or compliance breach leads to regulatory penalties and client contract terminations.",
+        "impact": "One-time charge of INR 5,000-8,000 cr reduces book value and triggers credit rating review. Ongoing effective tax rate increases 300-500 bps, reducing net margins. Compliance costs increase INR 500-1,000 cr annually. Reputational damage leads to 5-10% revenue attrition over 12-18 months. Stock price declines 20-30%. PAT reduced by INR 3,000-5,000 cr in year of charge, with ongoing INR 1,500-2,000 cr annual impact from higher tax rate.",
+        "probability": {
+          "value": 15,
+          "available": true,
+          "unit": "%",
+          "source": "Analyst reasoning",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "S22",
+          "note": "Lower probability given strong compliance framework (S41) and no current disclosed material disputes, but tail risk given complex multi-jurisdictional operations and regulatory environment."
         }
       }
     ]
@@ -957,35 +2206,35 @@
       {
         "check": "Issuer↔ticker match",
         "status": "pass",
-        "detail": "Requested ticker INFY matches Screener-resolved entity 'Infosys Ltd' and Annual Report confirms 'Infosys Limited' (CIN L85110KA1981PLC013115). Source: S2 p.142, S1."
+        "detail": "Requested ticker INFY and company name 'Infosys Ltd' match Screener-resolved entity 'Infosys Ltd' at https://www.screener.in/company/INFY/consolidated/"
       },
       {
         "check": "Primary listing",
         "status": "pass",
-        "detail": "NSE and BSE listing confirmed. Annual Report states equity shares listed on BSE Limited and National Stock Exchange of India Limited. Source: S2 p.142 section 10."
+        "detail": "NSE listing confirmed via Screener page (INFY ticker) and market cap quoted in INR crore; BSE listing also confirmed via multiple BSE filing URLs in sources S2-S5"
       },
       {
         "check": "Consolidated vs standalone",
         "status": "pass",
-        "detail": "Consolidated basis confirmed. Annual Report states 'The disclosures under this report are made on a consolidated basis, unless otherwise specified.' Screener URL is /consolidated/. Source: S2 p.142 section 13, S1."
+        "detail": "Screener URL explicitly shows '/consolidated/' path; all financials are on consolidated basis per S1"
       },
       {
         "check": "FY alignment",
         "status": "pass",
-        "detail": "Indian fiscal year (Apr-Mar) confirmed. Annual Report section 9 states 'Financial year for which reporting is being done April 2025 - March 2026'. Screener data shows Mar 2015 through Mar 2026 periods. Source: S2 p.142 section 9, S1."
+        "detail": "All periods in Screener data labeled 'Mar 2015' through 'Mar 2026' confirm Indian fiscal year (Apr–Mar) basis; consistent across P&L and Balance Sheet"
       },
       {
         "check": "Restatements",
         "status": "Not available",
-        "detail": "No restatement information found in the provided evidence. Annual Report excerpt does not mention restatements of prior periods."
+        "detail": "No restatement of prior periods explicitly noted in the provided Screener extract or source metadata"
       },
       {
         "check": "Corporate actions",
-        "status": "Not available",
-        "detail": "No recent bonus/split/buyback information found in the provided evidence. Face value is ₹5.00 per Screener, but no corporate action dates or details are available in the excerpts."
+        "status": "warn",
+        "detail": "Face value shown as ₹5.00; historical equity capital shows changes (e.g., Mar 2015: 572 cr to Mar 2016: 1,144 cr suggests bonus/split; Mar 2019: 2,170 cr). Recent periods (Mar 2024-2026) show minor equity changes (2,071→2,073→2,024 cr) but no explicit bonus/split/buyback disclosure in provided evidence. Dividend payout ratios high (66-73% recent years) but no buyback confirmation."
       }
     ],
-    "coverage_note": "High confidence on entity match, listing, consolidated basis, and FY alignment (all pass). No evidence available for restatements or recent corporate actions affecting per-share figures."
+    "coverage_note": "High confidence: issuer/ticker match, listing, consolidation basis, and FY alignment all verified. Restatement data not available in evidence. Corporate actions flag raised due to historical equity capital changes and recent minor fluctuations without explicit disclosure in provided extracts."
   },
   "sources": [
     {
@@ -1350,6 +2599,174 @@
     },
     {
       "id": "S46",
+      "title": "Analyst reasoning",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S2",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S3",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S4",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S5",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S6",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S7",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S8",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S9",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S10",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S11",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S12",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S13",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S14",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S15",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S16",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S17",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S18",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S19",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S20",
+      "title": "Analyst reasoning",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S21",
+      "title": "Analyst reasoning",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S22",
       "title": "Analyst reasoning",
       "type": "other",
       "date": null,
