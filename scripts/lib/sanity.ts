@@ -56,12 +56,17 @@ export function sanityCheck(report: CompanyReport): string[] {
   checkPeriod(report.financials?.latest_fy, warnings);
   for (const y of report.financials?.history ?? []) checkYear(y, warnings);
 
-  // Segment mix should sum to ~100 (allow 85–115 for rounding / "others").
-  const segPct = (report.business?.segments ?? [])
-    .map((s) => (s.pct_revenue?.available ? (s.pct_revenue.value ?? 0) : 0))
-    .reduce((a, b) => a + b, 0);
+  // Segment & geography mixes should each sum to ~100 (allow 85–115 for rounding /
+  // "others"). A near-zero sum means the names came through but the split didn't.
+  const sumPct = (rows: { pct_revenue?: Cited<number> }[]): number =>
+    rows.map((r) => (r.pct_revenue?.available ? (r.pct_revenue.value ?? 0) : 0)).reduce((a, b) => a + b, 0);
+  const segPct = sumPct(report.business?.segments ?? []);
   if (report.business?.segments?.length && (segPct < 85 || segPct > 115)) {
     warnings.push(`segment revenue mix sums to ${segPct.toFixed(0)}% (expected ~100%)`);
+  }
+  const geoPct = sumPct(report.business?.geographies ?? []);
+  if (report.business?.geographies?.length && (geoPct < 85 || geoPct > 115)) {
+    warnings.push(`geography revenue mix sums to ${geoPct.toFixed(0)}% (expected ~100%)`);
   }
 
   // Peer percentages / multiples shouldn't be absurd.

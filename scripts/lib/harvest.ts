@@ -30,7 +30,15 @@ const MAX_AR_CHARS = 2_500_000;
 const MAX_CONCALL_CHARS = 500_000;
 const MAX_PRESENTATION_CHARS = 400_000;
 const CONCALL_COUNT = 2;
-const MAX_SCREENER_TEXT = 40_000;
+// A ceiling, not a target: the WHOLE Screener page (pros/cons, full multi-year
+// P&L / balance-sheet / cash-flow / ratios / quarters / shareholding / growth
+// ranges) must fit so the fact sheet, financials and trends never lose rows to
+// truncation. Screener scraping is free, so this is generous on purpose.
+const MAX_SCREENER_TEXT = 120_000;
+// Deep-fetch the top N peers by Screener's (cap-sorted) peer order, and cap each
+// peer's extracted ratios text — so 6 peers add ~a few KB, not 6 full pages.
+const MAX_PEERS = 6;
+const MAX_PEER_RATIOS_CHARS = 2500;
 
 const sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms));
 
@@ -61,6 +69,10 @@ export interface HarvestResult {
   screenerText: string;
   /** Peer table rendered as text (Screener's own peer comparison), if present. */
   peersText: string;
+  /** Per-peer full ratios, each peer's OWN Screener page rendered to text. The
+   *  Screener peer table only carries ~4 columns; the full ratios (P/E, ROE,
+   *  ROCE, 5-yr growth, …) live on each peer's page, so we deep-fetch the top ones. */
+  peerRatiosText: string;
   annualReportText: string;
   annualReportName?: string;
   annualReportUrl?: string;
@@ -146,7 +158,16 @@ async function openSession(): Promise<Session> {
     },
     async download(url) {
       await polite();
-      const resp = await context.request.get(url, { timeout: NAV_TIMEOUT_MS });
+      // Browser-like headers: external hosts (notably BSE's AnnPdfOpen, which serves
+      // most concall transcripts) reject bare requests but return the PDF with a
+      // referer + pdf Accept. Harmless for Screener's own downloads.
+      const resp = await context.request.get(url, {
+        timeout: NAV_TIMEOUT_MS,
+        headers: {
+          accept: "application/pdf,application/octet-stream,*/*",
+          referer: `${SCREENER_BASE}/`,
+        },
+      });
       if (!resp.ok()) return { ok: false, status: resp.status() };
       return {
         ok: true,
@@ -213,6 +234,20 @@ function tableToText($: cheerio.CheerioAPI, sectionId: string, heading: string):
   return `## ${heading}\nPeriods: ${periods.join(" | ")}\n${lines.join("\n")}`;
 }
 
+/** Screener's machine-generated Pros & Cons (#analysis) — a high-signal summary
+ *  (debt-free / net-cash, ROE track record, dividend, red flags). */
+function analysisToText($: cheerio.CheerioAPI): string {
+  const grab = (sel: string, label: string): string => {
+    const items = $(`#analysis ${sel} li`)
+      .toArray()
+      .map((li) => clean($(li).text()))
+      .filter(Boolean);
+    return items.length ? `${label}:\n- ${items.join("\n- ")}` : "";
+  };
+  const blocks = [grab(".pros", "Pros"), grab(".cons", "Cons")].filter(Boolean);
+  return blocks.length ? `## Pros & Cons (Screener analysis)\n${blocks.join("\n")}` : "";
+}
+
 function screenerToText($: cheerio.CheerioAPI): string {
   const parts: string[] = [];
   const ratios: string[] = [];
@@ -222,6 +257,9 @@ function screenerToText($: cheerio.CheerioAPI): string {
     if (name) ratios.push(`${name}: ${value}`);
   });
   if (ratios.length) parts.push(`## Key ratios\n${ratios.join("\n")}`);
+
+  const analysis = analysisToText($);
+  if (analysis) parts.push(analysis);
 
   for (const [id, h] of [
     ["profit-loss", "Profit & Loss"],
@@ -250,7 +288,79 @@ function screenerToText($: cheerio.CheerioAPI): string {
     if (rows.length) parts.push(`## Shareholding\n${rows.join("\n")}`);
   }
 
+  const ranges = rangesToText($);
+  if (ranges) parts.push(ranges);
+
   return parts.join("\n\n").slice(0, MAX_SCREENER_TEXT);
+}
+
+/** Screener's compounded-growth range tables (sales/profit growth, ROE) — the
+ *  only place the 5-yr sales & profit growth figures are rendered. */
+function rangesToText($: cheerio.CheerioAPI): string {
+  const blocks = $(".ranges-table")
+    .toArray()
+    .map((t) => {
+      const title = clean($(t).find("th").first().text());
+      const rows = $(t)
+        .find("tr")
+        .toArray()
+        .map((tr) => {
+          const tds = $(tr).find("td").toArray().map((td) => clean($(td).text()));
+          return tds.length >= 2 ? `${tds[0]} ${tds[1]}` : "";
+        })
+        .filter(Boolean);
+      return title && rows.length ? `${title}: ${rows.join(", ")}` : "";
+    })
+    .filter(Boolean);
+  return blocks.length ? `## Growth ranges\n${blocks.join("\n")}` : "";
+}
+
+/** Compact ratios block for ONE peer's own Screener page: the top-ratios (P/E,
+ *  ROCE, ROE, …), the compounded-growth ranges (5-yr sales/profit growth) and the
+ *  multi-year ratios table. Capped so six peers stay a few KB, not six full pages. */
+function screenerRatiosToText($: cheerio.CheerioAPI, label: string): string {
+  const parts: string[] = [`### ${label}`];
+  const ratios: string[] = [];
+  $("#top-ratios li").each((_, li) => {
+    const name = clean($(li).find(".name").text());
+    const value = clean($(li).find(".value").text()) || clean($(li).find(".number").text());
+    if (name) ratios.push(`${name}: ${value}`);
+  });
+  if (ratios.length) parts.push(ratios.join(" | "));
+  const ranges = rangesToText($);
+  if (ranges) parts.push(ranges);
+  const rt = tableToText($, "ratios", "Ratios");
+  if (rt) parts.push(rt);
+  return parts.join("\n").slice(0, MAX_PEER_RATIOS_CHARS);
+}
+
+// Index / benchmark pseudo-companies Screener lists under "Part of" (#benchmarks),
+// never real peers — excluded defensively in case one appears in the table.
+const INDEX_SYMBOL_RE = /^(NIFTY|SENSEX|BANKNIFTY|CNX|NV\d|NI\d|LIX|NFT|NFTY|NY\d|NQ|LMIDCAP|ENHANCE|NITOP|NTY)/i;
+
+/** Peer company page URLs from the (JS-rendered) peer COMPARISON TABLE — each peer
+ *  name cell links to /company/<X>/. ONLY the table: the #benchmarks block above it
+ *  is a long list of index links (NIFTY/SENSEX/…) that must not be mistaken for
+ *  peers. Deduped, subject excluded, in the table's (market-cap-sorted) order. */
+function peerLinks($: cheerio.CheerioAPI, selfUrl: string, limit: number): string[] {
+  const self = selfUrl.replace(/\/consolidated\/?$/, "/").replace(/\/+$/, "/");
+  const seen = new Set<string>();
+  const out: string[] = [];
+  $("#peers")
+    .find("table")
+    .first()
+    .find("a[href^='/company/']")
+    .each((_, a) => {
+      const href = $(a).attr("href") || "";
+      // Keep only a bare company URL (/company/XXX/ or /company/XXX/consolidated/).
+      const m = href.match(/^\/company\/([^/]+)\/(consolidated\/)?$/);
+      if (!m || INDEX_SYMBOL_RE.test(m[1])) return;
+      const url = absolutize(`/company/${m[1]}/`);
+      if (url === self || seen.has(url)) return;
+      seen.add(url);
+      out.push(url);
+    });
+  return out.slice(0, limit);
 }
 
 /** Screener's own peer-comparison table, rendered to text (if present). */
@@ -286,33 +396,41 @@ function annualReportLink($: cheerio.CheerioAPI): { name: string; url: string } 
 }
 
 function concallTranscriptLinks($: cheerio.CheerioAPI, limit: number): { name: string; url: string; date: string | null }[] {
+  // Screener renders each concall row as <li> with a period <div> and chips:
+  // <a class="button-chip" title="Raw Transcript">Transcript</a> (+ AI Summary / PPT / REC).
   const container = $(".documents.concalls, .concalls").first();
-  if (!container.length) return [];
+  const scope = container.length ? container : $("#documents");
+  if (!scope.length) return [];
   const out: { name: string; url: string; date: string | null }[] = [];
-  container
+  scope
     .find("li")
     .toArray()
     .forEach((li) => {
       const $li = $(li);
       const period =
-        clean($li.find(".ink-600, .font-weight-500, .concall-title").first().text()) ||
+        clean($li.find(".ink-600, .font-weight-500, .nowrap, .concall-title").first().text()) ||
         clean($li.contents().first().text());
-      const transcript = $li
-        .find("a[href]")
-        .toArray()
-        .find((a) => /transcript/i.test(clean($(a).text())));
+      const anchors = $li.find("a[href]").toArray();
+      const isT = (a: (typeof anchors)[number]) =>
+        /transcript/i.test(clean($(a).text())) || /transcript/i.test($(a).attr("title") || "");
+      // Prefer a Screener-hosted transcript (most reliably downloadable); else any
+      // transcript anchor (usually a BSE/NSE-hosted PDF).
+      const transcript =
+        anchors.find((a) => isT(a) && /screener\.in/i.test($(a).attr("href") || "")) ||
+        anchors.find(isT);
       const href = transcript ? $(transcript).attr("href") : undefined;
       if (href) out.push({ name: `Concall ${period}`.trim(), url: absolutize(href), date: period || null });
     });
   return out.slice(0, limit);
 }
 
-/** Newest investor-presentation (PPT) link from the Documents section, if any. */
+/** Newest investor-presentation / fact-sheet (PPT) link from the Documents /
+ *  Concalls section, if any — the segment & geography mix usually lives here. */
 function presentationLink($: cheerio.CheerioAPI): { name: string; url: string } | undefined {
   const link = $(".documents a[href], .concalls a[href]")
     .toArray()
     .map((a) => ({ name: clean($(a).text()), href: $(a).attr("href") || "" }))
-    .find((l) => l.href && /ppt|presentation/i.test(`${l.name} ${l.href}`));
+    .find((l) => l.href && /ppt|presentation|fact\s*sheet|factsheet/i.test(`${l.name} ${l.href}`));
   return link ? { name: link.name || "Investor presentation", url: absolutize(link.href) } : undefined;
 }
 
@@ -342,9 +460,10 @@ function isPdf(buffer: Buffer, contentType?: string): boolean {
  */
 export async function harvestCompany(
   ticker: string,
-  opts: { skipUrls?: Set<string> } = {},
+  opts: { skipUrls?: Set<string>; fetchPeers?: boolean } = {},
 ): Promise<HarvestResult> {
   const skip = opts.skipUrls ?? new Set<string>();
+  const fetchPeers = opts.fetchPeers ?? true;
   const session = await openSession();
   const notes: string[] = [];
   if (session.note) notes.push(session.note);
@@ -354,6 +473,7 @@ export async function harvestCompany(
     loggedIn: session.loggedIn,
     screenerText: "",
     peersText: "",
+    peerRatiosText: "",
     annualReportText: "",
     documents: [],
   };
@@ -382,6 +502,33 @@ export async function harvestCompany(
     result.name = clean($("h1").first().text()) || undefined;
     result.screenerText = screenerToText($);
     result.peersText = peersToText($);
+
+    // Peer deep-fetch: the Screener peer table carries only ~4 columns, so fetch
+    // each of the top peers' OWN page for full ratios. These are cheap HTML page
+    // loads via the same session (rate-limited + capped + deduped), exactly like
+    // the subject page — so peer ratios stay fresh and never bloat the cache.
+    if (fetchPeers) {
+      const peerBlocks: string[] = [];
+      for (const purl of peerLinks($, result.url, MAX_PEERS)) {
+        if (skip.has(purl)) continue;
+        try {
+          let pp = await session.fetchHtml(`${purl}consolidated/`);
+          if (!looksLikeCompanyPage(pp.html)) pp = await session.fetchHtml(purl);
+          if (!looksLikeCompanyPage(pp.html)) continue;
+          const $p = cheerio.load(pp.html);
+          const peerName = clean($p("h1").first().text()) || purl;
+          // The URL is embedded in the label so the extractor can cite each peer
+          // datum to that peer's own Screener page.
+          const block = screenerRatiosToText($p, `Screener — ${peerName} <${pp.finalUrl}>`);
+          if (block) peerBlocks.push(block);
+        } catch (e) {
+          notes.push(`peer fetch error (${purl}): ${(e as Error).message}`);
+        }
+      }
+      if (peerBlocks.length) {
+        result.peerRatiosText = `## Peer ratios — each peer's own Screener page\n\n${peerBlocks.join("\n\n")}`;
+      }
+    }
 
     // Annual report (newest).
     const ar = annualReportLink($);
