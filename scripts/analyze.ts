@@ -147,7 +147,11 @@ async function main() {
 
   // 3) Harvest Screener + filings (skipping already-seen document URLs).
   console.log("Harvesting Screener + annual report + concalls + presentation…");
-  const harvest: HarvestResult = await harvestCompany(ticker, { skipUrls: skip });
+  const harvest: HarvestResult = await harvestCompany(ticker, {
+    skipUrls: skip,
+    // Deep-fetch peer pages only when the peers section is in the refresh plan.
+    fetchPeers: refresh.has("peers"),
+  });
   const company = companyArg || harvest.name || existing?.company || ticker;
   console.log(
     `  company: ${company} | loggedIn: ${harvest.loggedIn} | screener: ${harvest.screenerText.length}c | ` +

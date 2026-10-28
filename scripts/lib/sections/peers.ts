@@ -1,6 +1,5 @@
 import type { PeersSection } from "@/lib/types/report";
-import { webResearch } from "../firecrawl";
-import { citedSchema, extractSection, webBlock, type SectionCtx } from "./common";
+import { citedSchema, extractSection, type SectionCtx } from "./common";
 
 const n = () => citedSchema("number");
 
@@ -36,25 +35,27 @@ const PEERS_SCHEMA = {
 };
 
 export async function extractPeers(ctx: SectionCtx): Promise<PeersSection> {
-  const web = await webResearch(
-    `${ctx.company} ${ctx.ticker} peer comparison P/E EV/EBITDA ROE ROCE debt equity India listed competitors`,
-  );
-
-  const evidence =
-    [
-      ctx.harvest.peersText ? `SCREENER PEER TABLE:\n${ctx.harvest.peersText}` : "",
-      ctx.harvest.screenerText ? `SCREENER (subject company ratios):\n${ctx.harvest.screenerText.slice(0, 4000)}` : "",
-    ]
-      .filter(Boolean)
-      .join("\n\n---\n\n") + webBlock(ctx, web.hits, web.text);
+  // Screener is the primary (and sufficient) source: the peer table gives the peer
+  // set + headline columns, and each peer's OWN page (harvested into peerRatiosText)
+  // gives the full ratios. No web call needed here.
+  const evidence = [
+    ctx.harvest.peersText ? `SCREENER PEER TABLE (peer set + headline columns):\n${ctx.harvest.peersText}` : "",
+    ctx.harvest.peerRatiosText ? `${ctx.harvest.peerRatiosText}` : "",
+    ctx.harvest.screenerText ? `SCREENER — ${ctx.company} (subject) ratios:\n${ctx.harvest.screenerText.slice(0, 5000)}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n\n---\n\n");
 
   const instruction =
     `Produce the PEER comparison for ${ctx.company} (${ctx.ticker}).\n` +
-    `- peers: 4–7 rows INCLUDING ${ctx.company} itself (set is_self:true on its row). For each peer: ` +
-    `price (INR), mcap (INR cr), pe (x), ev_ebitda (x), roe (%), roce (%), roa (%), sales_growth_5y (%), ` +
-    `profit_growth_5y (%), de (x). Use the Screener peer table where present; cite each datum. ` +
-    `Mark any cell the evidence doesn't support as available:false — do NOT guess peer numbers.\n` +
-    `- note: one line on how the company screens vs peers.`;
+    `- peers: one row for ${ctx.company} itself (is_self:true) PLUS every peer that appears under ` +
+    `"Peer ratios — each peer's own Screener page" (typically 4–6). For EACH row fill from that peer's ` +
+    `own ratios block (and the subject's block for the self row): price (INR), mcap (INR cr), pe (x), ` +
+    `ev_ebitda (x), roe (%), roce (%), roa (%), sales_growth_5y (%, the 5-yr Compounded Sales Growth), ` +
+    `profit_growth_5y (%, the 5-yr Compounded Profit Growth), de (x). Cite each datum to that peer's ` +
+    `Screener page. Mark ONLY cells genuinely absent from the evidence as available:false — do NOT guess, ` +
+    `and do NOT copy the subject's numbers onto a peer.\n` +
+    `- note: one line on how ${ctx.company} screens vs peers (valuation / returns / growth).`;
 
   return extractSection<PeersSection>({
     ctx,

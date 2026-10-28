@@ -72,9 +72,12 @@ export async function extractFinancials(ctx: SectionCtx): Promise<FinancialsSect
     `Produce FINANCIALS for ${ctx.company} (${ctx.ticker}). All money in INR crore; margins and ` +
     `returns in %. Cite every datum to Screener or the annual report.\n` +
     `- latest_quarter: the most recent reported quarter (period_type "quarter"): revenue, EBITDA, ` +
-    `EBITDA margin, PAT, PAT margin, OCF, FCF, net_debt (negative = net cash), ROCE, ROE, and any ` +
-    `one_offs noted.\n` +
+    `EBITDA margin, PAT, PAT margin, OCF, FCF, net_debt, ROCE, ROE, and any one_offs noted.\n` +
     `- latest_fy: the most recent full year (period_type "annual"), same fields.\n` +
+    `- net_debt = total borrowings MINUS (cash & bank + current/liquid investments & treasury); a ` +
+    `NEGATIVE value means NET CASH. COMPUTE it from the balance sheet whenever those lines are present ` +
+    `(use the fact sheet's net cash/debt figure where given). A cash-rich IT-services firm is net cash ` +
+    `(negative) — do NOT mark it Not available when the balance sheet shows borrowings, cash & investments.\n` +
     `- history: the last 5 financial years, OLDEST FIRST, each with revenue, EBITDA, EBITDA margin, ` +
     `PAT, PAT margin, EPS. Mark anything the evidence doesn't contain as available:false (never guess).`;
 

@@ -52,8 +52,8 @@ const CAPACITY_SCHEMA = {
 export async function extractCapacity(ctx: SectionCtx): Promise<CapacitySection> {
   const ar = relevantPages(
     ctx.harvest.annualReportText,
-    ["capacity", "plant", "facility", "manufacturing", "utilisation", "utilization", "employees", "headcount", "delivery", "centre", "center", "office", "capex", "expansion"],
-    ["installed capacity", "capacity utilisation", "number of employees", "delivery centres", "manufacturing facilities", "properties"],
+    ["capacity", "plant", "facility", "manufacturing", "utilisation", "utilization", "employees", "headcount", "workforce", "delivery", "centre", "center", "office", "capex", "expansion", "attrition"],
+    ["installed capacity", "capacity utilisation", "number of employees", "total employees", "total headcount", "human resources", "our people", "delivery centres", "manufacturing facilities", "properties"],
     5,
     9000,
   );
@@ -75,6 +75,9 @@ export async function extractCapacity(ctx: SectionCtx): Promise<CapacitySection>
     `- For an IT-services / non-manufacturing company: set kind="delivery"; put headline footprint numbers ` +
     `(total headcount, delivery centres, offices, countries) in metrics, and key delivery locations in sites ` +
     `(capacity/utilization may be Not available). \n` +
+    `- ALWAYS extract TOTAL HEADCOUNT (total employees) for a services/IT company — it is disclosed in the ` +
+    `annual report (human resources / our people), the investor presentation or the fact sheet; mark it ` +
+    `Not available ONLY if genuinely absent from the evidence. Include attrition and women-in-workforce if stated.\n` +
     `- metrics: 2–5 headline footprint KPIs, each cited.\n` +
     `- Only if the company truly has no operating footprint set applicable=false + a reason. Never guess a number.`;
 

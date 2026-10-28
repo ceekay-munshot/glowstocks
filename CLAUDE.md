@@ -18,7 +18,12 @@ scripts/                      THE RESEARCH ENGINE (runs in GitHub Actions, never
   lib/
     bedrock.ts                Claude via Bedrock Converse (bearer key); preflight; prompt caching
     json.ts                   completeJSON driver (ajv schema validation + retry)
-    harvest.ts                Screener login (playwright-core) + PDF→text (unpdf) + cheerio parse
+    harvest.ts                Screener login (playwright-core) + PDF→text (unpdf) + cheerio parse.
+                              Scrapes the WHOLE company page (pros/cons, full multi-year P&L / BS /
+                              CF / ratios / quarters / shareholding / growth ranges) + deep-fetches
+                              the top ~6 peers' OWN pages for full ratios (peerRatiosText). Downloads
+                              the newest AR + last 2 concall transcripts (BSE PDFs, browser headers) +
+                              investor presentation / fact sheet.
     firecrawl.ts              cheap /search + run-cached /scrape (cost control)
     facts.ts                  one verified fact sheet injected (cached) into every section
     text.ts                   relevantPages() — pick the pages that matter from a long doc
@@ -87,7 +92,10 @@ data/companies/<TICKER>.json  committed reports (durable cache). TCS.json is the
   `buildReportModel` only — both exports update together. `npm run check:coverage`
   FAILS if the model drops any populated leaf of the TCS sample; keep it green.
 - **Never waste credits.** Keep read-once harvest, run-level Firecrawl cache,
-  Bedrock prompt caching, and incremental `--sections` refresh intact.
+  Bedrock prompt caching, and incremental `--sections` refresh intact. The peer
+  deep-fetch is capped (~6 peers), runs only when `peers` is in the refresh plan,
+  and reuses the one rate-limited Screener session; Firecrawl stays the fallback
+  for ONLY what Screener lacks (forward estimates / price targets).
 - **Extraction output ceiling is central + self-healing — don't re-tune it
   per section.** `maxTokens` is a CEILING (billed per token actually generated),
   so a low one silently truncates a data-rich section's JSON mid-stream → invalid

@@ -17,11 +17,12 @@ const SYSTEM =
 
 const FIN_TERMS = [
   "revenue", "sales", "ebitda", "profit", "pat", "cash", "borrowings", "debt",
-  "equity", "net worth", "finance", "depreciation",
+  "equity", "net worth", "finance", "depreciation", "investments",
 ];
 const FIN_HINTS = [
   "statement of profit and loss", "total income", "profit for the year",
   "cash and cash equivalents", "total borrowings", "total equity",
+  "current investments", "investments",
 ];
 const HOLD_TERMS = ["promoter", "shareholding", "pledge", "fii", "dii", "public"];
 const HOLD_HINTS = ["shareholding pattern", "promoter and promoter group", "pledged"];
@@ -119,8 +120,11 @@ export async function buildCompanyFacts(company: string, harvest: HarvestResult)
   const prompt =
     `Company: ${company}\n\nEVIDENCE (use ONLY this):\n${evidence}\n\n` +
     `Return STRICT JSON. Every monetary value in INR crore. Give the latest 3 financial ` +
-    `years, newest last. Use null when a value is absent. net_debt_cr is total borrowings ` +
-    `minus cash & bank (negative = net cash).`;
+    `years, newest last. Use null when a value is absent. net_debt_cr = total borrowings ` +
+    `MINUS (cash & bank balances + current / liquid investments & treasury): negative = net ` +
+    `cash. For a debt-free / cash-rich company (e.g. most IT services firms) this is a NEGATIVE ` +
+    `number — compute it whenever the balance sheet shows borrowings, cash and investments; ` +
+    `use null only if the balance sheet is genuinely absent from the evidence.`;
 
   try {
     const f = await completeJSON<FactsShape>(
