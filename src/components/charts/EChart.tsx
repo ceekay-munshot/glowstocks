@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import type { EChartsOption } from "echarts";
-import { ChartSkeleton } from "../states";
+import { ChartSkeleton } from "../ui/States";
 
 // echarts needs the DOM — load it client-only so it never runs during SSR.
 const ReactECharts = dynamic(() => import("echarts-for-react"), {

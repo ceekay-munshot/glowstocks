@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Icon } from "./Icon";
+import { Search, ChevronRight } from "lucide-react";
+import { GS } from "@/lib/brand";
 
 interface Hit {
   ticker: string;
@@ -9,11 +10,7 @@ interface Hit {
   url: string | null;
 }
 
-/**
- * Typeahead company search (Indian NSE/BSE via the server-side search proxy),
- * with direct ticker entry as a fallback (Enter commits the raw text). Two sizes:
- * a compact header variant and a large landing-hero variant.
- */
+/** Typeahead company search (Indian NSE/BSE), with direct ticker entry as a fallback. */
 export function CompanySearch({
   onSelect,
   size = "sm",
@@ -78,26 +75,12 @@ export function CompanySearch({
   };
 
   return (
-    <div
-      ref={boxRef}
-      className="gs-search"
-      style={{ position: "relative", width: lg ? "100%" : "min(420px, 48vw)" }}
-    >
+    <div ref={boxRef} className="gs-search relative" style={{ width: lg ? "100%" : "min(420px, 48vw)" }}>
       <div
-        className="gs-bigsearch"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: lg ? 12 : 8,
-          height: lg ? 54 : 32,
-          padding: lg ? "0 18px" : "0 12px",
-          background: "#fff",
-          border: `1px solid ${lg ? "var(--border-default)" : "var(--border-default)"}`,
-          borderRadius: lg ? 14 : 99,
-          boxShadow: lg ? "0 2px 10px rgba(15,23,42,0.05)" : "none",
-        }}
+        className="flex items-center bg-white transition"
+        style={{ gap: lg ? 12 : 8, height: lg ? 54 : 32, padding: lg ? "0 18px" : "0 12px", borderRadius: lg ? 14 : 999, border: "1px solid rgba(15,23,42,0.1)", boxShadow: lg ? "0 2px 12px rgba(15,23,42,0.06)" : "none" }}
       >
-        <Icon name="search" size={lg ? 20 : 15} color={lg ? "var(--primary)" : "var(--text-hint)"} />
+        <Search size={lg ? 20 : 15} style={{ color: lg ? GS.indigo : "#94a3b8", flexShrink: 0 }} />
         <input
           value={q}
           autoFocus={autoFocus}
@@ -110,56 +93,29 @@ export function CompanySearch({
             else if (e.key === "Escape") setOpen(false);
           }}
           placeholder={placeholder}
-          style={{
-            flex: 1,
-            minWidth: 0,
-            border: "none",
-            outline: "none",
-            fontSize: lg ? 16 : 13,
-            color: "var(--text-primary)",
-            background: "transparent",
-          }}
+          className="min-w-0 flex-1 border-0 bg-transparent text-ink outline-none"
+          style={{ fontSize: lg ? 16 : 13 }}
         />
-        {loading && <span className="gs-spin" style={{ width: lg ? 16 : 12, height: lg ? 16 : 12, border: "2px solid var(--primary-border)", borderTopColor: "var(--primary)", borderRadius: "50%" }} />}
+        {loading && <span className="gs-spin rounded-full border-2" style={{ width: lg ? 16 : 12, height: lg ? 16 : 12, borderColor: `${GS.indigo}33`, borderTopColor: GS.indigo }} />}
         {lg && !loading && (
-          <button
-            onClick={() => commit(active >= 0 ? hits[active] : undefined)}
-            style={{ height: 38, padding: "0 16px", borderRadius: 10, border: "none", background: "var(--primary)", color: "#fff", fontWeight: 700, fontSize: 13.5, cursor: "pointer", display: "inline-flex", alignItems: "center", gap: 6 }}
-          >
-            Research <Icon name="chevronRight" size={15} color="#fff" />
+          <button onClick={() => commit(active >= 0 ? hits[active] : undefined)} className="inline-flex h-9 items-center gap-1.5 rounded-[10px] px-4 text-[13.5px] font-extrabold text-white" style={{ background: GS.indigo }}>
+            Research <ChevronRight size={15} />
           </button>
         )}
       </div>
 
       {open && hits.length > 0 && (
-        <ul
-          style={{
-            position: "absolute",
-            top: lg ? 62 : 38,
-            left: 0,
-            right: 0,
-            zIndex: 40,
-            margin: 0,
-            padding: 5,
-            listStyle: "none",
-            background: "#fff",
-            border: "1px solid var(--border-default)",
-            borderRadius: 14,
-            boxShadow: "0 16px 40px rgba(15,23,42,0.16)",
-            maxHeight: 340,
-            overflowY: "auto",
-          }}
-        >
+        <ul className="absolute left-0 right-0 z-40 m-0 max-h-[340px] list-none overflow-y-auto rounded-2xl border border-black/[0.06] bg-white p-1.5 shadow-pop" style={{ top: lg ? 62 : 38 }}>
           {hits.map((h, i) => (
             <li
               key={`${h.ticker}-${i}`}
               onMouseDown={() => commit(h)}
               onMouseEnter={() => setActive(i)}
-              className="gs-rowh"
-              style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 8, padding: lg ? "11px 12px" : "8px 10px", borderRadius: 9, cursor: "pointer", background: active === i ? "var(--primary-light)" : "transparent" }}
+              className="flex cursor-pointer items-center justify-between gap-2 rounded-lg transition"
+              style={{ padding: lg ? "11px 12px" : "8px 10px", background: active === i ? `${GS.indigo}0d` : "transparent" }}
             >
-              <span style={{ fontSize: lg ? 14.5 : 13, color: "var(--text-primary)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{h.name}</span>
-              <span style={{ fontSize: 11, fontWeight: 700, color: "var(--primary-text)", background: "var(--primary-light)", border: "1px solid var(--primary-border)", borderRadius: 6, padding: "2px 8px", flexShrink: 0 }}>{h.ticker}</span>
+              <span className="truncate text-ink" style={{ fontSize: lg ? 14.5 : 13 }}>{h.name}</span>
+              <span className="tnum shrink-0 rounded-md px-2 py-0.5 text-[11px] font-bold" style={{ background: `${GS.indigo}12`, color: GS.indigo }}>{h.ticker}</span>
             </li>
           ))}
         </ul>
