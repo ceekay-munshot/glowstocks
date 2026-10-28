@@ -49,6 +49,7 @@ import { extractRisks } from "./lib/sections/risks";
 import { extractIntegrity } from "./lib/sections/integrity";
 import { sanityCheck } from "./lib/sanity";
 import { reviewReport } from "./lib/review";
+import { verifyCitations } from "./lib/verify";
 import {
   ensureCompaniesDir,
   loadExisting,
@@ -287,13 +288,16 @@ async function main() {
     sources_seen: [...mergedSeen],
   };
 
-  // 7) Sanity checks + read-back reconciliation.
+  // 7) Sanity checks + read-back reconciliation + deterministic citation check.
   const sanity = sanityCheck(report);
   const corrections = reviewReport(report);
+  const verify = verifyCitations(report, harvest); // zero-cost: no model/Firecrawl
   for (const w of sanity) console.log(`  [sanity] ${w}`);
   for (const c of corrections) console.log(`  [review] ${c}`);
-  if (sanity.length || corrections.length) {
-    report.coverage.notes = [report.coverage.notes, ...sanity, ...corrections]
+  for (const w of verify.warnings) console.log(`  [verify] ${w}`);
+  for (const u of verify.uncorroborated) console.log(`  [verify] uncorroborated: ${u.path} = ${u.value} (src: ${u.source ?? "-"})`);
+  if (sanity.length || corrections.length || verify.warnings.length) {
+    report.coverage.notes = [report.coverage.notes, ...sanity, ...corrections, ...verify.warnings]
       .filter(Boolean)
       .join(" | ")
       .slice(0, 2000);
