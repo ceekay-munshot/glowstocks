@@ -1,9 +1,9 @@
-import { Dashboard } from "@/components/Dashboard";
-import { getBundledReport, SAMPLE_TICKER } from "@/lib/bundledReports";
+import { Landing } from "@/components/Landing";
+import { knownCompanies } from "@/lib/bundledReports";
 
-// The committed SAMPLE (TCS) is bundled, so the dashboard renders on first paint
-// with zero keys and zero network calls — the brief's core requirement.
+// The app now opens on a SEARCH-FIRST landing screen (not the dashboard). The
+// previous-runs table is built from the committed/bundled reports, so it renders
+// with zero keys and zero network calls.
 export default function Home() {
-  const sample = getBundledReport(SAMPLE_TICKER);
-  return <Dashboard initialReport={sample} />;
+  return <Landing companies={knownCompanies()} />;
 }
