@@ -6,7 +6,7 @@
   "country": "India",
   "currency": "INR",
   "as_of": "Mar 2026",
-  "last_updated": "2026-10-28T20:52:27.914Z",
+  "last_updated": "2026-10-28T21:00:13.137Z",
   "units_note": "Figures in INR crore unless the datum states otherwise; margins & returns in %, multiples in x.",
   "generated_by": "glowstocks engine",
   "coverage": {
@@ -1762,7 +1762,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S20",
+          "source_id": "S5",
           "note": "Assumes prolonged demand weakness, continued pricing pressure from AI disruption, and market share loss to competitors and GCCs."
         },
         "revenue_cagr": {
@@ -1773,7 +1773,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S21",
+          "source_id": "S6",
           "note": "Based on lower end of FY27 guidance (1%) with minimal recovery in FY28-29; assumes AI cannibalization of traditional services outpaces new AI revenue."
         },
         "margin": {
@@ -1784,7 +1784,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S22",
+          "source_id": "S7",
           "note": "Operating margin compressed below guidance range due to aggressive pricing to retain clients and higher AI investment costs without proportional revenue."
         },
         "pe_exit": {
@@ -1795,7 +1795,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S23",
+          "source_id": "S8",
           "note": "De-rating from current 14.4x due to sustained low growth, margin pressure, and loss of premium valuation as AI story fails to materialize."
         },
         "target_price": {
@@ -1806,7 +1806,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S24",
+          "source_id": "S9",
           "note": "Based on FY28E EPS of ~79 (3% CAGR from FY26 base of 72.59) at 12x P/E."
         },
         "upside": {
@@ -1817,7 +1817,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S25",
+          "source_id": "S10",
           "note": "Downside from current price of 1123 to target of 950."
         },
         "narrative": "Demand environment deteriorates further with clients accelerating GCC buildouts and AI-driven automation reducing traditional IT services spend. Infosys struggles to offset revenue headwinds despite AI wins, leading to margin compression and valuation de-rating."
@@ -1832,7 +1832,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S26",
+          "source_id": "S11",
           "note": "Most likely scenario reflecting current guidance, gradual demand recovery, and balanced AI opportunity versus traditional services pressure."
         },
         "revenue_cagr": {
@@ -1843,7 +1843,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S27",
+          "source_id": "S12",
           "note": "FY27 at 1.5% (midpoint of 1-2% guidance), FY28 at 4% (aided by $2B+ mega deal contributing 1%+), FY29 at 5% as AI revenue scales and demand stabilizes."
         },
         "margin": {
@@ -1854,7 +1854,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S28",
+          "source_id": "S13",
           "note": "Operating margin maintained at midpoint of 20-22% guidance through operational efficiency, automation, and gradual improvement in utilization as demand recovers."
         },
         "pe_exit": {
@@ -1865,7 +1865,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S29",
+          "source_id": "S14",
           "note": "Modest re-rating from current 14.4x as AI revenue visibility improves and growth stabilizes, but remains below historical average due to structural headwinds."
         },
         "target_price": {
@@ -1876,7 +1876,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S30",
+          "source_id": "S15",
           "note": "Based on FY28E EPS of ~85 (5.5% CAGR from FY26 base of 72.59) at 15x P/E."
         },
         "upside": {
@@ -1887,7 +1887,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S31",
+          "source_id": "S16",
           "note": "Upside from current price of 1123 to target of 1275."
         },
         "narrative": "Infosys navigates near-term headwinds with stable margins and gradual revenue recovery. AI revenue continues to scale (reaching 15%+ of total by FY28), offsetting some traditional services pressure. Large deal pipeline converts steadily, and the $2B+ mega deal provides meaningful FY28 growth contribution."
@@ -1902,7 +1902,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S32",
+          "source_id": "S17",
           "note": "Assumes strong AI adoption acceleration, successful large deal execution, and faster-than-expected demand recovery across verticals."
         },
         "revenue_cagr": {
@@ -1913,7 +1913,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S33",
+          "source_id": "S18",
           "note": "FY27 at 2% (upper end of guidance), FY28 at 7% (mega deal + strong AI momentum), FY29 at 10% as AI becomes 20%+ of revenue and traditional services stabilize."
         },
         "margin": {
@@ -1924,7 +1924,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S34",
+          "source_id": "S19",
           "note": "Operating margin expands to upper end of guidance and beyond as AI services carry higher margins, utilization improves, and automation drives efficiency gains."
         },
         "pe_exit": {
@@ -1935,7 +1935,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S35",
+          "source_id": "S20",
           "note": "Significant re-rating as Infosys establishes clear AI leadership, demonstrates sustainable mid-to-high single-digit growth, and margin expansion trajectory."
         },
         "target_price": {
@@ -1946,7 +1946,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S36",
+          "source_id": "S21",
           "note": "Based on FY28E EPS of ~97 (10% CAGR from FY26 base of 72.59) at 18x P/E."
         },
         "upside": {
@@ -1957,7 +1957,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S37",
+          "source_id": "S22",
           "note": "Upside from current price of 1123 to target of 1750."
         },
         "narrative": "AI adoption accelerates dramatically across enterprise clients, with Infosys capturing disproportionate share as ecosystem integrator. Large deal pipeline converts strongly with multiple mega deals. Traditional services stabilize faster than expected as discretionary spending recovers, while AI revenue scales to 20%+ of total with superior margins."
@@ -2128,26 +2128,122 @@
   "capacity": {
     "applicable": true,
     "kind": "delivery",
-    "summary": "Infosys operates as a global IT services company with delivery centers across multiple countries. The company has a substantial workforce and global presence to serve clients worldwide.",
+    "summary": "Infosys is a global IT services company with delivery centers across multiple countries. As of March 2025, the company had 317,240 employees. The company operates development centers in India and globally, with headquarters in Bengaluru, Karnataka, India.",
     "sites": [
       {
-        "site": "Global delivery centers",
-        "product": "IT services and consulting",
+        "site": "India (Multiple Development Centers)",
+        "product": "IT Services & Consulting",
         "capacity": {
           "value": null,
           "available": false,
-          "note": "Specific delivery center capacity not disclosed in provided evidence"
+          "unit": "",
+          "source": "",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "",
+          "note": "Specific capacity not disclosed"
         },
         "utilization": {
           "value": null,
           "available": false,
-          "note": "Utilization metrics not disclosed in provided evidence"
+          "unit": "",
+          "source": "",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "",
+          "note": "Utilization not disclosed"
         },
-        "expansion": "Not available in provided evidence",
+        "expansion": "Not available",
         "capex": {
           "value": null,
           "available": false,
-          "note": "Delivery center capex not separately disclosed in provided evidence"
+          "unit": "",
+          "source": "",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "",
+          "note": "Capex not disclosed"
+        },
+        "timeline": "Not available"
+      },
+      {
+        "site": "Bengaluru, Karnataka (Headquarters)",
+        "product": "IT Services & Consulting",
+        "capacity": {
+          "value": null,
+          "available": false,
+          "unit": "",
+          "source": "",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "",
+          "note": "Specific capacity not disclosed"
+        },
+        "utilization": {
+          "value": null,
+          "available": false,
+          "unit": "",
+          "source": "",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "",
+          "note": "Utilization not disclosed"
+        },
+        "expansion": "Not available",
+        "capex": {
+          "value": null,
+          "available": false,
+          "unit": "",
+          "source": "",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "",
+          "note": "Capex not disclosed"
+        },
+        "timeline": "Not available"
+      },
+      {
+        "site": "Global Delivery Centers",
+        "product": "IT Services & Consulting",
+        "capacity": {
+          "value": null,
+          "available": false,
+          "unit": "",
+          "source": "",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "",
+          "note": "Specific capacity not disclosed"
+        },
+        "utilization": {
+          "value": null,
+          "available": false,
+          "unit": "",
+          "source": "",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "",
+          "note": "Utilization not disclosed"
+        },
+        "expansion": "Not available",
+        "capex": {
+          "value": null,
+          "available": false,
+          "unit": "",
+          "source": "",
+          "date": null,
+          "locator": null,
+          "url": null,
+          "source_id": "",
+          "note": "Capex not disclosed"
         },
         "timeline": "Not available"
       }
@@ -2155,42 +2251,63 @@
     "metrics": [
       {
         "label": "Total Headcount",
+        "value": 317240,
+        "available": true,
+        "unit": "employees",
+        "source": "Infosys Limited Number of Employees 2017-2026",
+        "date": "Mar 2025",
+        "locator": "Employee count data",
+        "url": "https://bullfincher.io/companies/infosys-limited/number-of-employees",
+        "source_id": "S3",
+        "note": "Total employees as of March 2025"
+      },
+      {
+        "label": "Countries of Operation",
+        "value": "50+",
+        "available": true,
+        "unit": "countries",
+        "source": "Infosys",
+        "date": null,
+        "locator": "Area served section",
+        "url": "https://en.wikipedia.org/wiki/Infosys",
+        "source_id": "S10",
+        "note": "Worldwide presence"
+      },
+      {
+        "label": "Attrition Rate",
         "value": null,
         "available": false,
-        "note": "Total employee count not disclosed in the provided evidence (Screener data). This information is typically available in annual reports or investor presentations which were not included in the evidence provided."
-      },
-      {
-        "label": "Market Capitalization",
-        "value": 456219,
-        "available": true,
-        "unit": "INR crore",
-        "source": "Screener — Infosys",
+        "unit": "",
+        "source": "",
         "date": null,
-        "locator": "Key ratios section",
-        "url": "https://www.screener.in/company/INFY/consolidated/",
-        "source_id": "S1"
+        "locator": null,
+        "url": null,
+        "source_id": "",
+        "note": "Not disclosed in available evidence"
       },
       {
-        "label": "Revenue (TTM)",
-        "value": 189336,
-        "available": true,
-        "unit": "INR crore",
-        "source": "Screener — Infosys",
-        "date": "TTM",
-        "locator": "Profit & Loss - Sales",
-        "url": "https://www.screener.in/company/INFY/consolidated/",
-        "source_id": "S1"
+        "label": "Women in Workforce",
+        "value": null,
+        "available": false,
+        "unit": "",
+        "source": "",
+        "date": null,
+        "locator": null,
+        "url": null,
+        "source_id": "",
+        "note": "Not disclosed in available evidence"
       },
       {
-        "label": "Operating Profit Margin (TTM)",
-        "value": 24,
-        "available": true,
-        "unit": "%",
-        "source": "Screener — Infosys",
-        "date": "TTM",
-        "locator": "Profit & Loss - OPM %",
-        "url": "https://www.screener.in/company/INFY/consolidated/",
-        "source_id": "S1"
+        "label": "Delivery Centers",
+        "value": null,
+        "available": false,
+        "unit": "",
+        "source": "",
+        "date": null,
+        "locator": null,
+        "url": null,
+        "source_id": "",
+        "note": "Specific count not disclosed in available evidence"
       }
     ]
   },
@@ -2735,7 +2852,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S49",
+          "source_id": "S23",
           "note": "Probability estimated based on: (1) current weak guidance already reflects some demand weakness, (2) client offshoring trend confirmed in Reuters article but not yet at severe levels, (3) US recession probability ~20-25% per economic forecasts, (4) Infosys has diversified client base reducing single-point failure risk. Scenario requires multiple adverse factors to align."
         }
       },
@@ -2751,7 +2868,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S50",
+          "source_id": "S24",
           "note": "Low probability based on: (1) Infosys strategic investment in cybersecurity (Missing Link acquisition), (2) no evidence of prior major breaches in available sources, (3) likely robust security controls given large regulated client base, (4) industry-wide cybersecurity investments post-COVID. However, threat landscape is elevated and impact would be severe, warranting inclusion."
         }
       },
@@ -2767,7 +2884,7 @@
           "date": null,
           "locator": null,
           "url": null,
-          "source_id": "S51",
+          "source_id": "S25",
           "note": "Moderate probability given: (1) aggressive pace of 5 acquisitions worth $808M in single year (FY26) per evidence, (2) integration risk is inherently elevated with multiple concurrent deals, (3) specialized nature of acquired firms (cybersecurity, insurance consulting) makes talent retention critical, (4) no evidence yet of integration problems but insufficient time has passed to declare success. Industry M&A failure rates support 20% estimate."
         }
       }
@@ -3744,6 +3861,198 @@
       "date": null,
       "locator": null,
       "url": null
+    },
+    {
+      "id": "S2",
+      "title": "Annual Reports and Quarterly Results",
+      "type": "web",
+      "date": null,
+      "locator": null,
+      "url": "https://www.infosys.com/investors/reports-filings.html"
+    },
+    {
+      "id": "S3",
+      "title": "Infosys Limited Number of Employees 2017-2026",
+      "type": "web",
+      "date": null,
+      "locator": null,
+      "url": "https://bullfincher.io/companies/infosys-limited/number-of-employees"
+    },
+    {
+      "id": "S4",
+      "title": "Integrated Annual Report 2025-26",
+      "type": "web",
+      "date": null,
+      "locator": null,
+      "url": "https://www.infosys.com/investors/reports-filings/annual-report/annual/documents/infosys-ar-26.pdf"
+    },
+    {
+      "id": "S5",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S6",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S7",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S8",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S9",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S10",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S11",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S12",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S13",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S14",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S15",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S16",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S17",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S18",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S19",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S20",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S21",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S22",
+      "title": "glowstocks estimate",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S23",
+      "title": "Analyst reasoning",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S24",
+      "title": "Analyst reasoning",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
+    },
+    {
+      "id": "S25",
+      "title": "Analyst reasoning",
+      "type": "other",
+      "date": null,
+      "locator": null,
+      "url": null
     }
   ],
   "sources_seen": [
@@ -3818,6 +4127,9 @@
     "https://www.screener.in/company/PERSISTENT/consolidated/",
     "https://www.facebook.com/cnbctv18india/videos/infosys-announced-2-strategic-acquisitions-optimum-healthcare-for-465m-and-strat/1492229445811071/",
     "https://www.linkedin.com/posts/reema-tendulkar-3774a430_infosys-steps-up-ma-game-are-indian-it-activity-7443233268994371584-ge2e",
-    "https://www.facebook.com/Infosys/posts/infosys-has-launched-the-5th-edition-of-its-annual-legal-compliance-flagship-eve/1036419175186941/"
+    "https://www.facebook.com/Infosys/posts/infosys-has-launched-the-5th-edition-of-its-annual-legal-compliance-flagship-eve/1036419175186941/",
+    "https://www.infosys.com/investors/reports-filings.html",
+    "https://bullfincher.io/companies/infosys-limited/number-of-employees",
+    "https://www.infosys.com/investors/reports-filings/annual-report/annual/documents/infosys-ar-26.pdf"
   ]
 }
