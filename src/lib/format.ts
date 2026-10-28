@@ -9,8 +9,12 @@ export const NA = "Not available";
  * Client-facing source label: the report only ever exposes RESEARCH activity, so
  * the harvest vendor's name is shown as a neutral, analyst-facing label. Only the
  * display label changes — each datum keeps its real date, locator and deep link.
+ *
+ * The negative lookahead leaves domains intact: a bare "Screener" label becomes
+ * "Market data", but a URL/domain like "screener.in" inside integrity prose is
+ * left untouched (never corrupted to "Market data" mid-link).
  */
-const SOURCE_RELABEL: [RegExp, string][] = [[/screener(\.in)?/gi, "Market data"]];
+const SOURCE_RELABEL: [RegExp, string][] = [[/screener(?!\.in)/gi, "Market data"]];
 export function cleanSource(label?: string | null): string {
   let s = (label ?? "").trim();
   if (!s) return s;

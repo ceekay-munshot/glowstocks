@@ -1,19 +1,38 @@
 "use client";
 
 import type { ReactNode } from "react";
-import type { Cited, CompanyReport, Metric, Stance } from "@/lib/types/report";
+import type { Cited, CompanyReport, Delta, Metric, Stance } from "@/lib/types/report";
 import { MiniStat } from "../ui/Card";
 import { CiteWrap } from "../CitedValue";
 import { formatValue, NA, cleanSource } from "@/lib/format";
 import { resolveSources } from "@/lib/export/reportModel";
-import { stanceColor } from "@/lib/brand";
+import { GS, stanceColor } from "@/lib/brand";
 
 /** A single tight stat strip (never a KPI wall). */
 export function StatStrip({ children }: { children: ReactNode }) {
   return <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">{children}</div>;
 }
 
-/** MiniStat from a cited Metric, with source-on-hover. */
+/** A signed trend chip that keeps its comparison period ("+12.5% vs FY23"). The
+ *  colour reads direction × sentiment: favourable → green, adverse → red. */
+function DeltaChip({ d }: { d: Delta }) {
+  const raw = formatValue(d.value, d.unit); // routes through the one formatter (pp/bps already signed)
+  const body = d.value > 0 && !raw.startsWith("+") ? `+${raw}` : raw;
+  const upIsGood = d.good ?? true; // default convention: an up-move is favourable
+  const fav = d.value === 0 ? null : d.value > 0 ? upIsGood : !upIsGood;
+  const color = fav === null ? GS.grey : fav ? GS.good : GS.bad;
+  // The period may arrive bare ("FY24") or already prefixed ("vs FY24") — normalise
+  // so we never render a doubled "vs vs FY24".
+  const period = d.period?.replace(/^vs\s+/i, "").trim();
+  return (
+    <span className="inline-flex flex-wrap items-baseline gap-x-1">
+      <span className="font-bold" style={{ color }}>{body}</span>
+      {period && <span className="text-grey">vs {period}</span>}
+    </span>
+  );
+}
+
+/** MiniStat from a cited Metric, with source-on-hover and an optional trend chip. */
 export function MetricStat({ m, color }: { m: Metric; color: string }) {
   const ok = m.available && m.value !== null && m.value !== undefined;
   return (
@@ -21,6 +40,7 @@ export function MetricStat({ m, color }: { m: Metric; color: string }) {
       label={m.label}
       color={color}
       value={ok ? <CiteWrap c={m}>{formatValue(m.value, m.unit)}</CiteWrap> : <span className="text-[14px] italic text-grey">{NA}</span>}
+      sub={ok && m.delta ? <DeltaChip d={m.delta} /> : undefined}
     />
   );
 }

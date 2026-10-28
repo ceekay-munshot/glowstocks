@@ -35,7 +35,9 @@ export interface CompanyRow {
   coverageTotal: number;
 }
 
-function toRow(r: CompanyReport): CompanyRow {
+/** Collapse a full report to a compact landing-table row. Shared by the bundled
+ *  list and by the client-side recent-runs store (live-researched companies). */
+export function reportToRow(r: CompanyReport): CompanyRow {
   const cov = (r.coverage ?? {}) as unknown as Record<string, boolean | undefined>;
   const done = SECTION_KEYS.filter((k) => cov[k]).length;
   return {
@@ -56,5 +58,5 @@ function toRow(r: CompanyReport): CompanyRow {
 
 /** Every researched company available offline (bundled/committed). */
 export function knownCompanies(): CompanyRow[] {
-  return Object.values(BUNDLED).map(toRow);
+  return Object.values(BUNDLED).map(reportToRow);
 }

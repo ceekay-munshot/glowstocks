@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Sparkles, Globe2, BarChart3, Link2, Download, CalendarDays, Check, RefreshCw, ChevronRight, TrendingUp } from "lucide-react";
 import type { CompanyRow } from "@/lib/bundledReports";
+import { getRecentRuns } from "@/lib/recentRuns";
 import { GS, logoGradient, timeAgo, rampGYR } from "@/lib/brand";
 import { CompanySearch } from "./CompanySearch";
 
@@ -14,19 +15,37 @@ export function Landing({ companies }: { companies: CompanyRow[] }) {
   const [sort, setSort] = useState<SortKey>("updated");
   const [asc, setAsc] = useState(false);
   const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const [recent, setRecent] = useState<CompanyRow[]>([]);
+  // Read this browser's own recent runs AFTER mount, so SSR and the first client
+  // render match (both show just the bundled list); the merge happens client-side.
+  useEffect(() => {
+    setMounted(true);
+    setRecent(getRecentRuns());
+  }, []);
 
   const go = (ticker: string) => router.push(`/company/${encodeURIComponent(ticker)}`);
   const update = (ticker: string) => router.push(`/company/${encodeURIComponent(ticker)}?run=1`);
 
+  // Bundled (offline) companies + anything this browser has researched, deduped
+  // by ticker (the viewed copy wins, but the sample keeps its badge).
+  const all = useMemo(() => {
+    const byTicker = new Map<string, CompanyRow>();
+    for (const c of companies) byTicker.set(c.ticker, c);
+    for (const r of recent) {
+      const prev = byTicker.get(r.ticker);
+      byTicker.set(r.ticker, prev ? { ...r, is_sample: r.is_sample || prev.is_sample } : r);
+    }
+    return [...byTicker.values()];
+  }, [companies, recent]);
+
   const rows = useMemo(() => {
     const dir = asc ? 1 : -1;
-    return [...companies].sort((a, b) => {
+    return [...all].sort((a, b) => {
       if (sort === "company") return dir * a.company.localeCompare(b.company);
       if (sort === "coverage") return dir * (a.coverageDone / a.coverageTotal - b.coverageDone / b.coverageTotal);
       return dir * (new Date(a.last_updated).getTime() - new Date(b.last_updated).getTime());
     });
-  }, [companies, sort, asc]);
+  }, [all, sort, asc]);
 
   const setSortKey = (k: SortKey) => {
     if (k === sort) setAsc((v) => !v);

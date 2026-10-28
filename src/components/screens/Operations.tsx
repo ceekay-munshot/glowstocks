@@ -3,13 +3,13 @@
 import { Users, Factory, Rocket, Mic, Quote, Sparkles, TriangleAlert } from "lucide-react";
 import type { Cited, CompanyReport } from "@/lib/types/report";
 import { GS, seriesColor, trendColor } from "@/lib/brand";
-import { fmtCr, num, formatValue, NA } from "@/lib/format";
-import { Card, CardHeader, PageHeader, Badge, MiniStat } from "../ui/Card";
+import { fmtCr, num } from "@/lib/format";
+import { Card, CardHeader, PageHeader, Badge } from "../ui/Card";
 import { EmptyState, NotApplicable } from "../ui/States";
 import { CitedValue, CiteWrap } from "../CitedValue";
 import { Donut } from "../charts/Donut";
 import { HBars } from "../charts/HBars";
-import { Screen, SourceFooter } from "./parts";
+import { Screen, SourceFooter, StatStrip, MetricStat } from "./parts";
 
 export function CustomersScreen({ report }: { report: CompanyReport }) {
   const c = report.customers;
@@ -92,12 +92,11 @@ export function CapacityScreen({ report }: { report: CompanyReport }) {
       ) : (
         <div className="space-y-4">
           {(cap?.metrics.length ?? 0) > 0 && (
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
-              {cap!.metrics.slice(0, 5).map((m, i) => {
-                const ok = m.available && m.value !== null && m.value !== undefined;
-                return <MiniStat key={`${m.label}-${i}`} label={m.label} color={seriesColor(i)} value={ok ? <CiteWrap c={m}>{formatValue(m.value, m.unit)}</CiteWrap> : <span className="text-[14px] italic text-grey">{NA}</span>} />;
-              })}
-            </div>
+            <StatStrip>
+              {cap!.metrics.slice(0, 5).map((m, i) => (
+                <MetricStat key={`${m.label}-${i}`} m={m} color={seriesColor(i)} />
+              ))}
+            </StatStrip>
           )}
           {bars.length > 0 && (
             <Card accent={GS.sky}>

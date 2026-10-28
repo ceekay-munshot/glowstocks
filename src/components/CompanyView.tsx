@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } fro
 import { useRouter } from "next/navigation";
 import { LayoutDashboard, BarChart3, Factory, Scale, CheckCircle2 } from "lucide-react";
 import { SECTION_KEYS, type CompanyReport } from "@/lib/types/report";
+import { recordRun } from "@/lib/recentRuns";
 import { GS, rampGYR } from "@/lib/brand";
 import { Tabs, SubTabs, type TabDef } from "./ui/Tabs";
 import { Header, MiniHeader } from "./Header";
@@ -93,6 +94,12 @@ export function CompanyView({ ticker, initialReport, autoRun = false }: { ticker
     }
   }, []);
   useEffect(() => () => stopPolling(), [stopPolling]);
+
+  // Remember every opened/researched company so it shows in the landing
+  // "Previous runs" table — including live tickers that aren't bundled offline.
+  useEffect(() => {
+    if (report) recordRun(report);
+  }, [report]);
 
   const loadReport = useCallback(async (t: string): Promise<boolean> => {
     const res = await fetch(`/api/report/get?ticker=${encodeURIComponent(t)}`);

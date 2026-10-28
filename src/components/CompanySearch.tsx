@@ -89,7 +89,7 @@ export function CompanySearch({
           onKeyDown={(e) => {
             if (e.key === "ArrowDown") setActive((a) => Math.min(a + 1, hits.length - 1));
             else if (e.key === "ArrowUp") setActive((a) => Math.max(a - 1, -1));
-            else if (e.key === "Enter") commit(active >= 0 ? hits[active] : undefined);
+            else if (e.key === "Enter") commit(active >= 0 ? hits[active] : hits[0]);
             else if (e.key === "Escape") setOpen(false);
           }}
           placeholder={placeholder}
@@ -98,7 +98,7 @@ export function CompanySearch({
         />
         {loading && <span className="gs-spin rounded-full border-2" style={{ width: lg ? 16 : 12, height: lg ? 16 : 12, borderColor: `${GS.indigo}33`, borderTopColor: GS.indigo }} />}
         {lg && !loading && (
-          <button onClick={() => commit(active >= 0 ? hits[active] : undefined)} className="inline-flex h-9 items-center gap-1.5 rounded-[10px] px-4 text-[13.5px] font-extrabold text-white" style={{ background: GS.indigo }}>
+          <button onClick={() => commit(active >= 0 ? hits[active] : hits[0])} className="inline-flex h-9 items-center gap-1.5 rounded-[10px] px-4 text-[13.5px] font-extrabold text-white" style={{ background: GS.indigo }}>
             Research <ChevronRight size={15} />
           </button>
         )}

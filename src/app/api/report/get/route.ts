@@ -10,10 +10,14 @@ import {
 export const dynamic = "force-dynamic";
 
 /**
- * Return a company's report, newest-first across three sources:
- *   1) BUNDLED (committed at build time, incl. the sample) — instant, 0 keys.
- *   2) the latest `glow-report-<TICKER>` Actions ARTIFACT — fresh after a run.
- *   3) the committed data/companies/<TICKER>.json via the Contents API — durable.
+ * Return a company's report, FRESHEST-first:
+ *   1) The bundled SAMPLE always serves from the build (instant, 0 keys, the
+ *      zero-secret demo) — a re-run never shadows the canonical sample.
+ *   2) The latest `glow-report-<TICKER>` Actions ARTIFACT — fresh after a run,
+ *      so an "Update" wins over any older committed/bundled copy.
+ *   3) The committed data/companies/<TICKER>.json via the Contents API — durable.
+ *   4) A non-sample BUNDLED report (e.g. INFY) as the OFFLINE fallback — it keeps
+ *      a committed company rendering with no keys, but never masks a fresher run.
  * Reopening a cached company therefore costs ZERO research credits.
  */
 export async function GET(request: Request) {
@@ -57,13 +61,14 @@ export async function GET(request: Request) {
     });
   }
 
-  // 1) Bundled (sample + anything committed at deploy).
   const bundled = getBundledReport(ticker);
-  if (bundled) {
+
+  // 1) The SAMPLE always serves instantly from the bundle (the zero-key demo).
+  if (bundled?.is_sample) {
     return NextResponse.json({ ok: true, found: true, source: "bundled", report: bundled });
   }
 
-  // 2) Freshest Actions artifact.
+  // 2) Freshest Actions artifact — a re-run / Update wins over any cached copy.
   if (token) {
     const latest = await listLatestArtifact(ticker, token, repo);
     if (latest) {
@@ -77,6 +82,12 @@ export async function GET(request: Request) {
     if (committed) {
       return NextResponse.json({ ok: true, found: true, source: "committed", report: committed });
     }
+  }
+
+  // 4) Offline fallback: a non-sample committed company (e.g. INFY) still renders
+  //    with no keys, and when nothing fresher could be fetched above.
+  if (bundled) {
+    return NextResponse.json({ ok: true, found: true, source: "bundled", report: bundled });
   }
 
   return NextResponse.json({ ok: true, found: false });
