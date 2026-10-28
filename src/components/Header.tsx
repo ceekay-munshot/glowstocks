@@ -2,28 +2,15 @@
 
 import { useState } from "react";
 import type { CompanyReport } from "@/lib/types/report";
+import { logoGradient } from "@/lib/theme";
 import { CompanySearch } from "./CompanySearch";
+import { Icon } from "./Icon";
 
-function TickerPill({ ticker, company }: { ticker: string; company?: string }) {
+function LogoChip({ ticker }: { ticker: string }) {
+  const g = logoGradient(ticker);
   return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: 6,
-        padding: "2px 10px",
-        background: "var(--primary-light)",
-        color: "var(--primary-text)",
-        borderRadius: 99,
-        fontSize: 12,
-        fontWeight: 600,
-        border: "1px solid var(--primary-border)",
-        maxWidth: 260,
-      }}
-    >
-      <span style={{ width: 6, height: 6, background: "var(--primary)", borderRadius: "50%" }} />
-      {ticker}
-      {company && <span style={{ color: "#818cf8", fontWeight: 400, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>· {company}</span>}
+    <span style={{ width: 28, height: 28, borderRadius: 8, flexShrink: 0, background: `linear-gradient(135deg, ${g.from}, ${g.to})`, color: "#fff", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: 10.5, fontWeight: 800, boxShadow: "0 2px 5px rgba(15,23,42,0.2)" }}>
+      {ticker.replace(/[^A-Z0-9]/gi, "").slice(0, 3).toUpperCase()}
     </span>
   );
 }
@@ -33,7 +20,7 @@ const btn = (primary = false): React.CSSProperties => ({
   padding: "0 12px",
   borderRadius: 8,
   fontSize: 12.5,
-  fontWeight: 600,
+  fontWeight: 700,
   cursor: "pointer",
   border: primary ? "none" : "1px solid var(--border-default)",
   background: primary ? "var(--primary)" : "#fff",
@@ -45,8 +32,10 @@ const btn = (primary = false): React.CSSProperties => ({
 
 export function Header({
   report,
+  ticker,
   running,
   exporting,
+  onBack,
   onSelect,
   onRun,
   onExportExcel,
@@ -54,8 +43,10 @@ export function Header({
   onExportFullPdf,
 }: {
   report: CompanyReport | null;
+  ticker: string;
   running: boolean;
   exporting: boolean;
+  onBack: () => void;
   onSelect: (ticker: string, name: string) => void;
   onRun: () => void;
   onExportExcel: () => void;
@@ -63,57 +54,49 @@ export function Header({
   onExportFullPdf: () => void;
 }) {
   const [menu, setMenu] = useState(false);
+  const pillTicker = report?.ticker ?? ticker;
 
   return (
     <header
       className="gs-header"
-      style={{
-        position: "sticky",
-        top: 0,
-        zIndex: 30,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: 12,
-        padding: "0 20px",
-        height: 48,
-        background: "var(--header-bar)",
-        backdropFilter: "blur(8px)",
-        borderBottom: "1px solid #e5e7eb",
-        flexShrink: 0,
-      }}
+      style={{ position: "sticky", top: 0, zIndex: 30, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, padding: "0 16px", height: 48, background: "var(--header-bar)", backdropFilter: "blur(8px)", borderBottom: "1px solid var(--border-default)", flexShrink: 0 }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
-        <h1 style={{ fontSize: 15, fontWeight: 700, color: "var(--text-primary)", margin: 0, whiteSpace: "nowrap" }}>
-          glow<span style={{ color: "var(--primary)" }}>stocks</span>
-        </h1>
-        {report && <span className="gs-hide-sm" style={{ display: "inline-flex", minWidth: 0 }}><TickerPill ticker={report.ticker} company={report.company} /></span>}
-        {report?.is_sample && (
-          <span className="gs-hide-sm" style={{ fontSize: 10, fontWeight: 600, color: "#d97706", background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 6, padding: "2px 7px", whiteSpace: "nowrap" }}>
-            SAMPLE
-          </span>
-        )}
+        <button onClick={onBack} title="Back to search" aria-label="Back to search" style={{ height: 30, width: 32, borderRadius: 8, border: "1px solid var(--border-default)", background: "#fff", cursor: "pointer", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <Icon name="arrowLeft" size={17} color="var(--text-secondary)" />
+        </button>
+        {pillTicker && <LogoChip ticker={pillTicker} />}
+        <div className="gs-hide-sm" style={{ minWidth: 0, lineHeight: 1.1 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
+            <span style={{ fontSize: 13.5, fontWeight: 800, color: "var(--text-primary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", maxWidth: 240 }}>
+              {report?.company ?? pillTicker}
+            </span>
+            {report?.is_sample && (
+              <span style={{ fontSize: 9.5, fontWeight: 700, color: "#b45309", background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 5, padding: "1px 6px", letterSpacing: "0.03em" }}>SAMPLE</span>
+            )}
+          </div>
+          <div style={{ fontSize: 10.5, color: "var(--text-hint)", fontWeight: 600 }}>{pillTicker}{report ? ` · ${report.exchange}` : ""}</div>
+        </div>
       </div>
 
       <div className="gs-actions" style={{ display: "flex", alignItems: "center", gap: 8 }}>
         <CompanySearch onSelect={onSelect} />
 
-        <button style={btn(true)} onClick={onRun} disabled={running || !report} title="Run the research engine for this company">
-          {running ? "Running…" : report?.is_sample ? "Run live" : "Refresh"}
+        <button style={btn(false)} onClick={onRun} disabled={running} title="Refresh this research">
+          <Icon name="refresh" size={14} color="var(--text-secondary)" className={running ? "gs-spin" : undefined} />
+          <span className="gs-hide-sm">{running ? "Updating…" : "Update"}</span>
         </button>
 
         <div style={{ position: "relative" }}>
-          <button style={btn()} onClick={() => setMenu((m) => !m)} disabled={!report || exporting}>
-            {exporting ? "Exporting…" : "Export ▾"}
+          <button style={btn(true)} onClick={() => setMenu((m) => !m)} disabled={!report || exporting}>
+            <Icon name="download" size={14} color="#fff" />
+            <span className="gs-hide-sm">{exporting ? "Exporting…" : "Export"}</span>
           </button>
           {menu && report && (
-            <div
-              onMouseLeave={() => setMenu(false)}
-              style={{ position: "absolute", right: 0, top: 36, zIndex: 40, background: "#fff", border: "1px solid var(--border-default)", borderRadius: 10, boxShadow: "0 12px 32px rgba(0,0,0,0.12)", padding: 4, minWidth: 180 }}
-            >
-              <MenuItem label="One-pager (PDF)" hint="Landscape visual · print" onClick={() => { setMenu(false); onExportPdf(); }} />
-              <MenuItem label="Full report (PDF)" hint="Multi-page · all sections" onClick={() => { setMenu(false); onExportFullPdf(); }} />
-              <MenuItem label="Full data (Excel)" hint="All 13 sections + Sources" onClick={() => { setMenu(false); onExportExcel(); }} />
+            <div onMouseLeave={() => setMenu(false)} style={{ position: "absolute", right: 0, top: 36, zIndex: 40, background: "#fff", border: "1px solid var(--border-default)", borderRadius: 12, boxShadow: "0 14px 36px rgba(15,23,42,0.16)", padding: 5, minWidth: 210 }}>
+              <MenuItem icon="doc" label="One-pager (PDF)" hint="Landscape visual · print" onClick={() => { setMenu(false); onExportPdf(); }} />
+              <MenuItem icon="doc" label="Full report (PDF)" hint="Multi-page · all sections" onClick={() => { setMenu(false); onExportFullPdf(); }} />
+              <MenuItem icon="bars" label="Full data (Excel)" hint="All 13 sections + sources" onClick={() => { setMenu(false); onExportExcel(); }} />
             </div>
           )}
         </div>
@@ -122,16 +105,20 @@ export function Header({
   );
 }
 
-function MenuItem({ label, hint, onClick }: { label: string; hint: string; onClick: () => void }) {
+function MenuItem({ icon, label, hint, onClick }: { icon: "doc" | "bars"; label: string; hint: string; onClick: () => void }) {
   return (
     <button
       onClick={onClick}
-      style={{ display: "block", width: "100%", textAlign: "left", border: "none", background: "transparent", borderRadius: 8, padding: "8px 10px", cursor: "pointer" }}
-      onMouseEnter={(e) => (e.currentTarget.style.background = "var(--primary-light)")}
-      onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+      className="gs-rowh"
+      style={{ display: "flex", alignItems: "center", gap: 10, width: "100%", textAlign: "left", border: "none", background: "transparent", borderRadius: 9, padding: "8px 10px", cursor: "pointer" }}
     >
-      <div style={{ fontSize: 12.5, fontWeight: 600, color: "var(--text-primary)" }}>{label}</div>
-      <div style={{ fontSize: 11, color: "var(--text-hint)" }}>{hint}</div>
+      <span style={{ width: 28, height: 28, borderRadius: 8, background: "var(--primary-light)", color: "var(--primary)", display: "inline-flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+        <Icon name={icon} size={15} color="var(--primary)" />
+      </span>
+      <span>
+        <span style={{ display: "block", fontSize: 12.5, fontWeight: 700, color: "var(--text-primary)" }}>{label}</span>
+        <span style={{ display: "block", fontSize: 11, color: "var(--text-hint)" }}>{hint}</span>
+      </span>
     </button>
   );
 }

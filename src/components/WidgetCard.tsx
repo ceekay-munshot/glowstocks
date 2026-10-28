@@ -1,5 +1,12 @@
-import type { ReactNode } from "react";
+"use client";
 
+import type { ReactNode } from "react";
+import type { Accent } from "@/lib/theme";
+import { Icon, type IconName } from "./Icon";
+import { useAccent } from "./AccentScope";
+
+// Kept for back-compat with existing call sites; colour now comes from the tab
+// accent (context) or an explicit `accent` prop, not this category.
 export type Category =
   | "markets"
   | "analytics"
@@ -8,24 +15,17 @@ export type Category =
   | "tools"
   | "heatmaps";
 
-const CATEGORY: Record<Category, { bg: string; fg: string; border: string }> = {
-  markets: { bg: "#eff6ff", fg: "#2563eb", border: "#dbeafe" },
-  analytics: { bg: "#f5f3ff", fg: "#7c3aed", border: "#ede9fe" },
-  india: { bg: "#fffbeb", fg: "#d97706", border: "#fde68a" },
-  sector: { bg: "#f0fdfa", fg: "#0d9488", border: "#99f6e4" },
-  tools: { bg: "#f0fdf4", fg: "#16a34a", border: "#bbf7d0" },
-  heatmaps: { bg: "#fff1f2", fg: "#e11d48", border: "#fecdd3" },
-};
-
 /**
- * The one card every data widget uses (Munshot dashboard-builder standard):
- * 16px radius, blurred white surface, 10px/16px header, recessive body. Never
- * nest a card inside another card.
+ * The one card every data widget uses (dashboard-builder structure: 16px radius,
+ * blurred surface, 10/16 header, recessive body, never nested) — now VIVID: a
+ * gradient accent header, a top accent bar and a tinted icon chip, coloured by
+ * the active tab's accent (via AccentScope) or an explicit `accent`.
  */
 export function WidgetCard({
   title,
   subtitle,
-  category,
+  icon,
+  accent,
   action,
   span,
   bodyPadding = 16,
@@ -33,70 +33,36 @@ export function WidgetCard({
 }: {
   title: string;
   subtitle?: string;
+  icon?: IconName;
+  accent?: Accent;
+  /** @deprecated colour now comes from the tab accent; accepted for back-compat. */
   category?: Category;
   action?: ReactNode;
   span?: 2 | 3;
   bodyPadding?: number;
   children: ReactNode;
 }) {
-  const cat = category ? CATEGORY[category] : null;
+  const ctx = useAccent();
+  const a = accent ?? ctx;
   return (
-    <div
-      className="gs-card"
-      style={{
-        background: "var(--card-bg)",
-        border: "1px solid var(--border-default)",
-        borderRadius: 16,
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        backdropFilter: "blur(8px)",
-        boxShadow: "0 1px 4px rgba(0,0,0,0.04)",
-        gridColumn: span ? `span ${span}` : undefined,
-      }}
-    >
+    <div className={`gs-card${span ? ` gs-span-${span}` : ""}`}>
+      <span className="gs-card__bar" style={{ background: `linear-gradient(90deg, ${a.main}, ${a.main}00)` }} />
       <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 8,
-          padding: "10px 16px",
-          borderBottom: "1px solid var(--border-default)",
-          background: "var(--card-header)",
-          flexShrink: 0,
-        }}
+        className="gs-card__head"
+        style={{ background: `linear-gradient(120deg, ${a.soft} 0%, rgba(255,255,255,0.6) 70%)`, borderBottom: `1px solid ${a.line}` }}
       >
-        <div style={{ minWidth: 0 }}>
-          <h3 style={{ margin: 0, fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>
-            {title}
-          </h3>
-          {subtitle && (
-            <p style={{ margin: "2px 0 0", fontSize: 11, color: "var(--text-hint)", lineHeight: 1.3 }}>
-              {subtitle}
-            </p>
-          )}
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>
-          {action}
-          {cat && (
-            <span
-              style={{
-                fontSize: 10,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.05em",
-                padding: "2px 8px",
-                borderRadius: 6,
-                border: `1px solid ${cat.border}`,
-                background: cat.bg,
-                color: cat.fg,
-              }}
-            >
-              {category}
+        <div style={{ display: "flex", alignItems: "center", gap: 10, minWidth: 0 }}>
+          {icon && (
+            <span className="gs-card__chip" style={{ background: a.soft, color: a.main, border: `1px solid ${a.line}` }}>
+              <Icon name={icon} size={16} color={a.main} />
             </span>
           )}
+          <div style={{ minWidth: 0 }}>
+            <h3 style={{ margin: 0, fontSize: 14, fontWeight: 700, color: "var(--text-primary)", lineHeight: 1.25 }}>{title}</h3>
+            {subtitle && <p style={{ margin: "1px 0 0", fontSize: 11, color: "var(--text-hint)", lineHeight: 1.3 }}>{subtitle}</p>}
+          </div>
         </div>
+        {action && <div style={{ display: "flex", alignItems: "center", gap: 8, flexShrink: 0 }}>{action}</div>}
       </div>
       <div style={{ flex: 1, position: "relative", overflow: "hidden", background: "var(--card-body)", padding: bodyPadding }}>
         {children}

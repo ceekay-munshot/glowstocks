@@ -5,6 +5,19 @@ import type { Cited } from "@/lib/types/report";
 
 export const NA = "Not available";
 
+/**
+ * Client-facing source label: the report only ever exposes RESEARCH activity, so
+ * the harvest vendor's name is shown as a neutral, analyst-facing label. Only the
+ * display label changes — each datum keeps its real date, locator and deep link.
+ */
+const SOURCE_RELABEL: [RegExp, string][] = [[/screener(\.in)?/gi, "Market data"]];
+export function cleanSource(label?: string | null): string {
+  let s = (label ?? "").trim();
+  if (!s) return s;
+  for (const [re, to] of SOURCE_RELABEL) s = s.replace(re, to);
+  return s;
+}
+
 /** Indian digit grouping: 1,41,00,00,000 style (xx,xx,xxx). */
 export function indianGroup(n: number): string {
   const neg = n < 0;

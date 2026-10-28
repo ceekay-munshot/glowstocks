@@ -1,13 +1,13 @@
 import type { ReactNode } from "react";
 import type { Cited } from "@/lib/types/report";
-import { citedText, NA } from "@/lib/format";
+import { citedText, cleanSource, NA } from "@/lib/format";
 
 /** The hover popover body: source · date · locator (+ link). */
 function Pop({ c }: { c: Cited<number | string> }) {
   const meta = [c.date, c.locator].filter(Boolean).join(" · ");
   return (
     <span className="gs-cite__pop" role="tooltip">
-      <span className="gs-cite__src">{c.source || "Source on file"}</span>
+      <span className="gs-cite__src">{cleanSource(c.source) || "Source on file"}</span>
       {meta && <span className="gs-cite__meta">{meta}</span>}
       {c.note && <span className="gs-cite__meta">{c.note}</span>}
       {c.url && (

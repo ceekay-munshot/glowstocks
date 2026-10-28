@@ -33,8 +33,15 @@ scripts/                      THE RESEARCH ENGINE (runs in GitHub Actions, never
 src/
   lib/types/report.ts         THE v1 DATA CONTRACT (pure types, shared by engine + UI)
   lib/{env,bundledReports,githubReports,format,palette,charts}.ts
+  lib/theme.ts                VIVID chrome map — per-tab + per-section accents/icons, KPI
+                              accents, logo gradients, timeAgo, coverageAccent (NOT chart data)
+  app/page.tsx                SEARCH-FIRST LANDING (route "/") — hero search + previous-runs table
+  app/company/[ticker]/page.tsx              the dashboard, behind a View/Back flow
+  components/{Landing,CompanyView,ProgressScreen,Header}.tsx   landing · dashboard shell ·
+                              client-facing research progress · header (Back + search + export)
+  components/{Icon,AccentScope,KpiStrip}.tsx inline-SVG icons · tab-accent context · compact KPI strip
   app/api/report/{run,get,status}/route.ts   dispatch · read-back · poll
-  app/api/stock-search/route.ts              server-side Screener search proxy
+  app/api/stock-search/route.ts              server-side company-search proxy (India NSE/BSE)
   lib/export/reportModel.ts                  THE shared "walk the report → emit every
                                              populated field" layer (coverage · provenance ·
                                              units · 3 states). BOTH exports render it.
@@ -84,8 +91,21 @@ data/companies/<TICKER>.json  committed reports (durable cache). TCS.json is the
   ONE axis per chart, **no scatter / bubble / dual-axis**, legend for ≥2 series,
   crosshair tooltips, text in ink tokens. The palette is validated by
   `scripts/validate_palette.js` in the dataviz skill — re-run it if you change hues.
-- **UI follows the dashboard-builder skill:** 3-zone shell, 48px header,
-  `WidgetCard` for every widget (no cards-in-cards), shimmer/empty/error states.
+- **UI follows the dashboard-builder skill — kept STRUCTURE, vivid COLOUR.** 3-zone
+  shell, 48px header, `WidgetCard` for every widget (no cards-in-cards),
+  shimmer/empty/error states. The restrained indigo+grey colour rule is overridden
+  per the owner's "super colourful" direction: per-tab + per-section accents/icons
+  (`src/lib/theme.ts` + `Icon`), accent card headers, ONE compact `KpiStrip` (not a
+  wall of big KPI cards). The widget grid is a responsive FIXED column count
+  (`.gs-grid`/`.gs-span-*`) so cards tile the full width — never auto-fill span gaps.
+- **Search-first, standalone, and NO backend/vendor names user-facing.** The app
+  opens on the landing search screen; the dashboard lives at `/company/[ticker]`
+  behind a Back flow. The research-progress screen (`ProgressScreen`) speaks only in
+  analyst steps, never tools/vendors/run links. Never surface "GitHub/Actions/
+  workflow/dispatch/artifact", "Claude/AI/model", "Firecrawl/Bedrock/Screener" in any
+  user-facing text (progress, notices, errors, tooltips, empty states, footer).
+  `format.ts`'s `cleanSource` relabels the harvest-vendor name at RENDER only (data,
+  citations, deep links and exports unchanged). Errors use plain language.
 - **Pin Next to 16.3.x (do NOT bump to 16.4+ yet).** `@opennextjs/cloudflare`
   1.20.9 (the latest) does not handle Next 16.4's new `preview-props.json` server
   manifest: the deployed Worker throws at startup (`Unexpected

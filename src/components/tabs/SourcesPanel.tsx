@@ -4,13 +4,14 @@ import type { SourceRef, SourceType } from "@/lib/types/report";
 import { WidgetCard } from "../WidgetCard";
 import { EmptyState } from "../states";
 import { Grid } from "./Grid";
+import { cleanSource } from "@/lib/format";
 
 const TYPE_STYLE: Record<SourceType, { label: string; bg: string; fg: string }> = {
   annual_report: { label: "Annual report", bg: "#eff6ff", fg: "#2563eb" },
   concall: { label: "Concall", bg: "#f0fdfa", fg: "#0d9488" },
   investor_presentation: { label: "Investor PPT", bg: "#f5f3ff", fg: "#7c3aed" },
   exchange_filing: { label: "Exchange filing", bg: "#fffbeb", fg: "#d97706" },
-  screener: { label: "Screener", bg: "#f0fdf4", fg: "#16a34a" },
+  screener: { label: "Market data", bg: "#f0fdf4", fg: "#16a34a" },
   web: { label: "Web", bg: "#f3f4f6", fg: "#4b5563" },
   news: { label: "News", bg: "#fff1f2", fg: "#e11d48" },
   estimate: { label: "Estimate", bg: "#eef2ff", fg: "#4338ca" },
@@ -31,8 +32,8 @@ export function SourcesPanel({ sources, updated }: { sources: SourceRef[]; updat
     <Grid>
       <WidgetCard
         title="Sources"
-        subtitle={`${sources.length} source${sources.length === 1 ? "" : "s"} · the provenance spine for every figure${updated ? ` · updated ${updated.slice(0, 10)}` : ""}`}
-        category="tools"
+        subtitle={`${sources.length} source${sources.length === 1 ? "" : "s"} · the provenance behind every figure${updated ? ` · updated ${updated.slice(0, 10)}` : ""}`}
+        icon="doc"
         span={3}
         bodyPadding={0}
       >
@@ -53,7 +54,7 @@ export function SourcesPanel({ sources, updated }: { sources: SourceRef[]; updat
                 {sources.map((s) => (
                   <tr key={s.id} id={`source-${s.id}`} style={{ borderBottom: "1px solid var(--border-default)" }}>
                     <td style={{ ...td, color: "var(--text-hint)", fontVariantNumeric: "tabular-nums" }}>{s.id}</td>
-                    <td style={{ ...td, fontWeight: 600, color: "var(--text-primary)" }}>{s.title}</td>
+                    <td style={{ ...td, fontWeight: 600, color: "var(--text-primary)" }}>{cleanSource(s.title)}</td>
                     <td style={td}><TypeBadge type={s.type} /></td>
                     <td style={{ ...td, color: "var(--text-muted)" }}>{s.date ?? "—"}</td>
                     <td style={{ ...td, color: "var(--text-muted)" }}>{s.locator ?? "—"}</td>
@@ -72,7 +73,7 @@ export function SourcesPanel({ sources, updated }: { sources: SourceRef[]; updat
             </table>
           </div>
         ) : (
-          <EmptyState title="No sources yet" hint="Run the engine to populate the provenance spine." />
+          <EmptyState title="No sources yet" hint="Start a research run to populate the sources." />
         )}
       </WidgetCard>
     </Grid>
@@ -86,9 +87,9 @@ export function SourceTrail({ sources, updated, onViewAll }: { sources: SourceRe
       <WidgetCard
         title="Source trail"
         subtitle={`${sources.length} source${sources.length === 1 ? "" : "s"}${updated ? ` · updated ${updated.slice(0, 10)}` : ""}`}
-        category="tools"
+        icon="link"
         action={
-          <button onClick={onViewAll} style={{ border: "none", background: "none", color: "var(--primary)", fontSize: 12, fontWeight: 600, cursor: "pointer" }}>
+          <button onClick={onViewAll} style={{ border: "none", background: "none", color: "var(--primary)", fontSize: 12, fontWeight: 700, cursor: "pointer" }}>
             View all →
           </button>
         }
@@ -100,10 +101,10 @@ export function SourceTrail({ sources, updated, onViewAll }: { sources: SourceRe
                 <TypeBadge type={s.type} />
                 {s.url ? (
                   <a href={s.url} target="_blank" rel="noopener noreferrer" style={{ color: "var(--text-secondary)", textDecoration: "none", maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                    {s.title}
+                    {cleanSource(s.title)}
                   </a>
                 ) : (
-                  s.title
+                  cleanSource(s.title)
                 )}
               </span>
             ))}

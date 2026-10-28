@@ -26,11 +26,11 @@ export function BusinessTab({ report }: { report: CompanyReport }) {
 
   return (
     <Grid>
-      <WidgetCard title="Revenue mix by segment" subtitle={b.summary ?? "Share of revenue"} category="analytics">
+      <WidgetCard title="Revenue mix by segment" subtitle={b.summary ?? "Share of revenue"} icon="layers">
         {hasSeg ? <EChart option={segmentsDonutOption(b.segments)} height={300} /> : <EmptyState />}
       </WidgetCard>
 
-      <WidgetCard title="Segments" subtitle="Share of revenue · trend" category="sector" span={2} bodyPadding={0}>
+      <WidgetCard title="Segments" subtitle="Share of revenue · trend" icon="doc" span={2} bodyPadding={0}>
         {hasSeg ? (
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
             <thead>
@@ -62,11 +62,11 @@ export function BusinessTab({ report }: { report: CompanyReport }) {
         )}
       </WidgetCard>
 
-      <WidgetCard title="Revenue by geography" subtitle="Share of revenue · hover for driver & risk" category="markets" span={2}>
+      <WidgetCard title="Revenue by geography" subtitle="Share of revenue · hover for driver & risk" icon="globe" span={2}>
         {hasGeo ? <EChart option={geographyBarsOption(b.geographies)} height={Math.max(220, b.geographies.length * 46)} /> : <EmptyState />}
       </WidgetCard>
 
-      <WidgetCard title="Geography — drivers & risks" category="sector">
+      <WidgetCard title="Geography — drivers & risks" icon="globe">
         {hasGeo ? (
           <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
             {b.geographies.map((g) => (
@@ -85,7 +85,7 @@ export function BusinessTab({ report }: { report: CompanyReport }) {
         )}
       </WidgetCard>
 
-      <WidgetCard title="Footprint & dependencies" subtitle="Where the revenue (and the risk) is concentrated" category="india">
+      <WidgetCard title="Footprint & dependencies" subtitle="Where the revenue (and the risk) is concentrated" icon="building" span={3}>
         <Dependencies report={report} />
       </WidgetCard>
     </Grid>

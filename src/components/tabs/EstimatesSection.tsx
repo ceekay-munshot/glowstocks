@@ -5,34 +5,36 @@ import { WidgetCard } from "../WidgetCard";
 import { CitedValue } from "../CitedValue";
 import { EChart } from "../charts/EChart";
 import { EmptyState } from "../states";
+import { AccentScope } from "../AccentScope";
 import { Grid, SubHeading } from "./Grid";
 import { SourcesFooter } from "./PeersTab";
 import { forwardRevenueBarsOption, forwardEpsLineOption } from "@/lib/charts";
+import { SECTION_META } from "@/lib/theme";
 import { num, fmtPrice } from "@/lib/format";
 import { resolveSources } from "@/lib/export/reportModel";
 
 export function EstimatesSection({ report }: { report: CompanyReport }) {
   const e = report.estimates;
   return (
-    <>
-      <SubHeading>Street estimates</SubHeading>
+    <AccentScope accent={SECTION_META.estimates.accent}>
+      <SubHeading icon="target">Street estimates</SubHeading>
       {!e || !e.available ? (
         <Grid>
-          <WidgetCard title="Street estimates" category="markets" span={3}>
-            <EmptyState title="Not available" hint={e?.summary ?? "No Street estimates found via web research."} />
+          <WidgetCard title="Street estimates" icon="target" span={3}>
+            <EmptyState title="Not available" hint={e?.summary ?? "No Street estimates were found for this company."} />
           </WidgetCard>
         </Grid>
       ) : (
         <Grid>
-          <WidgetCard title="Forward revenue" subtitle="Consensus · INR crore" category="markets">
+          <WidgetCard title="Forward revenue" subtitle="Consensus · INR crore" icon="bars">
             {e.forward.some((f) => f.revenue?.available) ? <EChart option={forwardRevenueBarsOption(e.forward)} height={240} /> : <EmptyState />}
           </WidgetCard>
 
-          <WidgetCard title="Forward EPS" subtitle="Consensus · INR" category="analytics">
+          <WidgetCard title="Forward EPS" subtitle="Consensus · INR" icon="trendUp">
             {e.forward.some((f) => f.eps?.available) ? <EChart option={forwardEpsLineOption(e.forward)} height={240} /> : <EmptyState />}
           </WidgetCard>
 
-          <WidgetCard title="Consensus" subtitle={e.summary} category="markets">
+          <WidgetCard title="Consensus" subtitle={e.summary} icon="scale">
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               <PriceTargetBar low={num(e.target_low ?? null)} mean={num(e.target_mean ?? null)} high={num(e.target_high ?? null)} />
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10, fontSize: 13 }}>
@@ -43,7 +45,7 @@ export function EstimatesSection({ report }: { report: CompanyReport }) {
             </div>
           </WidgetCard>
 
-          <WidgetCard title="Forward estimates" subtitle="Hover any figure for its source" category="markets" span={3} bodyPadding={0}>
+          <WidgetCard title="Forward estimates" subtitle="Hover any figure for its source" icon="doc" span={3} bodyPadding={0}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
               <thead>
                 <tr style={{ borderBottom: "1px solid var(--border-default)", background: "var(--card-header)" }}>
@@ -67,7 +69,7 @@ export function EstimatesSection({ report }: { report: CompanyReport }) {
           </WidgetCard>
         </Grid>
       )}
-    </>
+    </AccentScope>
   );
 }
 

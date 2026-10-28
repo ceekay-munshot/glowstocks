@@ -4,7 +4,9 @@ import type { CompanyReport, RiskLevel } from "@/lib/types/report";
 import { WidgetCard } from "../WidgetCard";
 import { CitedValue } from "../CitedValue";
 import { EmptyState } from "../states";
+import { AccentScope } from "../AccentScope";
 import { Grid, SubHeading } from "./Grid";
+import { SECTION_META } from "@/lib/theme";
 
 const LEVEL: Record<RiskLevel, { color: string; bg: string; border: string }> = {
   High: { color: "#b42318", bg: "#fef3f2", border: "#fecaca" },
@@ -25,17 +27,17 @@ function LevelChip({ kind, level }: { kind: string; level: RiskLevel }) {
 export function RisksSection({ report }: { report: CompanyReport }) {
   const r = report.risks;
   return (
-    <>
-      <SubHeading>Risk register</SubHeading>
+    <AccentScope accent={SECTION_META.risks.accent}>
+      <SubHeading icon="shield">Risk register</SubHeading>
       {!r || (r.register.length === 0 && r.downside_scenarios.length === 0) ? (
         <Grid>
-          <WidgetCard title="Risk register" category="heatmaps" span={3}>
+          <WidgetCard title="Risk register" icon="shield" span={3}>
             <EmptyState />
           </WidgetCard>
         </Grid>
       ) : (
         <Grid>
-          <WidgetCard title="Risk register" subtitle={r.summary ?? "Severity × probability, company-specific"} category="heatmaps" span={2}>
+          <WidgetCard title="Risk register" subtitle={r.summary ?? "Severity × probability, company-specific"} icon="shield" span={2}>
             {r.register.length ? (
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {r.register.map((row, i) => (
@@ -61,7 +63,7 @@ export function RisksSection({ report }: { report: CompanyReport }) {
             )}
           </WidgetCard>
 
-          <WidgetCard title="Top downside scenarios" subtitle="Trigger · impact · probability" category="heatmaps">
+          <WidgetCard title="Top downside scenarios" subtitle="Trigger · impact · probability" icon="alert">
             {r.downside_scenarios.length ? (
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {r.downside_scenarios.map((d, i) => (
@@ -81,6 +83,6 @@ export function RisksSection({ report }: { report: CompanyReport }) {
           </WidgetCard>
         </Grid>
       )}
-    </>
+    </AccentScope>
   );
 }

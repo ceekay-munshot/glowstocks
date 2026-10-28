@@ -91,21 +91,21 @@ export function FinancialsTab({ report }: { report: CompanyReport }) {
       <WidgetCard
         title="Latest period"
         subtitle={current?.period ?? "—"}
-        category="markets"
+        icon="calendar"
         action={f?.latest_quarter && f?.latest_fy ? toggle : undefined}
       >
         {current ? <PeriodTable p={current} /> : <EmptyState />}
       </WidgetCard>
 
-      <WidgetCard title="Revenue, EBITDA & PAT" subtitle="5-year history · INR crore" category="markets" span={2}>
+      <WidgetCard title="Revenue, EBITDA & PAT" subtitle="5-year history · INR crore" icon="bars" span={2}>
         {history.length ? <EChart option={financialsBarsOption(history)} height={300} /> : <EmptyState />}
       </WidgetCard>
 
-      <WidgetCard title="Margins" subtitle="EBITDA & PAT margin · %" category="analytics" span={2}>
+      <WidgetCard title="Margin trend" subtitle="EBITDA & PAT margin · %" icon="trendUp" span={3}>
         {history.length ? <EChart option={marginsLineOption(history)} height={280} /> : <EmptyState />}
       </WidgetCard>
 
-      <WidgetCard title="5-year table" subtitle="Hover any figure for its source" category="markets" span={3} bodyPadding={0}>
+      <WidgetCard title="5-year table" subtitle="Hover any figure for its source" icon="doc" span={3} bodyPadding={0}>
         {history.length ? (
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>

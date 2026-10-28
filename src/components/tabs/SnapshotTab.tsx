@@ -2,12 +2,12 @@
 
 import type { CompanyReport } from "@/lib/types/report";
 import { WidgetCard } from "../WidgetCard";
-import { Kpi } from "../Kpi";
+import { KpiStrip } from "../KpiStrip";
 import { StancePill } from "../Stance";
 import { EChart } from "../charts/EChart";
 import { EmptyState } from "../states";
 import { Grid } from "./Grid";
-import { financialsBarsOption } from "@/lib/charts";
+import { financialsBarsOption, marginsLineOption } from "@/lib/charts";
 
 export function SnapshotTab({ report }: { report: CompanyReport }) {
   const s = report.snapshot;
@@ -16,40 +16,36 @@ export function SnapshotTab({ report }: { report: CompanyReport }) {
   return (
     <Grid>
       {/* Stance hero */}
-      <WidgetCard title="Stance" subtitle={`As of ${report.as_of}`} category="analytics">
-        <div style={{ display: "flex", flexDirection: "column", gap: 12, minHeight: 120, justifyContent: "center" }}>
+      <WidgetCard title="Our stance" subtitle={`As of ${report.as_of}`} icon="flag">
+        <div style={{ display: "flex", flexDirection: "column", gap: 12, minHeight: 130, justifyContent: "center" }}>
           <StancePill stance={s.stance} size="lg" />
           {s.stance_rationale && (
-            <p style={{ margin: 0, fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.5 }}>{s.stance_rationale}</p>
+            <p style={{ margin: 0, fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.55 }}>{s.stance_rationale}</p>
           )}
         </div>
       </WidgetCard>
 
       {/* Business model */}
-      <WidgetCard title="Business model" subtitle={[s.sector, s.industry].filter(Boolean).join(" · ") || report.exchange} category="india" span={2}>
+      <WidgetCard title="Business model" subtitle={[s.sector, s.industry].filter(Boolean).join(" · ") || report.exchange} icon="building" span={2}>
         {s.business_model && s.business_model !== "Not available" ? (
-          <p style={{ margin: 0, fontSize: 14, color: "var(--text-secondary)", lineHeight: 1.6 }}>{s.business_model}</p>
+          <p style={{ margin: 0, fontSize: 14.5, color: "var(--text-secondary)", lineHeight: 1.65 }}>{s.business_model}</p>
         ) : (
           <EmptyState />
         )}
       </WidgetCard>
 
-      {/* Headline KPIs */}
-      <WidgetCard title="Headline KPIs" subtitle="Hover any figure for its source" category="markets" span={3}>
-        {s.kpis.length ? (
-          <div style={{ display: "grid", gap: 12, gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))" }}>
-            {s.kpis.map((m, i) => (
-              <Kpi key={`${m.label}-${i}`} m={m} />
-            ))}
-          </div>
-        ) : (
-          <EmptyState />
-        )}
+      {/* Headline KPIs — one compact colour strip */}
+      <WidgetCard title="Headline KPIs" subtitle="Hover any figure for its source" icon="gauge" span={3}>
+        {s.kpis.length ? <KpiStrip metrics={s.kpis} /> : <EmptyState />}
       </WidgetCard>
 
-      {/* Revenue & profit trend (snapshot view) */}
-      <WidgetCard title="Revenue, EBITDA & PAT" subtitle="Last 5 financial years · INR crore" category="markets" span={2}>
-        {history.length ? <EChart option={financialsBarsOption(history)} height={260} /> : <EmptyState />}
+      {/* Charts lead */}
+      <WidgetCard title="Revenue, EBITDA & PAT" subtitle="Last 5 financial years · INR crore" icon="bars" span={2}>
+        {history.length ? <EChart option={financialsBarsOption(history)} height={280} /> : <EmptyState />}
+      </WidgetCard>
+
+      <WidgetCard title="Margin trend" subtitle="EBITDA & PAT margin · %" icon="trendUp">
+        {history.length ? <EChart option={marginsLineOption(history)} height={280} /> : <EmptyState />}
       </WidgetCard>
     </Grid>
   );

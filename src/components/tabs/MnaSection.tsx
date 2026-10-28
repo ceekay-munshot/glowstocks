@@ -4,15 +4,17 @@ import type { CompanyReport } from "@/lib/types/report";
 import { WidgetCard } from "../WidgetCard";
 import { CitedValue } from "../CitedValue";
 import { EmptyState } from "../states";
+import { AccentScope } from "../AccentScope";
 import { Grid, SubHeading } from "./Grid";
+import { SECTION_META } from "@/lib/theme";
 
 export function MnaSection({ report }: { report: CompanyReport }) {
   const m = report.mna;
   return (
-    <>
-      <SubHeading>M&amp;A / inorganic</SubHeading>
+    <AccentScope accent={SECTION_META.mna.accent}>
+      <SubHeading icon="handshake">M&amp;A &amp; inorganic</SubHeading>
       <Grid>
-        <WidgetCard title="M&A timeline" subtitle={m?.summary ?? "Inorganic moves"} category="tools" span={3}>
+        <WidgetCard title="M&A timeline" subtitle={m?.summary ?? "Inorganic moves"} icon="handshake" span={3}>
           {!m || !m.found || m.deals.length === 0 ? (
             <EmptyState title={m && !m.found ? "No material M&A found" : "Not available"} hint={m?.summary} />
           ) : (
@@ -20,8 +22,8 @@ export function MnaSection({ report }: { report: CompanyReport }) {
               {m.deals.map((d, i) => (
                 <div key={i} style={{ display: "flex", gap: 12, paddingBottom: 16 }}>
                   <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                    <span style={{ fontSize: 11, fontWeight: 700, color: "var(--primary)", whiteSpace: "nowrap" }}>{d.date ?? "—"}</span>
-                    <span style={{ width: 10, height: 10, borderRadius: "50%", background: "var(--primary)", marginTop: 4 }} />
+                    <span style={{ fontSize: 11, fontWeight: 700, color: "#0d9488", whiteSpace: "nowrap" }}>{d.date ?? "—"}</span>
+                    <span style={{ width: 10, height: 10, borderRadius: "50%", background: "#0d9488", marginTop: 4 }} />
                     {i < m.deals.length - 1 && <span style={{ flex: 1, width: 2, background: "var(--border-default)", marginTop: 2 }} />}
                   </div>
                   <div style={{ flex: 1, fontSize: 13, lineHeight: 1.5 }}>
@@ -42,6 +44,6 @@ export function MnaSection({ report }: { report: CompanyReport }) {
           )}
         </WidgetCard>
       </Grid>
-    </>
+    </AccentScope>
   );
 }

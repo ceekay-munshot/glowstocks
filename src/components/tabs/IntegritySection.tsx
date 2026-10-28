@@ -3,7 +3,10 @@
 import type { CompanyReport, IntegrityStatus } from "@/lib/types/report";
 import { WidgetCard } from "../WidgetCard";
 import { EmptyState } from "../states";
+import { AccentScope } from "../AccentScope";
 import { Grid, SubHeading } from "./Grid";
+import { SECTION_META } from "@/lib/theme";
+import { cleanSource } from "@/lib/format";
 
 const STATUS: Record<IntegrityStatus, { color: string; bg: string; border: string; icon: string; label: string }> = {
   pass: { color: "#067647", bg: "#ecfdf3", border: "#bbf7d0", icon: "✓", label: "Pass" },
@@ -15,10 +18,10 @@ const STATUS: Record<IntegrityStatus, { color: string; bg: string; border: strin
 export function IntegritySection({ report }: { report: CompanyReport }) {
   const it = report.integrity;
   return (
-    <>
-      <SubHeading>Integrity gate</SubHeading>
+    <AccentScope accent={SECTION_META.integrity.accent}>
+      <SubHeading icon="shieldCheck">Data integrity</SubHeading>
       <Grid>
-        <WidgetCard title="Integrity gate" subtitle={it?.coverage_note ?? "Data-trust checklist"} category="tools" span={3}>
+        <WidgetCard title="Integrity gate" subtitle={cleanSource(it?.coverage_note) || "Data-trust checklist"} icon="shieldCheck" span={3}>
           {!it || it.checks.length === 0 ? (
             <EmptyState />
           ) : (
@@ -33,7 +36,7 @@ export function IntegritySection({ report }: { report: CompanyReport }) {
                         <span style={{ fontSize: 12.5, fontWeight: 600, color: "var(--text-primary)" }}>{c.check}</span>
                         <span style={{ fontSize: 10, fontWeight: 700, color: s.color }}>{s.label}</span>
                       </div>
-                      {c.detail && <div style={{ fontSize: 11.5, color: "var(--text-muted)", marginTop: 2 }}>{c.detail}</div>}
+                      {c.detail && <div style={{ fontSize: 11.5, color: "var(--text-muted)", marginTop: 2 }}>{cleanSource(c.detail)}</div>}
                     </div>
                   </div>
                 );
@@ -42,6 +45,6 @@ export function IntegritySection({ report }: { report: CompanyReport }) {
           )}
         </WidgetCard>
       </Grid>
-    </>
+    </AccentScope>
   );
 }

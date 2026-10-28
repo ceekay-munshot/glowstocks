@@ -5,7 +5,7 @@ import { WidgetCard } from "../WidgetCard";
 import { CitedValue } from "../CitedValue";
 import { EmptyState } from "../states";
 import { Grid } from "./Grid";
-import { num } from "@/lib/format";
+import { num, cleanSource } from "@/lib/format";
 import { resolveSources } from "@/lib/export/reportModel";
 import { seqTint, seqNeedsWhiteText } from "@/lib/palette";
 
@@ -31,7 +31,7 @@ export function PeersTab({ report }: { report: CompanyReport }) {
   if (!peers.length) {
     return (
       <Grid>
-        <WidgetCard title="Peer comparison" category="sector" span={3}>
+        <WidgetCard title="Peer comparison" icon="scale" span={3}>
           <EmptyState />
         </WidgetCard>
       </Grid>
@@ -50,7 +50,7 @@ export function PeersTab({ report }: { report: CompanyReport }) {
       <WidgetCard
         title="Peer comparison"
         subtitle={report.peers.note ?? "Cells shaded by magnitude within each column · hover for source"}
-        category="heatmaps"
+        icon="scale"
         span={3}
         bodyPadding={0}
       >
@@ -112,7 +112,7 @@ export function SourcesFooter({ labels }: { labels: string[] }) {
   if (!labels.length) return null;
   return (
     <div style={{ padding: "8px 12px", fontSize: 11, color: "var(--text-hint)", borderTop: "1px solid var(--border-default)" }}>
-      Source(s): {labels.join(" · ")}
+      Source(s): {labels.map(cleanSource).join(" · ")}
     </div>
   );
 }

@@ -6,8 +6,10 @@ import { CitedValue, CiteWrap } from "../CitedValue";
 import { StancePill } from "../Stance";
 import { EChart } from "../charts/EChart";
 import { EmptyState } from "../states";
-import { Grid } from "./Grid";
+import { AccentScope } from "../AccentScope";
+import { Grid, SubHeading } from "./Grid";
 import { scenarioUpsideOption } from "@/lib/charts";
+import { SECTION_META } from "@/lib/theme";
 import { num } from "@/lib/format";
 
 function PointList({ points, kind }: { points: ThesisPoint[]; kind: "support" | "counter" }) {
@@ -63,48 +65,51 @@ export function ThesisTab({ report }: { report: CompanyReport }) {
   const hasUpside = upsideData.some((d) => d.upside !== null);
 
   return (
-    <Grid>
-      <WidgetCard title="Stance" category="analytics">
-        <div style={{ display: "flex", flexDirection: "column", gap: 10, minHeight: 100, justifyContent: "center" }}>
-          <StancePill stance={t.stance} size="lg" />
-          <div style={{ fontSize: 12, color: "var(--text-hint)" }}>Consistent with the Snapshot view.</div>
-        </div>
-      </WidgetCard>
-
-      <WidgetCard title="What would change the view" subtitle="Measurable thresholds" category="tools" span={2}>
-        {t.change_my_mind.length ? (
-          <ul style={{ margin: 0, paddingLeft: 18, display: "flex", flexDirection: "column", gap: 8 }}>
-            {t.change_my_mind.map((c, i) => (
-              <li key={i} style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.5 }}>{c}</li>
-            ))}
-          </ul>
-        ) : (
-          <EmptyState />
-        )}
-      </WidgetCard>
-
-      <WidgetCard title="Bull case — supports" category="sector">
-        <PointList points={t.supports} kind="support" />
-      </WidgetCard>
-      <WidgetCard title="Bear case — counters" category="heatmaps">
-        <PointList points={t.counters} kind="counter" />
-      </WidgetCard>
-
-      <WidgetCard title="Scenario upside" subtitle="Implied upside/downside to target" category="markets">
-        {hasUpside ? <EChart option={scenarioUpsideOption(upsideData)} height={240} /> : <EmptyState />}
-      </WidgetCard>
-
-      <WidgetCard title="Scenarios" subtitle="Bear · Base · Bull — analyst estimates" category="analytics" span={3}>
-        {scenarios.length ? (
-          <div style={{ display: "grid", gap: 14, gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
-            {scenarios.map((s) => (
-              <ScenarioCard key={s.name} s={s} />
-            ))}
+    <AccentScope accent={SECTION_META.thesis.accent}>
+      <SubHeading icon="balance">Investment thesis</SubHeading>
+      <Grid>
+        <WidgetCard title="Our stance" icon="flag">
+          <div style={{ display: "flex", flexDirection: "column", gap: 10, minHeight: 100, justifyContent: "center" }}>
+            <StancePill stance={t.stance} size="lg" />
+            <div style={{ fontSize: 12, color: "var(--text-hint)" }}>Consistent with the Snapshot view.</div>
           </div>
-        ) : (
-          <EmptyState />
-        )}
-      </WidgetCard>
-    </Grid>
+        </WidgetCard>
+
+        <WidgetCard title="What would change the view" subtitle="Measurable thresholds" icon="target" span={2}>
+          {t.change_my_mind.length ? (
+            <ul style={{ margin: 0, paddingLeft: 18, display: "flex", flexDirection: "column", gap: 8 }}>
+              {t.change_my_mind.map((c, i) => (
+                <li key={i} style={{ fontSize: 13, color: "var(--text-secondary)", lineHeight: 1.5 }}>{c}</li>
+              ))}
+            </ul>
+          ) : (
+            <EmptyState />
+          )}
+        </WidgetCard>
+
+        <WidgetCard title="Bull case — supports" icon="trendUp" accent={{ main: "#16a34a", soft: "#f0fdf4", line: "#bbf7d0" }}>
+          <PointList points={t.supports} kind="support" />
+        </WidgetCard>
+        <WidgetCard title="Bear case — counters" icon="alert" accent={{ main: "#e11d48", soft: "#fff1f2", line: "#fecdd3" }}>
+          <PointList points={t.counters} kind="counter" />
+        </WidgetCard>
+
+        <WidgetCard title="Scenario upside" subtitle="Implied upside/downside to target" icon="bars">
+          {hasUpside ? <EChart option={scenarioUpsideOption(upsideData)} height={240} /> : <EmptyState />}
+        </WidgetCard>
+
+        <WidgetCard title="Scenarios" subtitle="Bear · Base · Bull — analyst estimates" icon="scale" span={3}>
+          {scenarios.length ? (
+            <div style={{ display: "grid", gap: 14, gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))" }}>
+              {scenarios.map((s) => (
+                <ScenarioCard key={s.name} s={s} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState />
+          )}
+        </WidgetCard>
+      </Grid>
+    </AccentScope>
   );
 }
