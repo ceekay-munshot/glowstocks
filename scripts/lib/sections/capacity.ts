@@ -1,6 +1,14 @@
 import type { CapacitySection } from "@/lib/types/report";
 import { relevantPages } from "../text";
-import { citedSchema, extractSection, type SectionCtx } from "./common";
+import { webResearch } from "../firecrawl";
+import { citedSchema, extractSection, webBlock, type SectionCtx } from "./common";
+
+/** Whether a total-headcount metric came through with a real value. */
+function hasHeadcount(cap: CapacitySection): boolean {
+  return (cap.metrics ?? []).some(
+    (m) => /head\s?count|employee/i.test(m.label || "") && m.available && m.value !== null && m.value !== undefined,
+  );
+}
 
 const METRIC_SCHEMA = {
   type: "object",
@@ -81,5 +89,25 @@ export async function extractCapacity(ctx: SectionCtx): Promise<CapacitySection>
     `- metrics: 2–5 headline footprint KPIs, each cited.\n` +
     `- Only if the company truly has no operating footprint set applicable=false + a reason. Never guess a number.`;
 
-  return extractSection<CapacitySection>({ ctx, instruction, evidence, schema: CAPACITY_SCHEMA });
+  const result = await extractSection<CapacitySection>({ ctx, instruction, evidence, schema: CAPACITY_SCHEMA });
+
+  // Total headcount is a headline number for a services/IT firm and is public
+  // (AR / presentation / web). If the filings didn't yield it, search the web
+  // ONCE and re-extract, keeping the retry only if it actually found headcount.
+  if (result.applicable && result.kind !== "manufacturing" && !hasHeadcount(result)) {
+    const web = await webResearch(
+      `${ctx.company} ${ctx.ticker} total employees headcount number latest quarter annual report`,
+    );
+    if (web.text) {
+      const retry = await extractSection<CapacitySection>({
+        ctx,
+        instruction,
+        evidence: evidence + webBlock(ctx, web.hits, web.text),
+        schema: CAPACITY_SCHEMA,
+      });
+      if (hasHeadcount(retry)) return retry;
+    }
+  }
+
+  return result;
 }
