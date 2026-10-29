@@ -245,9 +245,13 @@ export function buildReportModel(r: CompanyReport): SectionModel[] {
     if (f?.latest_fy) parts.push({ kind: "kv", title: `Latest FY — ${f.latest_fy.period}`, rows: periodRows(r, f.latest_fy) });
     const hist = f?.history ?? [];
     if (hist.length) parts.push({
-      kind: "table", title: "5-year history",
-      columns: ["Year", "Revenue", "EBITDA", "EBITDA %", "PAT", "PAT %", "EPS", "Source(s)"], dataBarCol: 1,
-      rows: hist.map((y) => [textCell(y.period), citedCell(y.revenue), citedCell(y.ebitda ?? null), citedCell(y.ebitda_margin ?? null), citedCell(y.pat), citedCell(y.pat_margin ?? null), citedCell(y.eps ?? null), sourcesCell(r, y.revenue, y.ebitda ?? null, y.ebitda_margin ?? null, y.pat, y.pat_margin ?? null, y.eps ?? null)]),
+      kind: "table", title: `${hist.length}-year financial trend`,
+      columns: ["Year", "Revenue", "EBITDA", "EBITDA %", "PAT", "PAT %", "EPS", "Op. cash flow", "Free cash flow", "ROCE", "ROE", "Net cash/debt", "Source(s)"], dataBarCol: 1,
+      rows: hist.map((y) => [
+        textCell(y.period), citedCell(y.revenue), citedCell(y.ebitda ?? null), citedCell(y.ebitda_margin ?? null), citedCell(y.pat), citedCell(y.pat_margin ?? null), citedCell(y.eps ?? null),
+        citedCell(y.ocf ?? null), citedCell(y.fcf ?? null), citedCell(y.roce ?? null), citedCell(y.roe ?? null), citedCell(y.net_debt ?? null),
+        sourcesCell(r, y.revenue, y.ebitda ?? null, y.ebitda_margin ?? null, y.pat, y.pat_margin ?? null, y.eps ?? null, y.ocf ?? null, y.fcf ?? null, y.roce ?? null, y.roe ?? null, y.net_debt ?? null),
+      ]),
     });
     S({
       key: "financials", title: "Financials", state: "ok",
