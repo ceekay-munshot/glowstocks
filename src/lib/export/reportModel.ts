@@ -20,6 +20,7 @@ import { formatValue } from "@/lib/format";
 import type {
   Cited,
   CompanyReport,
+  FinancialYear,
   Metric,
   PeriodFinancials,
   SourceRef,
@@ -244,20 +245,34 @@ export function buildReportModel(r: CompanyReport): SectionModel[] {
     if (f?.latest_quarter) parts.push({ kind: "kv", title: `Latest quarter — ${f.latest_quarter.period}`, rows: periodRows(r, f.latest_quarter) });
     if (f?.latest_fy) parts.push({ kind: "kv", title: `Latest FY — ${f.latest_fy.period}`, rows: periodRows(r, f.latest_fy) });
     const hist = f?.history ?? [];
-    if (hist.length) parts.push({
-      kind: "table", title: `${hist.length}-year financial trend`,
-      columns: ["Year", "Revenue", "EBITDA", "EBITDA %", "PAT", "PAT %", "EPS", "Op. cash flow", "Free cash flow", "ROCE", "ROE", "Net cash/debt", "Source(s)"], dataBarCol: 1,
-      rows: hist.map((y) => [
-        textCell(y.period), citedCell(y.revenue), citedCell(y.ebitda ?? null), citedCell(y.ebitda_margin ?? null), citedCell(y.pat), citedCell(y.pat_margin ?? null), citedCell(y.eps ?? null),
-        citedCell(y.ocf ?? null), citedCell(y.fcf ?? null), citedCell(y.roce ?? null), citedCell(y.roe ?? null), citedCell(y.net_debt ?? null),
-        sourcesCell(r, y.revenue, y.ebitda ?? null, y.ebitda_margin ?? null, y.pat, y.pat_margin ?? null, y.eps ?? null, y.ocf ?? null, y.fcf ?? null, y.roce ?? null, y.roe ?? null, y.net_debt ?? null),
-      ]),
-    });
+    if (hist.length) {
+      // Optional trend columns only when SOME year has them (pre-rerun / bundled
+      // reports have none — don't pad the table with empty columns).
+      const cell = (y: FinancialYear, k: keyof FinancialYear) => (y[k] as Cited<number> | undefined) ?? null;
+      const optCols = (
+        [
+          ["ocf", "Op. cash flow"],
+          ["fcf", "Free cash flow"],
+          ["roce", "ROCE"],
+          ["roe", "ROE"],
+          ["net_debt", "Net cash/debt (−ve = net cash)"],
+        ] as [keyof FinancialYear, string][]
+      ).filter(([k]) => hist.some((y) => (y[k] as Cited<number> | undefined)?.available));
+      parts.push({
+        kind: "table", title: `${hist.length}-year financial trend`,
+        columns: ["Year", "Revenue", "EBITDA", "EBITDA %", "PAT", "PAT %", "EPS", ...optCols.map(([, label]) => label), "Source(s)"], dataBarCol: 1,
+        rows: hist.map((y) => {
+          const base = [y.revenue, y.ebitda ?? null, y.ebitda_margin ?? null, y.pat, y.pat_margin ?? null, y.eps ?? null];
+          const opt = optCols.map(([k]) => cell(y, k));
+          return [textCell(y.period), ...base.map((c) => citedCell(c)), ...opt.map((c) => citedCell(c)), sourcesCell(r, ...base, ...opt)];
+        }),
+      });
+    }
     S({
       key: "financials", title: "Financials", state: "ok",
       charts: [
-        { id: "financialsBars", title: "Revenue · EBITDA · PAT (5Y, ₹ cr)", has: hist.length > 0 },
-        { id: "margins", title: "Margins (5Y, %)", has: hist.length > 0 },
+        { id: "financialsBars", title: `Revenue · EBITDA · PAT (${hist.length}Y, ₹ cr)`, has: hist.length > 0 },
+        { id: "margins", title: `Margins (${hist.length}Y, %)`, has: hist.length > 0 },
       ],
       parts,
     });

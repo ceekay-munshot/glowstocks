@@ -71,7 +71,7 @@ export default function OnePager() {
           {segments.length ? <EChart option={segmentsDonutOption(segments)} height={168} animate={false} /> : <Na />}
         </div>
         <div style={CARD}>
-          <div style={CAP}>Revenue · EBITDA · PAT (5Y, ₹ cr)</div>
+          <div style={CAP}>Revenue · EBITDA · PAT (₹ cr)</div>
           {history.length ? <EChart option={financialsBarsOption(history)} height={168} animate={false} /> : <Na />}
         </div>
         <div style={CARD}>
@@ -83,7 +83,7 @@ export default function OnePager() {
       {/* Charts row 2 */}
       <div style={{ display: "grid", gridTemplateColumns: "1.5fr 1fr", gap: 8 }}>
         <div style={CARD}>
-          <div style={CAP}>Margins (5Y, %)</div>
+          <div style={CAP}>Margins (%)</div>
           {history.length ? <EChart option={marginsLineOption(history)} height={158} animate={false} /> : <Na />}
         </div>
         <div style={CARD}>

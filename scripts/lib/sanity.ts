@@ -44,6 +44,8 @@ function checkPeriod(p: PeriodFinancials | undefined, warnings: string[]): void 
 function checkYear(y: FinancialYear, warnings: string[]): void {
   clampPct(y.ebitda_margin, `${y.period} EBITDA margin`, warnings);
   clampPct(y.pat_margin, `${y.period} PAT margin`, warnings);
+  clampPct(y.roce, `${y.period} ROCE`, warnings);
+  clampPct(y.roe, `${y.period} ROE`, warnings);
   if (has(y.revenue) && has(y.pat) && y.pat.value! > y.revenue.value!) {
     warnings.push(`${y.period}: PAT (${y.pat.value}) > revenue (${y.revenue.value})`);
   }

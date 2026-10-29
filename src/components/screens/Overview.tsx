@@ -24,7 +24,7 @@ function HistoryCharts({ report }: { report: CompanyReport }) {
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <Card accent={GS.indigo}>
-        <CardHeader icon={TrendingUp} accent={GS.indigo} title="Revenue, EBITDA & PAT" subtitle="Last 5 financial years · INR crore" />
+        <CardHeader icon={TrendingUp} accent={GS.indigo} title="Revenue, EBITDA & PAT" subtitle={`Last ${history.length} financial years · INR crore`} />
         <GroupedColumns
           groups={groups}
           series={[

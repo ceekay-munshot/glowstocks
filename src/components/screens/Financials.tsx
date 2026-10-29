@@ -32,7 +32,7 @@ const PNL_ROWS: { key: keyof PeriodFinancials; label: string }[] = [
 const ANNUAL_ROWS: { key: keyof PeriodFinancials; label: string }[] = [
   { key: "ocf", label: "Operating cash flow" },
   { key: "fcf", label: "Free cash flow" },
-  { key: "net_debt", label: "Net cash / debt" },
+  { key: "net_debt", label: "Net cash / debt (−ve = net cash)" },
   { key: "roce", label: "Return on capital (ROCE)" },
   { key: "roe", label: "Return on equity (ROE)" },
 ];
@@ -86,7 +86,7 @@ export function ResultsScreen({ report }: { report: CompanyReport }) {
             <MiniStat label="EBITDA margin" color={GS.teal} value={<CitedValue c={current.ebitda_margin ?? null} bold />} />
             <MiniStat label="Net profit" color={GS.violet} value={<CitedValue c={current.pat} bold />} />
             <MiniStat label="Net margin" color={GS.amber} value={<CitedValue c={current.pat_margin ?? null} bold />} />
-            <MiniStat label="Return on equity" color={GS.green} value={<CitedValue c={annual?.roe ?? null} bold />} />
+            <MiniStat label="Return on equity" color={GS.green} value={<CitedValue c={annual?.roe ?? null} bold />} sub={period === "quarter" && annual ? `annual · ${annual.period}` : undefined} />
           </StatStrip>
           <Card accent={GS.blue} pad={false}>
             <div className="p-4 sm:p-5">
@@ -132,7 +132,7 @@ const TREND_ROWS: { key: keyof FinancialYear; label: string; always?: boolean }[
   { key: "fcf", label: "Free cash flow" },
   { key: "roce", label: "ROCE" },
   { key: "roe", label: "ROE" },
-  { key: "net_debt", label: "Net cash / debt" },
+  { key: "net_debt", label: "Net cash / debt (−ve = net cash)" },
 ];
 
 export function HistoryScreen({ report }: { report: CompanyReport }) {
@@ -157,7 +157,7 @@ export function HistoryScreen({ report }: { report: CompanyReport }) {
 
   return (
     <Screen>
-      <PageHeader icon={History} accent={GS.teal} title="Financial Trends" subtitle={`${history.length}-year trend — every figure traced to its filing`} />
+      <PageHeader icon={History} accent={GS.teal} title="Financial Trends" subtitle={`${history.length}-year trend — every figure is source-backed`} />
       <div className={`grid gap-4 ${hasReturns ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
         <Card accent={GS.teal}>
           <CardHeader icon={BarChart3} accent={GS.teal} title="Revenue, EBITDA & profit" subtitle="INR crore" />
