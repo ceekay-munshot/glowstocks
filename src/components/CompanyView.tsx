@@ -39,7 +39,7 @@ const SUBTABS: Record<TopKey, { key: SubKey; label: string; color: string }[]> =
   ],
   financials: [
     { key: "results", label: "Results", color: GS.blue },
-    { key: "history", label: "5-Year History", color: GS.teal },
+    { key: "history", label: "Financial Trends", color: GS.teal },
     { key: "peers", label: "Peers & Estimates", color: GS.amber },
   ],
   operations: [

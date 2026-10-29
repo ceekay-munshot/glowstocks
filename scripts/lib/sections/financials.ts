@@ -39,6 +39,11 @@ const YEAR_SCHEMA = {
     pat: n(),
     pat_margin: n(),
     eps: n(),
+    ocf: n(),
+    fcf: n(),
+    net_debt: n(),
+    roce: n(),
+    roe: n(),
   },
 };
 
@@ -78,8 +83,12 @@ export async function extractFinancials(ctx: SectionCtx): Promise<FinancialsSect
     `NEGATIVE value means NET CASH. COMPUTE it from the balance sheet whenever those lines are present ` +
     `(use the fact sheet's net cash/debt figure where given). A cash-rich IT-services firm is net cash ` +
     `(negative) — do NOT mark it Not available when the balance sheet shows borrowings, cash & investments.\n` +
-    `- history: the last 5 financial years, OLDEST FIRST, each with revenue, EBITDA, EBITDA margin, ` +
-    `PAT, PAT margin, EPS. Mark anything the evidence doesn't contain as available:false (never guess).`;
+    `- history: the FULL annual trend Screener shows (up to the last 10 financial years), OLDEST ` +
+    `FIRST. For EACH year give revenue, EBITDA, EBITDA margin, PAT, PAT margin, EPS AND the annual ` +
+    `cash-flow & returns — ocf (Cash from Operating Activity), fcf (Free Cash Flow), net_debt ` +
+    `(borrowings − cash & investments; negative = net cash), roce (ROCE %) and roe (ROE %) — reading ` +
+    `straight DOWN Screener's Cash Flow and Ratios tables year by year. These are the TREND the user ` +
+    `wants, so fill every year Screener provides; mark only genuinely-absent cells available:false.`;
 
   return extractSection<FinancialsSection>({
     ctx,

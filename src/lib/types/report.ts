@@ -131,7 +131,7 @@ export interface PeriodFinancials {
   one_offs?: string;
 }
 
-/** A compact year row for the 5-year history chart. */
+/** A year row for the multi-year financial trend table (Screener-style). */
 export interface FinancialYear {
   period: string;
   revenue: Cited<number>;
@@ -140,12 +140,19 @@ export interface FinancialYear {
   pat: Cited<number>;
   pat_margin?: Cited<number>;
   eps?: Cited<number>;
+  /** Annual cash flow & returns — Screener reports these per year (not per quarter). */
+  ocf?: Cited<number>;
+  fcf?: Cited<number>;
+  /** Net debt; negative value means net cash. */
+  net_debt?: Cited<number>;
+  roce?: Cited<number>;
+  roe?: Cited<number>;
 }
 
 export interface FinancialsSection {
   latest_quarter?: PeriodFinancials;
   latest_fy?: PeriodFinancials;
-  /** Up to ~5 years, oldest first. */
+  /** The multi-year annual trend (up to ~10 years), oldest first. */
   history: FinancialYear[];
 }
 
